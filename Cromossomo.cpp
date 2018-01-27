@@ -92,6 +92,7 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
     this->fitness = c.fitness;
 
     this->genotipo = c.genotipo;
+    this->funcaoFitness = c.funcaoFitness;
 
     unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     if (this->gen == nullptr)

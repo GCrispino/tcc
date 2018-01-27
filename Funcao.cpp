@@ -13,6 +13,20 @@ double (*Funcao::getFuncao())(const std::vector<double> &){
     return this->funcao;
 }
 
+Funcao::Funcao(const Funcao &f)
+:minGlobal(f.minGlobal),min(f.min),max(f.max),funcao(f.funcao){}
+
+Funcao& Funcao::operator = (const Funcao &f){
+	if (this == &f)
+		return *this;
+
+	this->minGlobal = f.minGlobal;
+	this->min = f.min;
+	this->max = f.max;
+	this->funcao = f.funcao;
+
+}
+
 double * Funcao::getIntervalo() const{
 	double *intervalo = new double[2];
 	

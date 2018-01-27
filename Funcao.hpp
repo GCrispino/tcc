@@ -14,7 +14,9 @@ class Funcao{
     public:
     
         Funcao(double minGlobal = 0,double min = 0, double max = 0,  double (*funcao)(const std::vector<double> &) = funcaoPadrao);
-    
+        Funcao(const Funcao &f);
+        Funcao& operator = (const Funcao &);
+
         double (* getFuncao())(const std::vector<double> &);
         double * getIntervalo() const;
         double getMinimoGlobal() const;

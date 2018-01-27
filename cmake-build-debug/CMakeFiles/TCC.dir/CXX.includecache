@@ -46,6 +46,14 @@ numeric
 Funcao.hpp
 C:/Users/Crispino/Documents/tcc/Funcao.hpp
 
+C:/Users/Crispino/Documents/tcc/Migracao.cpp
+Migracao.h
+C:/Users/Crispino/Documents/tcc/Migracao.h
+
+C:/Users/Crispino/Documents/tcc/Migracao.h
+random
+-
+
 C:/Users/Crispino/Documents/tcc/Populacao.cpp
 Populacao.h
 C:/Users/Crispino/Documents/tcc/Populacao.h
@@ -64,6 +72,8 @@ C:/Users/Crispino/Documents/tcc/main.cpp
 iostream
 -
 chrono
+-
+omp.h
 -
 Populacao.h
 C:/Users/Crispino/Documents/tcc/Populacao.h

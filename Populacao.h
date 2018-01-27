@@ -27,7 +27,8 @@ class Populacao {
         const int N_THREADS = 3;
 
     public:
-        Populacao(int tamanho, float txMutacao, float txCruzamento, float desvioPadrao,const Funcao &funcaoFitness);
+        Populacao(int tamanho = 100, float txMutacao = 0.05, float txCruzamento = 0.9, float desvioPadrao = 1.55,const Funcao &funcaoFitness = Funcao());
+        Populacao& operator = (const Populacao &);
 
         void inicializacao();
         void calcularFitness();

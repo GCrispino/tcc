@@ -27,7 +27,26 @@ Populacao::Populacao(int tamanho, float txMutacao, float txCruzamento,float desv
         this->gen = new std::default_random_engine(seed);
 }
 
+Populacao& Populacao::operator = (const Populacao &p){
+    this->tamanho = p.tamanho;
+    this->txMutacao = p.txMutacao;
+    this->txCruzamento = p.txCruzamento;
+    this->desvioPadrao = p.desvioPadrao;
+    this->funcaoFitness = p.funcaoFitness;
+
+    this->acabou = p.acabou;
+    this->elemMaxFitness = p.elemMaxFitness;
+    this->iElemMaxFitness = p.iElemMaxFitness;
+    this->iElemMinFitness = p.iElemMinFitness;
+    this->gen = p.gen;
+
+    this->cromossomos = p.cromossomos;
+}
+
 void Populacao::inicializacao() {
+    if (this->cromossomos.size() > 0)
+        this->cromossomos.empty();
+
     for (int i = 0; i < this->tamanho; i++) {
         Cromossomo cromossomo(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
         cromossomo.inicializar();
@@ -40,7 +59,7 @@ void Populacao::calcularFitness() {
 
     double accFitness = 0;
 
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for (int i = 0;i < this->tamanho;++i){
         Cromossomo &c = this->cromossomos[i];
 
@@ -130,7 +149,7 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
     return filhos;
 }
 
-//PAREI AQUI!!!!
+
 void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
     int indicePior, indiceSegundoPior;
 
@@ -151,29 +170,7 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
 
     }
     return ;
-    //acha os dois piores indivíduos da população
-    for (int i = 0; i < this->cromossomos.size(); i++) {
-        Cromossomo cromossomo = cromossomos[i];
 
-        if (i == 0)
-            indicePior = i;
-        else if (i == 1) {
-            if (cromossomo.getFitness() > this->cromossomos[indicePior].getFitness()) {
-                indiceSegundoPior = indicePior;
-                indicePior = i;
-            } else
-                indiceSegundoPior = i;
-        } else {
-            if (cromossomo.getFitness() > this->cromossomos[indicePior].getFitness()) {
-                indiceSegundoPior = indicePior;
-                indicePior = i;
-            } else if (cromossomo.getFitness() > this->cromossomos[indiceSegundoPior].getFitness())
-                indiceSegundoPior = i;
-        }
-    }
-
-    this->cromossomos[indicePior] = filhos[0];
-    this->cromossomos[indiceSegundoPior] = filhos[1];
 }
 
 bool Populacao::verificarParada() {

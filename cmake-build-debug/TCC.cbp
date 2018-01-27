@@ -97,6 +97,12 @@
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Funcoes.hpp">
 			<Option target="TCC"/>
 		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Migracao.cpp">
+			<Option target="TCC"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Migracao.h">
+			<Option target="TCC"/>
+		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Populacao.cpp">
 			<Option target="TCC"/>
 		</Unit>

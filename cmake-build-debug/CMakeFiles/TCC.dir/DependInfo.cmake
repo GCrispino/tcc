@@ -6,6 +6,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Crispino/Documents/tcc/Cromossomo.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Cromossomo.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/Funcao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Funcao.cpp.obj"
+  "C:/Users/Crispino/Documents/tcc/Migracao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Migracao.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/Populacao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Populacao.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/main.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/main.cpp.obj"
   )

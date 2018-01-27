@@ -176,6 +176,33 @@ Funcao.cpp.s:
 	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Funcao.cpp.s
 .PHONY : Funcao.cpp.s
 
+Migracao.obj: Migracao.cpp.obj
+
+.PHONY : Migracao.obj
+
+# target to build an object file
+Migracao.cpp.obj:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Migracao.cpp.obj
+.PHONY : Migracao.cpp.obj
+
+Migracao.i: Migracao.cpp.i
+
+.PHONY : Migracao.i
+
+# target to preprocess a source file
+Migracao.cpp.i:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Migracao.cpp.i
+.PHONY : Migracao.cpp.i
+
+Migracao.s: Migracao.cpp.s
+
+.PHONY : Migracao.s
+
+# target to generate assembly for a file
+Migracao.cpp.s:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Migracao.cpp.s
+.PHONY : Migracao.cpp.s
+
 Populacao.obj: Populacao.cpp.obj
 
 .PHONY : Populacao.obj
@@ -245,6 +272,9 @@ help:
 	@echo ... Funcao.obj
 	@echo ... Funcao.i
 	@echo ... Funcao.s
+	@echo ... Migracao.obj
+	@echo ... Migracao.i
+	@echo ... Migracao.s
 	@echo ... Populacao.obj
 	@echo ... Populacao.i
 	@echo ... Populacao.s
