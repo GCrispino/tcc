@@ -35,11 +35,11 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
                 iPopulacao2 = this->intDis(this->gen);
             }while(iPopulacao1 == iPopulacao2);
 
-            std::cout << iPopulacao1 << ',';
+            /*std::cout << iPopulacao1 << ',';
             std::cout << iPopulacao2 << std::endl;
 
             std::cout << iCromossomoAleatorio1 << ',';
-            std::cout << iCromossomoAleatorio2 << std::endl;
+            std::cout << iCromossomoAleatorio2 << std::endl;*/
 
             Populacao
                     *populacao1 = this->populacoes[iPopulacao1],
