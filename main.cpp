@@ -3,19 +3,19 @@
 #include <omp.h>
 #include "Populacao.h"
 #include "Funcoes.hpp"
+#include "Migracao.h"
 
 #define N_POPULACOES 10
 
 void inicializarPopulacoes(
-        std::vector<Populacao> &populacoes,
+        int n,
+        std::vector<Populacao *> &populacoes,
         int tamanho,
         double txMutacao,
         double txCruzamento,
         double desvioPadrao,
         Funcao funcaoFitness
 );
-
-void migracao(int &nPopulacoesProcessadas,std::vector<Populacao> &pops);
 
 int main(){
 
@@ -26,16 +26,18 @@ int main(){
     double
             txMutacao = .05,
             txCruzamento = .9,
-            desvioPadrao = 1.55;
+            desvioPadrao = 1.55,
+            probMigracao = 0.003;
 
     std::chrono::steady_clock::time_point comeco,fim;
     std::chrono::steady_clock::duration tempo;
 
 
-    Funcao funcaoFitness = Funcoes::ackley;
-    std::vector<Populacao> populacoes(10);
+    Funcao funcaoFitness = Funcoes::schaffer2;
+    std::vector<Populacao *> populacoes(10);
 
-    inicializarPopulacoes(populacoes,tamanhoPopulacao,txMutacao,txCruzamento,desvioPadrao,funcaoFitness);
+    inicializarPopulacoes(N_POPULACOES,populacoes,tamanhoPopulacao,txMutacao,txCruzamento,desvioPadrao,funcaoFitness);
+    Migracao operadorMigracao(probMigracao,populacoes);
 
     comeco = std::chrono::steady_clock::now();
 
@@ -47,16 +49,16 @@ int main(){
         #pragma omp single nowait
         {
             #pragma omp task
-            migracao(nPopulacoesProcessadas,populacoes);
+            operadorMigracao.iniciarMigracao(nPopulacoesProcessadas);
         }
 
         #pragma omp for nowait
         for (unsigned int i = 0;i < N_POPULACOES;++i){
 
-            Populacao &p = populacoes[i];
+            Populacao &p = *(populacoes[i]);
 
-            p.inicializacao();
-            p.calcularFitness();
+            //p.inicializacao();
+            //p.calcularFitness();
 
             int j = 0;
             do {
@@ -83,8 +85,6 @@ int main(){
     }
 
 
-
-
     fim = std::chrono::steady_clock::now();
     tempo = fim - comeco;
 
@@ -99,26 +99,19 @@ int main(){
 
 
 void inicializarPopulacoes(
-        std::vector<Populacao> &populacoes,
+        int n,
+        std::vector<Populacao *> &populacoes,
         int tamanho,
         double txMutacao,
         double txCruzamento,
         double desvioPadrao,
         Funcao funcaoFitness
 ){
-    for (Populacao &p: populacoes)
-        p = Populacao(tamanho,txMutacao,txCruzamento,desvioPadrao,funcaoFitness);
-
-}
-
-void migracao(int &nPopulacoesProcessadas,std::vector<Populacao> &pops){
-    std::mt19937 gen(std::chrono::system_clock::now().time_since_epoch().count());
-    std::uniform_real_distribution<float> realDis(0.0,1.0);
-
-
-    while(nPopulacoesProcessadas < N_POPULACOES){
-        if (realDis(gen) < 0.0)
-        std::cout << "Migracao!" << std::endl;
+    for (unsigned int i = 0;i < n;++i) {
+        populacoes[i] = new Populacao(tamanho, txMutacao, txCruzamento, desvioPadrao, funcaoFitness);
+        populacoes[i]->inicializacao();
+        populacoes[i]->calcularFitness();
     }
+
 }
 

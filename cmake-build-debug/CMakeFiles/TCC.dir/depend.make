@@ -8,8 +8,11 @@ CMakeFiles/TCC.dir/Cromossomo.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/Funcao.cpp.obj: ../Funcao.cpp
 CMakeFiles/TCC.dir/Funcao.cpp.obj: ../Funcao.hpp
 
+CMakeFiles/TCC.dir/Migracao.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/Migracao.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/Migracao.cpp.obj: ../Migracao.cpp
 CMakeFiles/TCC.dir/Migracao.cpp.obj: ../Migracao.h
+CMakeFiles/TCC.dir/Migracao.cpp.obj: ../Populacao.h
 
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Cromossomo.hpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Funcao.hpp
@@ -19,6 +22,7 @@ CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Populacao.h
 CMakeFiles/TCC.dir/main.cpp.obj: ../Cromossomo.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcoes.hpp
+CMakeFiles/TCC.dir/main.cpp.obj: ../Migracao.h
 CMakeFiles/TCC.dir/main.cpp.obj: ../Populacao.h
 CMakeFiles/TCC.dir/main.cpp.obj: ../main.cpp
 

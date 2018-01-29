@@ -21,6 +21,7 @@ class Populacao {
         int iElemMinFitness;
         Cromossomo * elemMaxFitness;
         bool acabou;
+        bool momentoMigracao;//define se migração está acontecendo no momento
 
         static std::default_random_engine *gen;
 
@@ -42,6 +43,10 @@ class Populacao {
         unsigned int achaIndicePiorFitness();
         void setElemMaxFitness(Cromossomo *);
         double getMediaFitness();
+        int getTamanho() const;
+        Cromossomo getCromossomo(int i) const;
+        void setCromossomo(int i,Cromossomo &);
+        void setMomentoMigracao(bool);
 
 
 
