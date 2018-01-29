@@ -13,11 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="30eb2ad3-d7be-44a7-8aa6-4ad72bcc0223" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Migracao.cpp" afterPath="$PROJECT_DIR$/Migracao.cpp" />
-      <change beforePath="$PROJECT_DIR$/Migracao.h" afterPath="$PROJECT_DIR$/Migracao.h" />
-      <change beforePath="$PROJECT_DIR$/Populacao.cpp" afterPath="$PROJECT_DIR$/Populacao.cpp" />
-      <change beforePath="$PROJECT_DIR$/Populacao.h" afterPath="$PROJECT_DIR$/Populacao.h" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -288,12 +283,12 @@
       <workItem from="1516834748650" duration="7766000" />
       <workItem from="1516990419286" duration="8472000" />
       <workItem from="1517060181801" duration="3296000" />
-      <workItem from="1517150585732" duration="7692000" />
+      <workItem from="1517150585732" duration="7757000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="79066000" />
+    <option name="totallyTimeSpent" value="79131000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="-14" width="3868" height="2098" extended-state="6" />
