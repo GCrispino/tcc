@@ -149,6 +149,33 @@ Cromossomo.cpp.s:
 	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Cromossomo.cpp.s
 .PHONY : Cromossomo.cpp.s
 
+CromossomoMorto.obj: CromossomoMorto.cpp.obj
+
+.PHONY : CromossomoMorto.obj
+
+# target to build an object file
+CromossomoMorto.cpp.obj:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj
+.PHONY : CromossomoMorto.cpp.obj
+
+CromossomoMorto.i: CromossomoMorto.cpp.i
+
+.PHONY : CromossomoMorto.i
+
+# target to preprocess a source file
+CromossomoMorto.cpp.i:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/CromossomoMorto.cpp.i
+.PHONY : CromossomoMorto.cpp.i
+
+CromossomoMorto.s: CromossomoMorto.cpp.s
+
+.PHONY : CromossomoMorto.s
+
+# target to generate assembly for a file
+CromossomoMorto.cpp.s:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/CromossomoMorto.cpp.s
+.PHONY : CromossomoMorto.cpp.s
+
 Funcao.obj: Funcao.cpp.obj
 
 .PHONY : Funcao.obj
@@ -242,6 +269,9 @@ help:
 	@echo ... Cromossomo.obj
 	@echo ... Cromossomo.i
 	@echo ... Cromossomo.s
+	@echo ... CromossomoMorto.obj
+	@echo ... CromossomoMorto.i
+	@echo ... CromossomoMorto.s
 	@echo ... Funcao.obj
 	@echo ... Funcao.i
 	@echo ... Funcao.s

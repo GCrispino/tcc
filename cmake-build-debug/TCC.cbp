@@ -88,6 +88,12 @@
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Cromossomo.hpp">
 			<Option target="TCC"/>
 		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/CromossomoMorto.cpp">
+			<Option target="TCC"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/CromossomoMorto.hpp">
+			<Option target="TCC"/>
+		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Funcao.cpp">
 			<Option target="TCC"/>
 		</Unit>

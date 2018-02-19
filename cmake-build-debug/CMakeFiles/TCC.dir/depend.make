@@ -5,15 +5,22 @@ CMakeFiles/TCC.dir/Cromossomo.cpp.obj: ../Cromossomo.cpp
 CMakeFiles/TCC.dir/Cromossomo.cpp.obj: ../Cromossomo.hpp
 CMakeFiles/TCC.dir/Cromossomo.cpp.obj: ../Funcao.hpp
 
+CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj: ../CromossomoMorto.cpp
+CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj: ../CromossomoMorto.hpp
+CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj: ../Funcao.hpp
+
 CMakeFiles/TCC.dir/Funcao.cpp.obj: ../Funcao.cpp
 CMakeFiles/TCC.dir/Funcao.cpp.obj: ../Funcao.hpp
 
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/Populacao.cpp.obj: ../CromossomoMorto.hpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Populacao.cpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Populacao.h
 
 CMakeFiles/TCC.dir/main.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/main.cpp.obj: ../CromossomoMorto.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcoes.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Populacao.h

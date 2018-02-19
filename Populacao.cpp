@@ -7,10 +7,19 @@
 #include <omp.h>
 #include <iostream>
 
-std::default_random_engine* Populacao::gen = nullptr;
+/**
+ * PROBLEMA
+	Cromossomos mortos tem fitness errado
+	função calcularFitness() da população só calcula da população dos vivos
+	No entanto, isso não deveria ser necessário porque os indivíduos já são transferidos com o fitness calculado para a população dos mortos
+ */
 
-Populacao::Populacao(int tamanho, float txMutacao, float txCruzamento,float desvioPadrao,const Funcao &funcaoFitness) {
+
+std::mt19937* Populacao::gen = nullptr;
+
+Populacao::Populacao(unsigned int tamanho, unsigned int tamanhoPopulacaoMortos,float txMutacao, float txCruzamento,unsigned int taxaInfeccao,float desvioPadrao,const Funcao &funcaoFitness) {
     this->tamanho = tamanho;
+    this->tamanhoPopulacaoMortos = tamanhoPopulacaoMortos;
     this->txMutacao = txMutacao;
     this->txCruzamento = txCruzamento;
     this->desvioPadrao = desvioPadrao;
@@ -24,7 +33,7 @@ Populacao::Populacao(int tamanho, float txMutacao, float txCruzamento,float desv
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
     if (this->gen == nullptr)
-        this->gen = new std::default_random_engine(seed);
+        this->gen = new std::mt19937(seed);
 }
 
 void Populacao::inicializacao() {
@@ -40,7 +49,7 @@ void Populacao::calcularFitness() {
 
     double accFitness = 0;
 
-    #pragma omp parallel for
+    //#pragma omp parallel for
     for (int i = 0;i < this->tamanho;++i){
         Cromossomo &c = this->cromossomos[i];
 
@@ -130,7 +139,7 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
     return filhos;
 }
 
-//PAREI AQUI!!!!
+
 void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
     int indicePior, indiceSegundoPior;
 
@@ -142,38 +151,70 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
             &filho2 = filhos[i + 1];
 
 
-        const Cromossomo *
-                escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2;
+        const Cromossomo
+                * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2,
+                * outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
 
         this->cromossomos[this->iElemMinFitness] = *escolhido;
+        this->mortos.push_back(*outro);
 
-        this->iElemMinFitness = this->achaIndicePiorFitness(); //ou usa find_if()
+        this->iElemMinFitness = this->achaIndicePiorFitness();
 
     }
     return ;
-    //acha os dois piores indivíduos da população
-    for (int i = 0; i < this->cromossomos.size(); i++) {
-        Cromossomo cromossomo = cromossomos[i];
+}
 
-        if (i == 0)
-            indicePior = i;
-        else if (i == 1) {
-            if (cromossomo.getFitness() > this->cromossomos[indicePior].getFitness()) {
-                indiceSegundoPior = indicePior;
-                indicePior = i;
-            } else
-                indiceSegundoPior = i;
-        } else {
-            if (cromossomo.getFitness() > this->cromossomos[indicePior].getFitness()) {
-                indiceSegundoPior = indicePior;
-                indicePior = i;
-            } else if (cromossomo.getFitness() > this->cromossomos[indiceSegundoPior].getFitness())
-                indiceSegundoPior = i;
-        }
+void Populacao::recombinacao(){
+    /*
+     * Seleciona um aleatório da população
+     * Seleciona um aleatório da população dos mortos
+     * faz o cruzamento simples
+     *      se o filho for melhor, incrementa o valor de fitMorto
+     *      se não, decrementa
+     * ao fim, se a população estiver cheia, tira os indivíduos com os menores fitMorto até ela alcançar o seu tamanho máximo
+     */
+
+    std::uniform_int_distribution<int>
+            distPopulacao (0,this->tamanho - 1),
+            distMortos (0,this->mortos.size() - 1);
+
+    unsigned int
+            iCromossomo = distPopulacao(*(this->gen)),
+            iMorto = distMortos(*(this->gen));
+
+    CromossomoMorto &morto = this->mortos[iMorto];
+
+    Cromossomo
+        &c = this->cromossomos[iCromossomo],
+        novo = c.crossoverSimples(morto);
+
+    if (novo.getFitness() < c.getFitness()){
+        //decrementa fitMorto
+        morto.decFitMorto();
+    }
+    else{
+        //incrementa fitMorto
+        morto.incFitMorto();
     }
 
-    this->cromossomos[indicePior] = filhos[0];
-    this->cromossomos[indiceSegundoPior] = filhos[1];
+    unsigned int tamAtualPopulacaoMortos = this->mortos.size();
+    
+    if (tamAtualPopulacaoMortos > this->tamanhoPopulacaoMortos){
+        //ordenar população baseado no fitmorto
+        std::sort(this->mortos.begin(),this->mortos.end(),[](CromossomoMorto &c1, CromossomoMorto &c2){
+            return c1.getFitMorto() > c2.getFitMorto();
+        });
+
+        for (auto &morto: this->mortos){
+            morto.calcularFitness();
+        }
+
+        //excluir os menores
+        std::vector<CromossomoMorto>::iterator inicioRemocao = this->mortos.begin() + this->tamanhoPopulacaoMortos;
+        this->mortos.erase(inicioRemocao,this->mortos.end());
+        std::cout << "";
+    }
+
 }
 
 bool Populacao::verificarParada() {

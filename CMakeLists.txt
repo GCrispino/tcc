@@ -14,4 +14,4 @@ add_executable(TCC
         Funcao.cpp
         Funcao.hpp
         Funcoes.hpp
-        )
+        CromossomoMorto.cpp CromossomoMorto.hpp)

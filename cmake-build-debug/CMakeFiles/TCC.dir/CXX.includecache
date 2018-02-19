@@ -26,6 +26,14 @@ random
 Funcao.hpp
 C:/Users/Crispino/Documents/tcc/Funcao.hpp
 
+C:/Users/Crispino/Documents/tcc/CromossomoMorto.cpp
+CromossomoMorto.hpp
+C:/Users/Crispino/Documents/tcc/CromossomoMorto.hpp
+
+C:/Users/Crispino/Documents/tcc/CromossomoMorto.hpp
+Cromossomo.hpp
+C:/Users/Crispino/Documents/tcc/Cromossomo.hpp
+
 C:/Users/Crispino/Documents/tcc/Funcao.cpp
 Funcao.hpp
 C:/Users/Crispino/Documents/tcc/Funcao.hpp
@@ -43,6 +51,8 @@ numeric
 C:/Users/Crispino/Documents/tcc/Funcoes.hpp
 numeric
 -
+cmath
+-
 Funcao.hpp
 C:/Users/Crispino/Documents/tcc/Funcao.hpp
 
@@ -59,6 +69,8 @@ iostream
 C:/Users/Crispino/Documents/tcc/Populacao.h
 Cromossomo.hpp
 C:/Users/Crispino/Documents/tcc/Cromossomo.hpp
+CromossomoMorto.hpp
+C:/Users/Crispino/Documents/tcc/CromossomoMorto.hpp
 
 C:/Users/Crispino/Documents/tcc/main.cpp
 iostream

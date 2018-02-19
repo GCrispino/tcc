@@ -40,8 +40,11 @@ class Cromossomo{
         //realiza a opera??o de muta??o probabilisticamente em um array de cromossomos
         void mutaFilhos(std::vector<Cromossomo> &filhos);
 
-        //crossover de dois pontos
+        //gera dois filhos
         std::vector<Cromossomo> crossover(const Cromossomo &outroCromossomo);
+
+        //gera um filho
+        Cromossomo crossoverSimples(const Cromossomo &outroCromossomo);
 
         double getFitness() const;
 

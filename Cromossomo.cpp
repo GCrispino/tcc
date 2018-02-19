@@ -71,9 +71,10 @@ Cromossomo::Cromossomo(float txMutacao,float desvioPadrao,const Funcao &funcaoFi
 }
 
 Cromossomo::Cromossomo(const Cromossomo &c)
-:txMutacao(c.txMutacao),desvioPadrao(c.desvioPadrao),funcaoFitness(c.funcaoFitness)
+:txMutacao(c.txMutacao),desvioPadrao(c.desvioPadrao),fitness(c.fitness),funcaoFitness(c.funcaoFitness)
 {
-    this->genotipo = c.genotipo;
+    if (!c.genotipo.empty())
+        this->genotipo = c.genotipo;
 
     unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     if (this->gen == nullptr)
@@ -90,8 +91,14 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
     this->txMutacao = c.txMutacao;
     this->desvioPadrao = c.desvioPadrao;
     this->fitness = c.fitness;
+    this->funcaoFitness =c.funcaoFitness;
 
-    this->genotipo = c.genotipo;
+
+    if (!c.genotipo.empty())
+        this->genotipo = c.genotipo;
+    else
+        this->genotipo = std::vector<double>(Cromossomo::N_GENES);
+
 
     unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
     if (this->gen == nullptr)
@@ -130,8 +137,8 @@ void Cromossomo::mutacao() {
 void Cromossomo::mutaFilhos(std::vector<Cromossomo> &filhos) {
 
     for (Cromossomo &filho : filhos) {
-        //double probMutacao = Math.random();
-        double probMutacao = this->realDis(*this->gen);/*ALEATORIO!= this->rGen.nextDouble()*/;
+
+        double probMutacao = this->realDis(*this->gen);
 
         if (probMutacao < filho.txMutacao) {
             filho.mutacao();
@@ -177,6 +184,31 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo)
 
     return filhos;
 }
+
+Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo){
+
+    Cromossomo filho(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
+
+    double alpha;
+
+    for (int i = 0; i < Cromossomo::N_GENES; ++i) {
+        alpha = this->realDis(*(this->gen));
+
+        filho.genotipo[i] = alpha * this->genotipo[i] + (1 - alpha) * outroCromossomo.genotipo[i];
+    }
+
+    filho.calcularFitness();
+
+    double probMutacao = this->realDis(*this->gen);
+
+    if (probMutacao < filho.txMutacao) {
+        filho.mutacao();
+    }
+
+
+    return filho;
+}
+
 
 double Cromossomo::getFitness() const{
     return this->fitness;

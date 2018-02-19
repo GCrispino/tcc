@@ -98,7 +98,7 @@ namespace Funcoes{
 
 
     Funcao
-            schaffer2(0.0,-1000.0,1000.0,func_schaffer2),
+            schaffer2(0.0,-1000.0,1000.0    ,func_schaffer2),
             dropwave(-1.0,-5.12,5.12,func_dropwave),
             booth(0.0,-10,10,func_booth),
             ackley(0.0,-32,32,func_ackley),

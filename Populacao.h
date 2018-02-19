@@ -7,33 +7,41 @@
 
 
 #include "Cromossomo.hpp"
+#include "CromossomoMorto.hpp"
 
 class Populacao {
     private:
-        int tamanho;
+        unsigned int tamanho;
+        unsigned int tamanhoPopulacaoMortos;
         float txMutacao;
         float txCruzamento;
         float desvioPadrao;
         double mediaFitness;
         Funcao funcaoFitness;
         std::vector<Cromossomo> cromossomos;
+        std::vector<CromossomoMorto> mortos;
         int iElemMaxFitness;
         int iElemMinFitness;
         Cromossomo * elemMaxFitness;
         bool acabou;
 
-        static std::default_random_engine *gen;
+        static std::mt19937 *gen;
 
         const int N_THREADS = 3;
 
     public:
-        Populacao(int tamanho, float txMutacao, float txCruzamento, float desvioPadrao,const Funcao &funcaoFitness);
+        Populacao(
+                unsigned int tamanho,unsigned int tamanhoPopulacaoMortos,
+                float txMutacao, float txCruzamento, unsigned int taxaInfeccao,float desvioPadrao,
+                const Funcao &funcaoFitness
+        );
 
         void inicializacao();
         void calcularFitness();
         std::vector<Cromossomo> selecaoPais(int nPaisASelecionar,int tamanhoTorneio);
         std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &);
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
+        void recombinacao();
         bool verificarParada();
         void setAcabou();
         const Cromossomo & getElemMaxFitness();
