@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
   "CMakeFiles/TCC.dir/Populacao.cpp.obj"
   "CMakeFiles/TCC.dir/Cromossomo.cpp.obj"
-  "CMakeFiles/TCC.dir/main.cpp.obj"
+  "CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj"
   "CMakeFiles/TCC.dir/Funcao.cpp.obj"
   "CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj"
   "CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj"

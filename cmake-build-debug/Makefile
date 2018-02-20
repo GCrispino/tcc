@@ -257,32 +257,32 @@ PopulacaoTransformacao.cpp.s:
 	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.s
 .PHONY : PopulacaoTransformacao.cpp.s
 
-main.obj: main.cpp.obj
+mainNaoConvencional.obj: mainNaoConvencional.cpp.obj
 
-.PHONY : main.obj
+.PHONY : mainNaoConvencional.obj
 
 # target to build an object file
-main.cpp.obj:
-	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/main.cpp.obj
-.PHONY : main.cpp.obj
+mainNaoConvencional.cpp.obj:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj
+.PHONY : mainNaoConvencional.cpp.obj
 
-main.i: main.cpp.i
+mainNaoConvencional.i: mainNaoConvencional.cpp.i
 
-.PHONY : main.i
+.PHONY : mainNaoConvencional.i
 
 # target to preprocess a source file
-main.cpp.i:
-	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/main.cpp.i
-.PHONY : main.cpp.i
+mainNaoConvencional.cpp.i:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/mainNaoConvencional.cpp.i
+.PHONY : mainNaoConvencional.cpp.i
 
-main.s: main.cpp.s
+mainNaoConvencional.s: mainNaoConvencional.cpp.s
 
-.PHONY : main.s
+.PHONY : mainNaoConvencional.s
 
 # target to generate assembly for a file
-main.cpp.s:
-	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/main.cpp.s
-.PHONY : main.cpp.s
+mainNaoConvencional.cpp.s:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/mainNaoConvencional.cpp.s
+.PHONY : mainNaoConvencional.cpp.s
 
 # Help Target
 help:
@@ -308,9 +308,9 @@ help:
 	@echo ... PopulacaoTransformacao.obj
 	@echo ... PopulacaoTransformacao.i
 	@echo ... PopulacaoTransformacao.s
-	@echo ... main.obj
-	@echo ... main.i
-	@echo ... main.s
+	@echo ... mainNaoConvencional.obj
+	@echo ... mainNaoConvencional.i
+	@echo ... mainNaoConvencional.s
 .PHONY : help
 
 

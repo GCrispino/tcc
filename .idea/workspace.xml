@@ -14,9 +14,8 @@
     <list default="true" id="30eb2ad3-d7be-44a7-8aa6-4ad72bcc0223" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" afterPath="$PROJECT_DIR$/CMakeLists.txt" />
-      <change beforePath="$PROJECT_DIR$/Populacao.cpp" afterPath="$PROJECT_DIR$/Populacao.cpp" />
-      <change beforePath="$PROJECT_DIR$/Populacao.h" afterPath="$PROJECT_DIR$/Populacao.h" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" />
+      <change beforePath="$PROJECT_DIR$/PopulacaoTransformacao.cpp" afterPath="$PROJECT_DIR$/PopulacaoTransformacao.cpp" />
+      <change beforePath="$PROJECT_DIR$/PopulacaoTransformacao.h" afterPath="$PROJECT_DIR$/PopulacaoTransformacao.h" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/CXX.includecache" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/CXX.includecache" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/DependInfo.cmake" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/DependInfo.cmake" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/build.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/build.make" />
@@ -24,11 +23,9 @@
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/depend.internal" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/depend.internal" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/depend.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/depend.make" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/objects1.rsp" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/objects1.rsp" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/progress.make" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TCC.dir/progress.make" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Makefile" afterPath="$PROJECT_DIR$/cmake-build-debug/Makefile" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/TCC.cbp" afterPath="$PROJECT_DIR$/cmake-build-debug/TCC.cbp" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/mainNaoConvencional.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,11 +38,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="675">
-      <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/main.cpp">
+      <file leaf-file-name="mainNaoConvencional.cpp" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-509">
-              <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
+            <state relative-caret-position="637">
+              <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -56,8 +53,8 @@
       <file leaf-file-name="Populacao.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Populacao.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1555">
-              <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+            <state relative-caret-position="-12">
+              <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
               <folding>
                 <element signature="e#94#119#0" expanded="true" />
               </folding>
@@ -69,7 +66,7 @@
         <entry file="file://$PROJECT_DIR$/Populacao.cpp">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="5848">
-              <caret line="136" column="28" lean-forward="false" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
+              <caret line="136" column="36" lean-forward="false" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="36" />
               <folding>
                 <element signature="e#44#66#0" expanded="true" />
               </folding>
@@ -100,18 +97,18 @@
       <file leaf-file-name="PopulacaoTransformacao.h" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="559">
-              <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="28" />
+            <state relative-caret-position="473">
+              <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PopulacaoTransformacao.cpp" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PopulacaoTransformacao.cpp" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="2150">
+              <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -120,7 +117,7 @@
       <file leaf-file-name="Funcoes.hpp" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Funcoes.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2494">
+            <state relative-caret-position="1727">
               <caret line="58" column="62" lean-forward="false" selection-start-line="58" selection-start-column="62" selection-end-line="58" selection-end-column="62" />
               <folding />
             </state>
@@ -151,16 +148,16 @@
       <find>ca</find>
       <find>calcular</find>
       <find>new</find>
-      <find>recombina</find>
       <find>calcularFitness()</find>
       <find>calcularFitness(</find>
       <find>morto</find>
       <find>Populacao(</find>
-      <find>taxaInfeccao</find>
       <find>recombinacao</find>
       <find>selecaoSobre</find>
       <find>selecaoSobrevie</find>
       <find>selecaoSobreviventes</find>
+      <find>taxaInfeccao</find>
+      <find>recombina</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -180,11 +177,11 @@
         <option value="$PROJECT_DIR$/CromossomoMorto.cpp" />
         <option value="$PROJECT_DIR$/Cromossomo.cpp" />
         <option value="$PROJECT_DIR$/Funcoes.hpp" />
-        <option value="$PROJECT_DIR$/PopulacaoTransformacao.h" />
         <option value="$PROJECT_DIR$/Populacao.cpp" />
         <option value="$PROJECT_DIR$/Populacao.h" />
-        <option value="$PROJECT_DIR$/PopulacaoTransformacao.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/PopulacaoTransformacao.h" />
+        <option value="$PROJECT_DIR$/PopulacaoTransformacao.cpp" />
       </list>
     </option>
   </component>
@@ -282,12 +279,13 @@
       <workItem from="1516990419286" duration="2129000" />
       <workItem from="1519006993626" duration="2783000" />
       <workItem from="1519083802123" duration="1247000" />
-      <workItem from="1519092263616" duration="262000" />
+      <workItem from="1519092263616" duration="997000" />
+      <workItem from="1519156004838" duration="1387000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="82365000" />
+    <option name="totallyTimeSpent" value="84487000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="-14" width="3868" height="2098" extended-state="6" />
@@ -303,7 +301,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.7781955" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.37969926" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -318,6 +316,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/mainNaoConvencional.cpp</url>
+          <line>33</line>
+          <option name="timeStamp" value="139" />
+        </line-breakpoint>
+      </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
@@ -326,7 +331,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="139" />
+      <option name="time" value="143" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -405,7 +410,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="4" column="43" lean-forward="false" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
@@ -423,7 +428,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1032">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
@@ -477,7 +482,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="688">
           <caret line="16" column="4" lean-forward="false" selection-start-line="16" selection-start-column="4" selection-end-line="16" selection-end-column="4" />
@@ -531,7 +536,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="172">
           <caret line="4" column="67" lean-forward="false" selection-start-line="4" selection-start-column="67" selection-end-line="4" selection-end-column="67" />
@@ -581,7 +586,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -599,7 +604,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -674,7 +679,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="358">
           <caret line="1223" column="0" lean-forward="false" selection-start-line="1223" selection-start-column="0" selection-end-line="1223" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -706,16 +710,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Populacao.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="5848">
-          <caret line="136" column="28" lean-forward="false" selection-start-line="136" selection-start-column="28" selection-end-line="136" selection-end-column="28" />
-          <folding>
-            <element signature="e#44#66#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CromossomoMorto.cpp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1333">
@@ -732,18 +726,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Populacao.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5848">
+          <caret line="136" column="36" lean-forward="false" selection-start-line="136" selection-start-column="16" selection-end-line="136" selection-end-column="36" />
+          <folding>
+            <element signature="e#44#66#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Funcoes.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2494">
+        <state relative-caret-position="1727">
           <caret line="58" column="62" lean-forward="false" selection-start-line="58" selection-start-column="62" selection-end-line="58" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/mainNaoConvencional.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="637">
+          <caret line="33" column="0" lean-forward="false" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Populacao.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1555">
-          <caret line="56" column="0" lean-forward="false" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+        <state relative-caret-position="-12">
+          <caret line="17" column="27" lean-forward="false" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
           <folding>
             <element signature="e#94#119#0" expanded="true" />
           </folding>
@@ -752,27 +766,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="559">
-          <caret line="13" column="28" lean-forward="false" selection-start-line="13" selection-start-column="6" selection-end-line="13" selection-end-column="28" />
+        <state relative-caret-position="473">
+          <caret line="17" column="34" lean-forward="false" selection-start-line="17" selection-start-column="34" selection-end-line="17" selection-end-column="34" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        <state relative-caret-position="2150">
+          <caret line="74" column="9" lean-forward="false" selection-start-line="74" selection-start-column="9" selection-end-line="74" selection-end-column="9" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-509">
-          <caret line="7" column="19" lean-forward="false" selection-start-line="7" selection-start-column="19" selection-end-line="7" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#19#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

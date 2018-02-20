@@ -26,11 +26,11 @@ CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../Populacao.h
 CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../PopulacaoTransformacao.cpp
 CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../PopulacaoTransformacao.h
 
-CMakeFiles/TCC.dir/main.cpp.obj: ../Cromossomo.hpp
-CMakeFiles/TCC.dir/main.cpp.obj: ../CromossomoMorto.hpp
-CMakeFiles/TCC.dir/main.cpp.obj: ../Funcao.hpp
-CMakeFiles/TCC.dir/main.cpp.obj: ../Funcoes.hpp
-CMakeFiles/TCC.dir/main.cpp.obj: ../Populacao.h
-CMakeFiles/TCC.dir/main.cpp.obj: ../PopulacaoTransformacao.h
-CMakeFiles/TCC.dir/main.cpp.obj: ../main.cpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../CromossomoMorto.hpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../Funcao.hpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../Funcoes.hpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../Populacao.h
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../PopulacaoTransformacao.h
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../mainNaoConvencional.cpp
 

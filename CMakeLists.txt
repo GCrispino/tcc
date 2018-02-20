@@ -9,7 +9,7 @@ add_executable(TCC
         Populacao.h
         Cromossomo.cpp
         Cromossomo.hpp
-        main.cpp
+        mainNaoConvencional.cpp
 
         Funcao.cpp
         Funcao.hpp

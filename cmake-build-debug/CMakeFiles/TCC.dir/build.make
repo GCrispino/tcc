@@ -104,28 +104,28 @@ CMakeFiles/TCC.dir/Cromossomo.cpp.obj.provides: CMakeFiles/TCC.dir/Cromossomo.cp
 CMakeFiles/TCC.dir/Cromossomo.cpp.obj.provides.build: CMakeFiles/TCC.dir/Cromossomo.cpp.obj
 
 
-CMakeFiles/TCC.dir/main.cpp.obj: CMakeFiles/TCC.dir/flags.make
-CMakeFiles/TCC.dir/main.cpp.obj: ../main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TCC.dir/main.cpp.obj"
-	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\TCC.dir\main.cpp.obj -c C:\Users\Crispino\Documents\tcc\main.cpp
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: CMakeFiles/TCC.dir/flags.make
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj: ../mainNaoConvencional.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj"
+	C:\TDM-GCC-64\bin\g++.exe  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles\TCC.dir\mainNaoConvencional.cpp.obj -c C:\Users\Crispino\Documents\tcc\mainNaoConvencional.cpp
 
-CMakeFiles/TCC.dir/main.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TCC.dir/main.cpp.i"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Crispino\Documents\tcc\main.cpp > CMakeFiles\TCC.dir\main.cpp.i
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/TCC.dir/mainNaoConvencional.cpp.i"
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E C:\Users\Crispino\Documents\tcc\mainNaoConvencional.cpp > CMakeFiles\TCC.dir\mainNaoConvencional.cpp.i
 
-CMakeFiles/TCC.dir/main.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TCC.dir/main.cpp.s"
-	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Crispino\Documents\tcc\main.cpp -o CMakeFiles\TCC.dir\main.cpp.s
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/TCC.dir/mainNaoConvencional.cpp.s"
+	C:\TDM-GCC-64\bin\g++.exe $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S C:\Users\Crispino\Documents\tcc\mainNaoConvencional.cpp -o CMakeFiles\TCC.dir\mainNaoConvencional.cpp.s
 
-CMakeFiles/TCC.dir/main.cpp.obj.requires:
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.requires:
 
-.PHONY : CMakeFiles/TCC.dir/main.cpp.obj.requires
+.PHONY : CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.requires
 
-CMakeFiles/TCC.dir/main.cpp.obj.provides: CMakeFiles/TCC.dir/main.cpp.obj.requires
-	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/main.cpp.obj.provides.build
-.PHONY : CMakeFiles/TCC.dir/main.cpp.obj.provides
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.provides: CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.requires
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.provides.build
+.PHONY : CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.provides
 
-CMakeFiles/TCC.dir/main.cpp.obj.provides.build: CMakeFiles/TCC.dir/main.cpp.obj
+CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.provides.build: CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj
 
 
 CMakeFiles/TCC.dir/Funcao.cpp.obj: CMakeFiles/TCC.dir/flags.make
@@ -204,7 +204,7 @@ CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj.provides.build: CMakeFiles/TCC
 TCC_OBJECTS = \
 "CMakeFiles/TCC.dir/Populacao.cpp.obj" \
 "CMakeFiles/TCC.dir/Cromossomo.cpp.obj" \
-"CMakeFiles/TCC.dir/main.cpp.obj" \
+"CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj" \
 "CMakeFiles/TCC.dir/Funcao.cpp.obj" \
 "CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj" \
 "CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj"
@@ -214,7 +214,7 @@ TCC_EXTERNAL_OBJECTS =
 
 TCC.exe: CMakeFiles/TCC.dir/Populacao.cpp.obj
 TCC.exe: CMakeFiles/TCC.dir/Cromossomo.cpp.obj
-TCC.exe: CMakeFiles/TCC.dir/main.cpp.obj
+TCC.exe: CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj
 TCC.exe: CMakeFiles/TCC.dir/Funcao.cpp.obj
 TCC.exe: CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj
 TCC.exe: CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj
@@ -232,7 +232,7 @@ CMakeFiles/TCC.dir/build: TCC.exe
 
 CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/Populacao.cpp.obj.requires
 CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/Cromossomo.cpp.obj.requires
-CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/main.cpp.obj.requires
+CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/mainNaoConvencional.cpp.obj.requires
 CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/Funcao.cpp.obj.requires
 CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj.requires
 CMakeFiles/TCC.dir/requires: CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj.requires

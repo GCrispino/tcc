@@ -17,7 +17,7 @@ PopulacaoTransformacao::PopulacaoTransformacao(
 :Populacao(tamanho,txMutacao,txCruzamento,taxaInfeccao,desvioPadrao,funcaoFitness)
 {
     this->tamanhoPopulacaoMortos = tamanhoPopulacaoMortos;
-
+    this->taxaInfeccao = taxaInfeccao;
 }
 
 void PopulacaoTransformacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
@@ -50,28 +50,31 @@ void PopulacaoTransformacao::recombinacao(){
      * ao fim, se a população estiver cheia, tira os indivíduos com os menores fitMorto até ela alcançar o seu tamanho máximo
      */
 
-    std::uniform_int_distribution<int>
-            distPopulacao (0,this->tamanho - 1),
-            distMortos (0,this->mortos.size() - 1);
+    for (unsigned int i = 0; i < this->taxaInfeccao; ++i) {
+        std::uniform_int_distribution<int>
+                distPopulacao (0,this->tamanho - 1),
+                distMortos (0,this->mortos.size() - 1);
 
-    unsigned int
-            iCromossomo = distPopulacao(*(this->gen)),
-            iMorto = distMortos(*(this->gen));
+        unsigned int
+                iCromossomo = distPopulacao(*(this->gen)),
+                iMorto = distMortos(*(this->gen));
 
-    CromossomoMorto &morto = this->mortos[iMorto];
+        CromossomoMorto &morto = this->mortos[iMorto];
 
-    Cromossomo
-            &c = this->cromossomos[iCromossomo],
-            novo = c.crossoverSimples(morto);
+        Cromossomo
+                &c = this->cromossomos[iCromossomo],
+                novo = c.crossoverSimples(morto);
 
-    if (novo.getFitness() < c.getFitness()){
-        //decrementa fitMorto
-        morto.decFitMorto();
+        if (novo.getFitness() < c.getFitness()){
+            //decrementa fitMorto
+            morto.decFitMorto();
+        }
+        else{
+            //incrementa fitMorto
+            morto.incFitMorto();
+        }
     }
-    else{
-        //incrementa fitMorto
-        morto.incFitMorto();
-    }
+
 
     unsigned int tamAtualPopulacaoMortos = this->mortos.size();
 

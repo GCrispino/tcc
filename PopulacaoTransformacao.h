@@ -15,6 +15,7 @@ class PopulacaoTransformacao: public Populacao{
     private:
         unsigned int tamanhoPopulacaoMortos;
         std::vector<CromossomoMorto> mortos;
+        unsigned int taxaInfeccao;
 
     public:
         PopulacaoTransformacao(
