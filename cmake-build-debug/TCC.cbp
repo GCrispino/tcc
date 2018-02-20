@@ -109,6 +109,12 @@
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Populacao.h">
 			<Option target="TCC"/>
 		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.cpp">
+			<Option target="TCC"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.h">
+			<Option target="TCC"/>
+		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/main.cpp">
 			<Option target="TCC"/>
 		</Unit>

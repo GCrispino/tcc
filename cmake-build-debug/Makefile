@@ -230,6 +230,33 @@ Populacao.cpp.s:
 	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/Populacao.cpp.s
 .PHONY : Populacao.cpp.s
 
+PopulacaoTransformacao.obj: PopulacaoTransformacao.cpp.obj
+
+.PHONY : PopulacaoTransformacao.obj
+
+# target to build an object file
+PopulacaoTransformacao.cpp.obj:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj
+.PHONY : PopulacaoTransformacao.cpp.obj
+
+PopulacaoTransformacao.i: PopulacaoTransformacao.cpp.i
+
+.PHONY : PopulacaoTransformacao.i
+
+# target to preprocess a source file
+PopulacaoTransformacao.cpp.i:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.i
+.PHONY : PopulacaoTransformacao.cpp.i
+
+PopulacaoTransformacao.s: PopulacaoTransformacao.cpp.s
+
+.PHONY : PopulacaoTransformacao.s
+
+# target to generate assembly for a file
+PopulacaoTransformacao.cpp.s:
+	$(MAKE) -f CMakeFiles\TCC.dir\build.make CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.s
+.PHONY : PopulacaoTransformacao.cpp.s
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -278,6 +305,9 @@ help:
 	@echo ... Populacao.obj
 	@echo ... Populacao.i
 	@echo ... Populacao.s
+	@echo ... PopulacaoTransformacao.obj
+	@echo ... PopulacaoTransformacao.i
+	@echo ... PopulacaoTransformacao.s
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s

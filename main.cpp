@@ -1,11 +1,11 @@
 #include <iostream>
 #include <chrono>
-#include "Populacao.h"
+#include "PopulacaoTransformacao.h"
 #include "Funcoes.hpp"
 
 int main(){
 
-    Populacao p(100,50,0.05,0.9,30,1.55,Funcoes::griewank);
+    PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,Funcoes::eggholder);
 
     int
         i = 0,

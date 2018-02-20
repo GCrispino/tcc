@@ -8,6 +8,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "C:/Users/Crispino/Documents/tcc/CromossomoMorto.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/Funcao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Funcao.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/Populacao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/Populacao.cpp.obj"
+  "C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj"
   "C:/Users/Crispino/Documents/tcc/main.cpp" "C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

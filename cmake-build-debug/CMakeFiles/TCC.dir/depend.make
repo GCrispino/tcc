@@ -19,10 +19,18 @@ CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Populacao.cpp
 CMakeFiles/TCC.dir/Populacao.cpp.obj: ../Populacao.h
 
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../Cromossomo.hpp
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../CromossomoMorto.hpp
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../Funcao.hpp
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../Populacao.h
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../PopulacaoTransformacao.cpp
+CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj: ../PopulacaoTransformacao.h
+
 CMakeFiles/TCC.dir/main.cpp.obj: ../Cromossomo.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../CromossomoMorto.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcao.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Funcoes.hpp
 CMakeFiles/TCC.dir/main.cpp.obj: ../Populacao.h
+CMakeFiles/TCC.dir/main.cpp.obj: ../PopulacaoTransformacao.h
 CMakeFiles/TCC.dir/main.cpp.obj: ../main.cpp
 

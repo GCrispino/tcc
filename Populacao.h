@@ -10,7 +10,7 @@
 #include "CromossomoMorto.hpp"
 
 class Populacao {
-    private:
+    protected:
         unsigned int tamanho;
         unsigned int tamanhoPopulacaoMortos;
         float txMutacao;
@@ -31,9 +31,8 @@ class Populacao {
 
     public:
         Populacao(
-                unsigned int tamanho,unsigned int tamanhoPopulacaoMortos,
-                float txMutacao, float txCruzamento, unsigned int taxaInfeccao,float desvioPadrao,
-                const Funcao &funcaoFitness
+                unsigned int tamanho,float txMutacao, float txCruzamento,
+                unsigned int taxaInfeccao,float desvioPadrao, const Funcao &funcaoFitness
         );
 
         void inicializacao();
@@ -41,7 +40,6 @@ class Populacao {
         std::vector<Cromossomo> selecaoPais(int nPaisASelecionar,int tamanhoTorneio);
         std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &);
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
-        void recombinacao();
         bool verificarParada();
         void setAcabou();
         const Cromossomo & getElemMaxFitness();

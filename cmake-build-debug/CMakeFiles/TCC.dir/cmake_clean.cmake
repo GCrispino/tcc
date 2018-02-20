@@ -4,6 +4,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/TCC.dir/main.cpp.obj"
   "CMakeFiles/TCC.dir/Funcao.cpp.obj"
   "CMakeFiles/TCC.dir/CromossomoMorto.cpp.obj"
+  "CMakeFiles/TCC.dir/PopulacaoTransformacao.cpp.obj"
   "TCC.pdb"
   "TCC.exe"
   "TCC.exe.manifest"
