@@ -50,5 +50,7 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/TCC.dir/DependInfo.cmake"
+  "CMakeFiles/NaoConvencional.dir/DependInfo.cmake"
+  "CMakeFiles/Convencional.dir/DependInfo.cmake"
+  "CMakeFiles/Paralelo.dir/DependInfo.cmake"
   )

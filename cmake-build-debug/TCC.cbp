@@ -17,8 +17,8 @@
 					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="TCC">
-				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/TCC.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="NaoConvencional">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/NaoConvencional.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -33,14 +33,14 @@
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 TCC"/>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 NaoConvencional"/>
 					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
-			<Target title="TCC/fast">
-				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/TCC.exe" prefix_auto="0" extension_auto="0"/>
+			<Target title="NaoConvencional/fast">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/NaoConvencional.exe" prefix_auto="0" extension_auto="0"/>
 				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
 				<Option object_output="./"/>
 				<Option type="1"/>
@@ -55,7 +55,95 @@
 					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
 				</Compiler>
 				<MakeCommands>
-					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 TCC/fast"/>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 NaoConvencional/fast"/>
+					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Convencional">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/Convencional.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 Convencional"/>
+					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Convencional/fast">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/Convencional.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 Convencional/fast"/>
+					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Paralelo">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/Paralelo.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 Paralelo"/>
+					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Paralelo/fast">
+				<Option output="C:/Users/Crispino/Documents/tcc/cmake-build-debug/Paralelo.exe" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="C:/Users/Crispino/Documents/tcc/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/x86_64-w64-mingw32"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include/c++/backward"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../include"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/include-fixed"/>
+					<Add directory="C:/TDM-GCC-64/bin/../lib/gcc/x86_64-w64-mingw32/5.1.0/../../../../x86_64-w64-mingw32/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 Paralelo/fast"/>
 					<CompileFile command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
 					<Clean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 					<DistClean command="C:/TDM-GCC-64/bin/mingw32-make.exe -f &quot;C:/Users/Crispino/Documents/tcc/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
@@ -83,40 +171,74 @@
 			</Target>
 		</Build>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Cromossomo.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Cromossomo.hpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/CromossomoMorto.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/CromossomoMorto.hpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Funcao.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Funcao.hpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Funcoes.hpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Migracao.cpp">
+			<Option target="Paralelo"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Migracao.h">
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Populacao.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Populacao.h">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.h">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/mainConvencional.cpp">
+			<Option target="Convencional"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/mainNaoConvencional.cpp">
-			<Option target="TCC"/>
+			<Option target="NaoConvencional"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/mainParalelo.cpp">
+			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

@@ -1,3 +1,5 @@
-C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/TCC.dir
+C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/NaoConvencional.dir
+C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/Convencional.dir
+C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/Paralelo.dir
 C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/edit_cache.dir
 C:/Users/Crispino/Documents/tcc/cmake-build-debug/CMakeFiles/rebuild_cache.dir

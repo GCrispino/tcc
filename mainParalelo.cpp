@@ -33,7 +33,7 @@ int main(){
     std::chrono::steady_clock::duration tempo;
 
 
-    Funcao funcaoFitness = Funcoes::schaffer2;
+    Funcao funcaoFitness = Funcoes::rastringin;
     std::vector<Populacao *> populacoes(10);
 
     inicializarPopulacoes(N_POPULACOES,populacoes,tamanhoPopulacao,txMutacao,txCruzamento,desvioPadrao,funcaoFitness);

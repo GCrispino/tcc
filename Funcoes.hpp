@@ -96,6 +96,17 @@ namespace Funcoes{
         return soma;
     }
 
+    double func_rastringin(const std::vector<double> &x){
+        double
+                d = (double)x.size(),
+                soma = 0;
+
+        for (const double &val: x)
+            soma += (double)(pow(val,2) - 10.0 * cos(2.0 * M_PI * val));
+
+
+        return 10.0 * d + soma;
+    }
 
     Funcao
             schaffer2(0.0,-1000.0,1000.0    ,func_schaffer2),
@@ -103,7 +114,8 @@ namespace Funcoes{
             booth(0.0,-10,10,func_booth),
             ackley(0.0,-32,32,func_ackley),
             griewank(0.0,-600,600,func_griewank),
-            rosenbrock(0,-5,10,func_rosenbrock),
+            rastringin(0.0,-5.12,5.12,func_rastringin),
+            rosenbrock(0.0,-5,10,func_rosenbrock),
             eggholder(-959.6407,-512,512,func_eggholder);
 };
 

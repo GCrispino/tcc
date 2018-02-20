@@ -5,7 +5,7 @@
 
 int main(){
 
-    PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,Funcoes::eggholder);
+    PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,Funcoes::rastringin);
 
     int
         i = 0,
@@ -29,7 +29,7 @@ int main(){
         p.selecaoSobreviventes(filhos);
 
         p.calcularFitness();
-        
+
         if (i % 100 == 0) {
             std::cout << "Geracao: " << i << '\t';
             std::cout << "Melhor fitness: " << p.getElemMaxFitness().getFitness() << '\t';
