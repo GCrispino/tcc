@@ -23,6 +23,8 @@ class Populacao {
         int iElemMaxFitness;
         int iElemMinFitness;
         Cromossomo * elemMaxFitness;
+        bool paralelo;
+        bool momentoMigracao;//define se migração está acontecendo no momento
         bool acabou;
 
         static std::mt19937 *gen;
@@ -32,7 +34,8 @@ class Populacao {
     public:
         Populacao(
                 unsigned int tamanho,float txMutacao, float txCruzamento,
-                unsigned int taxaInfeccao,float desvioPadrao, const Funcao &funcaoFitness
+                float desvioPadrao, const Funcao &funcaoFitness,
+                bool paralelo = false
         );
 
         void inicializacao();
@@ -47,6 +50,10 @@ class Populacao {
         unsigned int achaIndicePiorFitness();
         void setElemMaxFitness(Cromossomo *);
         double getMediaFitness();
+        int getTamanho() const;
+        Cromossomo getCromossomo(int i) const;
+        void setCromossomo(int i,Cromossomo &);
+        void setMomentoMigracao(bool);
 
 
 

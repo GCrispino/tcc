@@ -12,7 +12,7 @@
 
 std::mt19937* Populacao::gen = nullptr;
 
-Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,unsigned int taxaInfeccao,float desvioPadrao,const Funcao &funcaoFitness) {
+Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,float desvioPadrao,const Funcao &funcaoFitness,bool paralelo) {
     this->tamanho = tamanho;
     this->txMutacao = txMutacao;
     this->txCruzamento = txCruzamento;
@@ -20,6 +20,7 @@ Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,u
     this->funcaoFitness = funcaoFitness;
 
     this->acabou = false;
+    this->momentoMigracao = false;
     this->elemMaxFitness = nullptr;
     this->iElemMaxFitness = -1;
     this->iElemMinFitness = -1;
@@ -40,6 +41,7 @@ void Populacao::inicializacao() {
 
 
 void Populacao::calcularFitness() {
+    while(this->paralelo && this->momentoMigracao);
 
     double accFitness = 0;
 
@@ -71,6 +73,9 @@ void Populacao::calcularFitness() {
 
 
 std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tamanhoTorneio) {
+    while(this->paralelo && this->momentoMigracao);
+
+
     std::vector<Cromossomo> pais;
 
     std::uniform_int_distribution<int> dist (0,this->tamanho - 1);
@@ -116,6 +121,8 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
 }
 
 std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSelecionados) {
+    while(this->paralelo && this->momentoMigracao);
+
     std::vector<Cromossomo> filhos(paisSelecionados.size());
 
     for (int i = 0;i < paisSelecionados.size();i += 2){
@@ -135,6 +142,8 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
 
 
 void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
+    while(this->paralelo && this->momentoMigracao);
+
     const Cromossomo pior = this->getElemMinFitness();
 
     for (int i = 0;i < filhos.size();i += 2){
@@ -194,4 +203,21 @@ void Populacao::setElemMaxFitness(Cromossomo *c) {
 
 double Populacao::getMediaFitness(){
     return this->mediaFitness;
+}
+
+
+int Populacao::getTamanho() const{
+    return this->tamanho;
+}
+
+Cromossomo Populacao::getCromossomo(int i) const{
+    return this->cromossomos[i];
+}
+
+void Populacao::setCromossomo(int i,Cromossomo &c){
+    this->cromossomos[i] = c;
+}
+
+void Populacao::setMomentoMigracao(bool m){
+    this->momentoMigracao = m;
 }

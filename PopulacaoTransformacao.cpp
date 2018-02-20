@@ -14,7 +14,7 @@ PopulacaoTransformacao::PopulacaoTransformacao(
         unsigned int tamanho, unsigned int tamanhoPopulacaoMortos,
         float txMutacao, float txCruzamento, unsigned int taxaInfeccao,
         float desvioPadrao, const Funcao &funcaoFitness)
-:Populacao(tamanho,txMutacao,txCruzamento,taxaInfeccao,desvioPadrao,funcaoFitness)
+:Populacao(tamanho,txMutacao,txCruzamento,desvioPadrao,funcaoFitness)
 {
     this->tamanhoPopulacaoMortos = tamanhoPopulacaoMortos;
     this->taxaInfeccao = taxaInfeccao;
