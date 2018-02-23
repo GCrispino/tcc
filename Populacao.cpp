@@ -24,6 +24,7 @@ Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,f
 
     this->acabou = false;
     this->momentoMigracao = false;
+    this->ocupada = false;
     this->elemMaxFitness = nullptr;
     this->iElemMaxFitness = -1;
     this->iElemMinFitness = -1;
@@ -78,6 +79,8 @@ void Populacao::calcularFitness() {
 std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tamanhoTorneio) {
     while(this->paralelo && this->momentoMigracao);
 
+    this->ocupada = true;
+
 
     std::vector<Cromossomo> pais;
 
@@ -118,6 +121,7 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
         }
 
     }
+    this->ocupada = false;
 
     return pais;
 
@@ -145,8 +149,10 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
 
 
 void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
-    if (acabou) return;
+    //if (acabou) return;
     while(this->paralelo && this->momentoMigracao);
+
+    this->ocupada = true;
 
     const Cromossomo pior = this->getElemMinFitness();
 
@@ -161,12 +167,13 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
                 * outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
 
         this->cromossomos[this->iElemMinFitness] = *escolhido;
-        //this->mortos.push_back(*outro);
 
         this->iElemMinFitness = this->achaIndicePiorFitness();
 
     }
 
+
+    this->ocupada = false;
 }
 
 bool Populacao::verificarParada() {
@@ -179,6 +186,10 @@ void Populacao::setAcabou() {
 
 const unsigned int Populacao::getID(){
     return this->id;
+}
+
+bool Populacao::estaOcupada(){
+    return this->ocupada;
 }
 
 const Cromossomo & Populacao::getElemMaxFitness() {

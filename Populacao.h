@@ -25,6 +25,7 @@ class Populacao {
         bool paralelo;
         bool momentoMigracao;//define se migração está acontecendo no momento
         bool acabou;
+        bool ocupada;
 
         static std::mt19937 *gen;
         static unsigned int count;
@@ -43,8 +44,9 @@ class Populacao {
         std::vector<Cromossomo> selecaoPais(int nPaisASelecionar,int tamanhoTorneio);
         std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &);
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
-        bool verificarParada();
         void setAcabou();
+        bool verificarParada();
+        bool estaOcupada();
         const unsigned int getID();
         const Cromossomo & getElemMaxFitness();
         const Cromossomo & getElemMinFitness();
