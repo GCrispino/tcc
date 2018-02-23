@@ -37,7 +37,7 @@ int main(){
             std::cout << "Media do fitness: " << p.getMediaFitness();
             std::cout << std::endl;
         }
-    } while (++i < nGeracoes/* && !p.verificarParada()*/);
+    } while (++i < nGeracoes);
 
     const Cromossomo &melhor = p.getElemMaxFitness();
 

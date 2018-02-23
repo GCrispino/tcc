@@ -1,5 +1,6 @@
 #include <iostream>
 #include <chrono>
+#include <algorithm>
 #include <omp.h>
 #include "Populacao.h"
 #include "Funcoes.hpp"
@@ -20,8 +21,8 @@ void inicializarPopulacoes(
 int main(){
 
     int
-            tamanhoPopulacao = 100,
-            nGeracoes = 2000,
+            tamanhoPopulacao = 20,
+            nGeracoes = 1000,
             nParesPaisASelecionar = 15,tamTorneio = 2;
     double
             txMutacao = .05,
@@ -34,7 +35,7 @@ int main(){
 
 
     Funcao funcaoFitness = Funcoes::rastringin;
-    std::vector<Populacao *> populacoes(10);
+    std::vector<Populacao *> populacoes(N_POPULACOES);
 
     inicializarPopulacoes(N_POPULACOES,populacoes,tamanhoPopulacao,txMutacao,txCruzamento,desvioPadrao,funcaoFitness);
     Migracao operadorMigracao(probMigracao,populacoes);
@@ -58,11 +59,13 @@ int main(){
 
             Populacao &p = *(populacoes[i]);
 
-            //p.inicializacao();
-            //p.calcularFitness();
+            #pragma omp critical
+            std::cout << "Iniciou populacao " << p.getID() << std::endl;
+
 
             int j = 0;
             do {
+
                 std::vector<Cromossomo> pais,filhos;
                 pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
 
@@ -71,8 +74,16 @@ int main(){
                 p.selecaoSobreviventes(filhos);
 
                 p.calcularFitness();
-            } while (++j < nGeracoes && !p.verificarParada());
 
+                /*if (j % 100 == 0) {
+                    std::cout << "Populacao: " << i << std::endl;
+                    std::cout << "Geracao: " << j << '\t';
+                    std::cout << "Melhor fitness: " << p.getElemMaxFitness().getFitness() << '\t';
+                    std::cout << "Media do fitness: " << p.getMediaFitness();
+                    std::cout << std::endl;
+                }*/
+            } while (++j < nGeracoes);
+            p.setAcabou();
 
             #pragma omp critical
             if (melhor.getFitness() == -1 || p.getElemMaxFitness().getFitness() < melhor.getFitness())
@@ -81,10 +92,34 @@ int main(){
             #pragma omp atomic
             nPopulacoesProcessadas += 1;
 
+            #pragma omp critical
+            {
+                std::cout << "Terminou populacao " << p.getID() << std::endl;
+                std::cout << "Melhor elemento: " << p.getElemMaxFitness() << std::endl;
+                std::cout << "";
+            }
+
         }
 
     }
 
+    std::cout << "===============================================================";
+    std::cout << "===============================================================" << std::endl;
+
+    std::vector<Cromossomo>melhores(N_POPULACOES);
+
+    std::transform(
+            populacoes.begin(),
+            populacoes.end(),
+            melhores.begin(),
+            [](Populacao *p){
+                return p->getElemMaxFitness();
+            }
+    );
+
+    std::for_each(melhores.begin(),melhores.end(),[](Cromossomo &c) {
+        std::cout << "Melhor: " << c << std::endl;
+    });
 
     fim = std::chrono::steady_clock::now();
     tempo = fim - comeco;

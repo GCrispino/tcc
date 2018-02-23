@@ -26,15 +26,29 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
         double rand = this->realDis(this->gen);
         if (rand < this->probMigracao) {
             int
-                iPopulacao1 = this->intDis(this->gen),
+                iPopulacao1 = -1,
                 iPopulacao2 = -1,
                 iCromossomoAleatorio1 = popDis(this->gen),
                 iCromossomoAleatorio2 = popDis(this->gen);
 
+            bool acabou = false;
+            do {
+                iPopulacao1 = this->intDis(this->gen);
+
+                acabou = this->populacoes[iPopulacao1]->verificarParada();
+            }while(!(nPopulacoesProcessadas < this->populacoes.size()) && !acabou);
+
             do {
                 iPopulacao2 = this->intDis(this->gen);
-            }while(iPopulacao1 == iPopulacao2);
+                acabou = this->populacoes[iPopulacao2]->verificarParada();
 
+                if (acabou)
+                  std::cout << "";
+            }while(!(nPopulacoesProcessadas < this->populacoes.size()) && !(acabou || iPopulacao1 == iPopulacao2));
+
+
+            if (nPopulacoesProcessadas >= this->populacoes.size())
+                return ;
             /*std::cout << iPopulacao1 << ',';
             std::cout << iPopulacao2 << std::endl;
 
@@ -54,12 +68,14 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
 
             populacao1->setCromossomo(iCromossomoAleatorio1,melhorPopulacao2);
             populacao2->setCromossomo(iCromossomoAleatorio2,melhorPopulacao1);
-            std::cout << "";
 
 
             populacao1->setMomentoMigracao(false);
             populacao2->setMomentoMigracao(false);
 
         }
+
     }
+    #pragma omp critical
+    std::cout << "Acabou migração" << std::endl;
 }

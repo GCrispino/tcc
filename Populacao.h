@@ -11,15 +11,14 @@
 
 class Populacao {
     protected:
+        unsigned int id;
         unsigned int tamanho;
-        unsigned int tamanhoPopulacaoMortos;
         float txMutacao;
         float txCruzamento;
         float desvioPadrao;
         double mediaFitness;
         Funcao funcaoFitness;
         std::vector<Cromossomo> cromossomos;
-        std::vector<CromossomoMorto> mortos;
         int iElemMaxFitness;
         int iElemMinFitness;
         Cromossomo * elemMaxFitness;
@@ -28,6 +27,7 @@ class Populacao {
         bool acabou;
 
         static std::mt19937 *gen;
+        static unsigned int count;
 
         const int N_THREADS = 3;
 
@@ -45,6 +45,7 @@ class Populacao {
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
         bool verificarParada();
         void setAcabou();
+        const unsigned int getID();
         const Cromossomo & getElemMaxFitness();
         const Cromossomo & getElemMinFitness();
         unsigned int achaIndicePiorFitness();

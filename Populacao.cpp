@@ -11,8 +11,11 @@
 
 
 std::mt19937* Populacao::gen = nullptr;
+unsigned int Populacao::count = 0;
 
 Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,float desvioPadrao,const Funcao &funcaoFitness,bool paralelo) {
+    this->id = ++count;
+
     this->tamanho = tamanho;
     this->txMutacao = txMutacao;
     this->txCruzamento = txCruzamento;
@@ -142,6 +145,7 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
 
 
 void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
+    if (acabou) return;
     while(this->paralelo && this->momentoMigracao);
 
     const Cromossomo pior = this->getElemMinFitness();
@@ -157,7 +161,7 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
                 * outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
 
         this->cromossomos[this->iElemMinFitness] = *escolhido;
-        this->mortos.push_back(*outro);
+        //this->mortos.push_back(*outro);
 
         this->iElemMinFitness = this->achaIndicePiorFitness();
 
@@ -171,6 +175,10 @@ bool Populacao::verificarParada() {
 
 void Populacao::setAcabou() {
     this->acabou = true;
+}
+
+const unsigned int Populacao::getID(){
+    return this->id;
 }
 
 const Cromossomo & Populacao::getElemMaxFitness() {

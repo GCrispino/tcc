@@ -5,7 +5,7 @@
 
 int main(){
 
-    PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,Funcoes::rastringin);
+    PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,Funcoes::eggholder);
 
     int
         i = 0,
@@ -29,14 +29,9 @@ int main(){
         p.selecaoSobreviventes(filhos);
 
         p.calcularFitness();
+    } while (++i < nGeracoes);
 
-        if (i % 100 == 0) {
-            std::cout << "Geracao: " << i << '\t';
-            std::cout << "Melhor fitness: " << p.getElemMaxFitness().getFitness() << '\t';
-            std::cout << "Media do fitness: " << p.getMediaFitness();
-            std::cout << std::endl;
-        }
-    } while (++i < nGeracoes/* && !p.verificarParada()*/);
+
 
     const Cromossomo &melhor = p.getElemMaxFitness();
 
