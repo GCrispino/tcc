@@ -8,6 +8,24 @@
 
 #define N_POPULACOES 10
 
+
+/**
+ *
+ * O QUE AVALIAR NO DESEMPENHO DO ALGORITMO
+ *
+ *
+ *  - Pior fitness
+ *  - Melhor fitness
+ *  - Média
+ *  - Média de vezes que encontrou um fitness menor que um determinado erro
+ *
+ *  ROADMAP
+ *  - funções definidas em Algoritmos para cada tipo de AG
+ *  - cada uma dessas função retorna uma instância da struct 'Resultado'
+ *
+ *
+ */
+
 void inicializarPopulacoes(
         int n,
         std::vector<Populacao *> &populacoes,

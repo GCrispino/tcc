@@ -29,7 +29,7 @@ add_executable(Paralelo
         Funcao.cpp
         Funcao.hpp
         Funcoes.hpp
-        CromossomoMorto.cpp CromossomoMorto.hpp PopulacaoTransformacao.cpp PopulacaoTransformacao.h)
+        CromossomoMorto.cpp CromossomoMorto.hpp PopulacaoTransformacao.cpp PopulacaoTransformacao.h Algoritmos.hpp Resultado.h)
 
 
 add_executable(NaoConvencional

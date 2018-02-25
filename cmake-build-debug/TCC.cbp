@@ -170,6 +170,9 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Algoritmos.hpp">
+			<Option target="Paralelo"/>
+		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Cromossomo.cpp">
 			<Option target="NaoConvencional"/>
 			<Option target="Convencional"/>
@@ -229,6 +232,9 @@
 		<Unit filename="C:/Users/Crispino/Documents/tcc/PopulacaoTransformacao.h">
 			<Option target="NaoConvencional"/>
 			<Option target="Convencional"/>
+			<Option target="Paralelo"/>
+		</Unit>
+		<Unit filename="C:/Users/Crispino/Documents/tcc/Resultado.h">
 			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/mainConvencional.cpp">
