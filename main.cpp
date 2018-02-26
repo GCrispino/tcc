@@ -20,8 +20,14 @@
  *  - Média de vezes que encontrou um fitness menor que um determinado erro
  *
  * O QUE FAZER NO MAIN:
- * - executar 30 vezes cada algoritmo e pegar o resultado
- * - calcular a média desses resultados
+ * - Cada função retorna um std::vector<Resultado>
+ * - Esse vector irá conter os resultados para cada geração do algoritmo
+ * - Isso é feito para cada uma das 30 execuções de cada AG
+ * - Ao fim, no main, deve ser resultado um novo vector<Resultado>, com o mesmo tamanho,
+ *      que irá conter as médias de cada geração
+ *      a média da última geração será o resultado final a ser demonstrado
+ *
+ * - PROBLEMA: como fazer isso no AG paralelo, que possui 10 populações
  */
 
 
