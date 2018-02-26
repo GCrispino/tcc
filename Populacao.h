@@ -21,7 +21,7 @@ class Populacao {
         std::vector<Cromossomo> cromossomos;
         int iElemMaxFitness;
         int iElemMinFitness;
-        Cromossomo * elemMaxFitness;
+        Cromossomo * elemMinFitness;
         bool paralelo;
         bool momentoMigracao;//define se migração está acontecendo no momento
         bool acabou;
@@ -51,7 +51,7 @@ class Populacao {
         const Cromossomo & getElemMaxFitness();
         const Cromossomo & getElemMinFitness();
         unsigned int achaIndicePiorFitness();
-        void setElemMaxFitness(Cromossomo *);
+        void setElemMinFitness(Cromossomo *);
         double getMediaFitness();
         int getTamanho() const;
         Cromossomo getCromossomo(int i) const;

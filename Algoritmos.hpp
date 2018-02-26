@@ -58,7 +58,7 @@ namespace Algoritmos{
 
 
 
-        const Cromossomo &melhor = p.getElemMaxFitness();
+        const Cromossomo &melhor = p.getElemMinFitness();
 
         fim = std::chrono::steady_clock::now();
         tempo = fim - comeco;
@@ -72,7 +72,7 @@ namespace Algoritmos{
     }
 
 
-    Resultado paralelo(const Funcao &funcaoFitness,const int N_POPULACOES){
+    std::vector<Resultado> paralelo(const Funcao &funcaoFitness,const int N_POPULACOES){
 
         int
                 tamanhoPopulacao = 20,
@@ -83,6 +83,8 @@ namespace Algoritmos{
                 txCruzamento = .9,
                 desvioPadrao = 1.55,
                 probMigracao = 0.003;
+
+        std::vector<std::vector<Resultado>> resultsPopulacoes(N_POPULACOES);
 
         std::chrono::steady_clock::time_point comeco,fim;
         std::chrono::steady_clock::duration tempo;
@@ -95,7 +97,7 @@ namespace Algoritmos{
         comeco = std::chrono::steady_clock::now();
 
         int nPopulacoesProcessadas = 0;
-        Cromossomo melhor;
+        Cromossomo melhor,pior;
 
 
         #pragma omp parallel
@@ -130,16 +132,27 @@ namespace Algoritmos{
                     /*if (j % 100 == 0) {
                         std::cout << "Populacao: " << i << std::endl;
                         std::cout << "Geracao: " << j << '\t';
-                        std::cout << "Melhor fitness: " << p.getElemMaxFitness().getFitness() << '\t';
+                        std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
                         std::cout << "Media do fitness: " << p.getMediaFitness();
                         std::cout << std::endl;
                     }*/
+
+                    resultsPopulacoes[i].push_back(Resultado(
+                            p.getElemMinFitness().getFitness(),
+                            p.getElemMaxFitness().getFitness(),
+                            p.getMediaFitness()
+                    ));
                 } while (++j < nGeracoes);
                 p.setAcabou();
 
                 #pragma omp critical
-                if (melhor.getFitness() == -1 || p.getElemMaxFitness().getFitness() < melhor.getFitness())
-                    melhor = p.getElemMaxFitness();
+                if (melhor.getFitness() == -1 || p.getElemMinFitness().getFitness() < melhor.getFitness())
+                    melhor = p.getElemMinFitness();
+
+                #pragma omp critical
+                if (pior.getFitness() == -1 || p.getElemMaxFitness().getFitness() > pior.getFitness())
+                    pior = p.getElemMaxFitness();
+
 
                 #pragma omp atomic
                 nPopulacoesProcessadas += 1;
@@ -147,7 +160,7 @@ namespace Algoritmos{
                 #pragma omp critical
                 {
                     std::cout << "Terminou populacao " << p.getID() << std::endl;
-                    std::cout << "Melhor elemento: " << p.getElemMaxFitness() << std::endl;
+                    //std::cout << "Melhor elemento: " << p.getElemMinFitness() << std::endl;
                     std::cout << "";
                 }
 
@@ -157,6 +170,8 @@ namespace Algoritmos{
 
         std::cout << "===============================================================";
         std::cout << "===============================================================" << std::endl;
+
+        std::vector<Resultado> resultsFinais(nGeracoes);
 
         std::vector<Cromossomo>melhores(N_POPULACOES);
 
@@ -168,22 +183,22 @@ namespace Algoritmos{
                     return p->getElemMaxFitness();
                 }
         );
-
+/*
         std::for_each(melhores.begin(),melhores.end(),[](Cromossomo &c) {
             std::cout << "Melhor: " << c << std::endl;
-        });
+        });*/
 
         fim = std::chrono::steady_clock::now();
         tempo = fim - comeco;
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
-        std::cout << "Terminou: tempo em " << nseconds << std::endl;
+        /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
 
-        std::cout << "Melhor individuo: " << melhor << std::endl;
+        std::cout << "Melhor individuo: " << melhor << std::endl;*/
 
 
-        return Resultado(0.0,0.0,0.0);
+        return resultsFinais;
     }
 
 
@@ -216,13 +231,13 @@ namespace Algoritmos{
             p.recombinacao();
             if (i % 100 == 0) {
                 std::cout << "Geracao: " << i << '\t';
-                std::cout << "Melhor fitness: " << p.getElemMaxFitness().getFitness() << '\t';
+                std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
                 std::cout << "Media do fitness: " << p.getMediaFitness();
                 std::cout << std::endl;
             }
         } while (++i < nGeracoes);
 
-        const Cromossomo &melhor = p.getElemMaxFitness();
+        const Cromossomo &melhor = p.getElemMinFitness();
 
         fim = std::chrono::steady_clock::now();
         tempo = fim - comeco;

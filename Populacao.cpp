@@ -25,7 +25,7 @@ Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,f
     this->acabou = false;
     this->momentoMigracao = false;
     this->ocupada = false;
-    this->elemMaxFitness = nullptr;
+    this->elemMinFitness = nullptr;
     this->iElemMaxFitness = -1;
     this->iElemMinFitness = -1;
 
@@ -57,19 +57,19 @@ void Populacao::calcularFitness() {
         double fitness = c.getFitness();
         accFitness += fitness;
 
-        if (this->elemMaxFitness == nullptr || fitness < this->elemMaxFitness->getFitness()) {
-            this->elemMaxFitness = &c;
-            this->iElemMaxFitness = i;
+        if (this->elemMinFitness == nullptr || fitness < this->elemMinFitness->getFitness()) {
+            this->elemMinFitness = &c;
+            this->iElemMinFitness = i;
 
             if (fitness <= this->funcaoFitness.getMinimoGlobal() + pow(10,-3)) {
                 this->acabou = true;
             }
         }
 
-        if (this->iElemMinFitness == -1)
-            this->iElemMinFitness = i;
-        else if(fitness > this->getElemMinFitness().getFitness())
-            this->iElemMinFitness = i;
+        if (this->iElemMaxFitness == -1)
+            this->iElemMaxFitness = i;
+        else if(fitness > this->getElemMaxFitness().getFitness())
+            this->iElemMaxFitness = i;
     }
 
     this->mediaFitness = accFitness / this->tamanho;
@@ -154,7 +154,7 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
 
     this->ocupada = true;
 
-    const Cromossomo pior = this->getElemMinFitness();
+    const Cromossomo pior = this->getElemMaxFitness();
 
     for (int i = 0;i < filhos.size();i += 2){
         const Cromossomo
@@ -166,9 +166,9 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
                 * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2,
                 * outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
 
-        this->cromossomos[this->iElemMinFitness] = *escolhido;
+        this->cromossomos[this->iElemMaxFitness] = *escolhido;
 
-        this->iElemMinFitness = this->achaIndicePiorFitness();
+        this->iElemMaxFitness = this->achaIndicePiorFitness();
 
     }
 
@@ -192,12 +192,12 @@ bool Populacao::estaOcupada(){
     return this->ocupada;
 }
 
-const Cromossomo & Populacao::getElemMaxFitness() {
-    return *(this->elemMaxFitness);
+const Cromossomo & Populacao::getElemMinFitness() {
+    return *(this->elemMinFitness);
 }
 
-const Cromossomo & Populacao::getElemMinFitness(){
-    return this->cromossomos[this->iElemMinFitness];
+const Cromossomo & Populacao::getElemMaxFitness(){
+    return this->cromossomos[this->iElemMaxFitness];
 }
 
 unsigned int Populacao::achaIndicePiorFitness(){
@@ -216,8 +216,8 @@ unsigned int Populacao::achaIndicePiorFitness(){
     return indicePiorFitness;
 }
 
-void Populacao::setElemMaxFitness(Cromossomo *c) {
-    this->elemMaxFitness = c;
+void Populacao::setElemMinFitness(Cromossomo *c) {
+    this->elemMinFitness = c;
 }
 
 double Populacao::getMediaFitness(){

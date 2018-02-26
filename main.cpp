@@ -14,25 +14,25 @@
  * O QUE AVALIAR NO DESEMPENHO DO ALGORITMO
  *
  *
- *  - Pior fitness
- *  - Melhor fitness
- *  - Média
+ *  - Pior fitness - feito
+ *  - Melhor fitness - feito
+ *  - Média fitness - Média da geração e/ou média da população no algoritmo inteiro?
  *  - Média de vezes que encontrou um fitness menor que um determinado erro
  *
- *  ROADMAP
- *  - funções definidas em Algoritmos para cada tipo de AG
- *  - cada uma dessas função retorna uma instância da struct 'Resultado'
- *
- *
+ * O QUE FAZER NO MAIN:
+ * - executar 30 vezes cada algoritmo e pegar o resultado
+ * - calcular a média desses resultados
  */
 
 
 int main(){
-    //Resultado resConvencional,resParalelo,resNaoConvencional;
+    std::vector<Resultado> resConvencional,resParalelo,resNaoConvencional;
 
-    /*resParalelo = *///Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
+    resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
 
-    Algoritmos::recombinacaoTransformacao(Funcoes::rastringin);
+    //std::cout << resParalelo << std::endl;
+
+    //Algoritmos::recombinacaoTransformacao(Funcoes::rastringin);
 
     return 0;
 }
