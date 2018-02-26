@@ -340,86 +340,32 @@ PopulacaoTransformacao.cpp.s:
 	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/PopulacaoTransformacao.cpp.s
 .PHONY : PopulacaoTransformacao.cpp.s
 
-mainConvencional.obj: mainConvencional.cpp.obj
+main.obj: main.cpp.obj
 
-.PHONY : mainConvencional.obj
-
-# target to build an object file
-mainConvencional.cpp.obj:
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/mainConvencional.cpp.obj
-.PHONY : mainConvencional.cpp.obj
-
-mainConvencional.i: mainConvencional.cpp.i
-
-.PHONY : mainConvencional.i
-
-# target to preprocess a source file
-mainConvencional.cpp.i:
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/mainConvencional.cpp.i
-.PHONY : mainConvencional.cpp.i
-
-mainConvencional.s: mainConvencional.cpp.s
-
-.PHONY : mainConvencional.s
-
-# target to generate assembly for a file
-mainConvencional.cpp.s:
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/mainConvencional.cpp.s
-.PHONY : mainConvencional.cpp.s
-
-mainNaoConvencional.obj: mainNaoConvencional.cpp.obj
-
-.PHONY : mainNaoConvencional.obj
+.PHONY : main.obj
 
 # target to build an object file
-mainNaoConvencional.cpp.obj:
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/mainNaoConvencional.cpp.obj
-.PHONY : mainNaoConvencional.cpp.obj
+main.cpp.obj:
+	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/main.cpp.obj
+.PHONY : main.cpp.obj
 
-mainNaoConvencional.i: mainNaoConvencional.cpp.i
+main.i: main.cpp.i
 
-.PHONY : mainNaoConvencional.i
-
-# target to preprocess a source file
-mainNaoConvencional.cpp.i:
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/mainNaoConvencional.cpp.i
-.PHONY : mainNaoConvencional.cpp.i
-
-mainNaoConvencional.s: mainNaoConvencional.cpp.s
-
-.PHONY : mainNaoConvencional.s
-
-# target to generate assembly for a file
-mainNaoConvencional.cpp.s:
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/mainNaoConvencional.cpp.s
-.PHONY : mainNaoConvencional.cpp.s
-
-mainParalelo.obj: mainParalelo.cpp.obj
-
-.PHONY : mainParalelo.obj
-
-# target to build an object file
-mainParalelo.cpp.obj:
-	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/mainParalelo.cpp.obj
-.PHONY : mainParalelo.cpp.obj
-
-mainParalelo.i: mainParalelo.cpp.i
-
-.PHONY : mainParalelo.i
+.PHONY : main.i
 
 # target to preprocess a source file
-mainParalelo.cpp.i:
-	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/mainParalelo.cpp.i
-.PHONY : mainParalelo.cpp.i
+main.cpp.i:
+	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/main.cpp.i
+.PHONY : main.cpp.i
 
-mainParalelo.s: mainParalelo.cpp.s
+main.s: main.cpp.s
 
-.PHONY : mainParalelo.s
+.PHONY : main.s
 
 # target to generate assembly for a file
-mainParalelo.cpp.s:
-	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/mainParalelo.cpp.s
-.PHONY : mainParalelo.cpp.s
+main.cpp.s:
+	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/main.cpp.s
+.PHONY : main.cpp.s
 
 # Help Target
 help:
@@ -450,15 +396,9 @@ help:
 	@echo ... PopulacaoTransformacao.obj
 	@echo ... PopulacaoTransformacao.i
 	@echo ... PopulacaoTransformacao.s
-	@echo ... mainConvencional.obj
-	@echo ... mainConvencional.i
-	@echo ... mainConvencional.s
-	@echo ... mainNaoConvencional.obj
-	@echo ... mainNaoConvencional.i
-	@echo ... mainNaoConvencional.s
-	@echo ... mainParalelo.obj
-	@echo ... mainParalelo.i
-	@echo ... mainParalelo.s
+	@echo ... main.obj
+	@echo ... main.i
+	@echo ... main.s
 .PHONY : help
 
 

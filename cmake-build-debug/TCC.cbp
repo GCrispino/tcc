@@ -237,13 +237,7 @@
 		<Unit filename="C:/Users/Crispino/Documents/tcc/Resultado.h">
 			<Option target="Paralelo"/>
 		</Unit>
-		<Unit filename="C:/Users/Crispino/Documents/tcc/mainConvencional.cpp">
-			<Option target="Convencional"/>
-		</Unit>
-		<Unit filename="C:/Users/Crispino/Documents/tcc/mainNaoConvencional.cpp">
-			<Option target="NaoConvencional"/>
-		</Unit>
-		<Unit filename="C:/Users/Crispino/Documents/tcc/mainParalelo.cpp">
+		<Unit filename="C:/Users/Crispino/Documents/tcc/main.cpp">
 			<Option target="Paralelo"/>
 		</Unit>
 		<Unit filename="C:/Users/Crispino/Documents/tcc/CMakeLists.txt">

@@ -9,7 +9,6 @@ add_executable(Convencional
         Populacao.h
         Cromossomo.cpp
         Cromossomo.hpp
-        mainConvencional.cpp
 
         Funcao.cpp
         Funcao.hpp
@@ -24,7 +23,7 @@ add_executable(Paralelo
         Cromossomo.hpp
         Migracao.cpp
         Migracao.h
-        mainParalelo.cpp
+        main.cpp
 
         Funcao.cpp
         Funcao.hpp
@@ -37,7 +36,6 @@ add_executable(NaoConvencional
         Populacao.h
         Cromossomo.cpp
         Cromossomo.hpp
-        mainNaoConvencional.cpp
 
         Funcao.cpp
         Funcao.hpp
