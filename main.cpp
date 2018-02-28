@@ -22,19 +22,52 @@
  * O QUE FAZER NO MAIN:
  * - Cada função retorna um std::vector<Resultado>
  * - Esse vector irá conter os resultados para cada geração do algoritmo
- * - Isso é feito para cada uma das 30 execuções de cada AG
- * - Ao fim, no main, deve ser resultado um novo vector<Resultado>, com o mesmo tamanho,
- *      que irá conter as médias de cada geração
- *      a média da última geração será o resultado final a ser demonstrado
+ * - Cada tipo de AG é executado então, N vezes, no main
+ * - Ao final disso, temos um std::vector<std::vector<Resultado>>(n),
+ *      com os resultados de cada geração para cada uma das n execuções
+ * - Um std::vector<Resultado> do mesmo tamanho do retorno das funções vai ser originado,
+ *      da média das n execuções, para cada geração.
+ * - O resultado final é o último elemento desse vector final
  *
  * - PROBLEMA: como fazer isso no AG paralelo, que possui 10 populações
+ * - SOLUÇÃO: para cada população, tirar a média dos resultados de cada geração i para as 30 execuções
  */
 
+std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes, const std::vector<std::vector<Resultado>> &resultsExecucoes);
+std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &));
+std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int));
 
 int main(){
-    std::vector<Resultado> resConvencional,resParalelo,resNaoConvencional;
+    Resultado resFinalConvencional,resFinalParalelo,resFinalNaoConvencional;
+    std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional;
+    std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional;
 
-    resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
+    unsigned int nExecucoes = 30,nGeracoes = 1000;
+
+    //resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
+    resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
+    resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
+    resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
+
+    //Resultado resultParalelo1 = resultsParalelo[0][nGeracoes - 1], resultParalelo2 = resultsParalelo[1][nGeracoes - 1];
+    /*
+     * PAREI AQUI!!!!!!
+     */
+    mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
+    mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
+    mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
+
+    resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
+    resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
+    resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
+
+    std::cout << "Resultado Convencional: " << std::endl;
+    std::cout << resFinalConvencional << std::endl << std::endl;
+    std::cout << "Resultado Paralelo: " << std::endl;
+    std::cout << resFinalParalelo << std::endl << std::endl;
+    std::cout << "Resultado Não-Convencional: " << std::endl;
+    std::cout << resFinalNaoConvencional << std::endl << std::endl;
+
 
     //std::cout << resParalelo << std::endl;
 
@@ -43,4 +76,31 @@ int main(){
     return 0;
 }
 
+std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vector<std::vector<Resultado>> &resultsExecucoes){
 
+    unsigned int nExecucoes = resultsExecucoes.size();
+
+    std::vector<Resultado> resultsMediasExecucoes(nGeracoes);
+
+    for (unsigned int i = 0;i < nGeracoes;++i)
+        resultsMediasExecucoes[i] = Algoritmos::Util::mediaResultados(i,resultsExecucoes);
+
+
+    return resultsMediasExecucoes;
+}
+
+std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
+    std::vector<std::vector<Resultado>> results(n);
+    for (int i = 0;i < n;++i)
+        results[i] = ag(Funcoes::booth);
+
+    return results;
+}
+
+std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
+    std::vector<std::vector<Resultado>> results(n);
+    for (int i = 0;i < n;++i)
+        results[i] = ag(Funcoes::booth,N_POPULACOES);
+
+    return results;
+}

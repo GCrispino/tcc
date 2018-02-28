@@ -27,15 +27,44 @@ void inicializarPopulacoes(
 
 }
 
+
+
 namespace Algoritmos{
 
-    Resultado convencional(const Funcao &funcaoFitness){
+    namespace Util{
+        Resultado mediaResultados(unsigned int iGeracao,const std::vector<std::vector<Resultado>> &resultsPopulacoes){
+            double
+                    mediaPiorFitness = 0,
+                    mediaMelhorFitness = 0,
+                    mediaMediaFitness = 0;
+
+            unsigned int nPopulacoes = resultsPopulacoes.size();
+
+            for (unsigned int i = 0;i < nPopulacoes;++i){
+                const Resultado &resAtual = resultsPopulacoes[i][iGeracao];
+                mediaPiorFitness += resAtual.piorFitness;
+                mediaMediaFitness += resAtual.mediaFitness;
+                mediaMelhorFitness += resAtual.melhorFitness;
+            }
+
+            mediaPiorFitness /= nPopulacoes;
+            mediaMediaFitness /= nPopulacoes;
+            mediaMelhorFitness /= nPopulacoes;
+
+            return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness);
+        }
+    }
+
+    std::vector<Resultado> convencional(const Funcao &funcaoFitness){
+
         Populacao p(100,0.05,0.9,1.55,funcaoFitness);
 
         int
                 i = 0,
                 nGeracoes = 1000,
                 nParesPaisASelecionar = 15,tamTorneio = 2;
+
+        std::vector<Resultado> results(nGeracoes);
 
         std::chrono::steady_clock::time_point comeco,fim;
         std::chrono::steady_clock::duration tempo;
@@ -54,8 +83,13 @@ namespace Algoritmos{
             p.selecaoSobreviventes(filhos);
 
             p.calcularFitness();
-        } while (++i < nGeracoes);
 
+            results[i] = Resultado(
+                    p.getElemMinFitness().getFitness(),
+                    p.getElemMaxFitness().getFitness(),
+                    p.getMediaFitness()
+            );
+        } while (++i < nGeracoes);
 
 
         const Cromossomo &melhor = p.getElemMinFitness();
@@ -65,10 +99,13 @@ namespace Algoritmos{
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
-        std::cout << "Terminou: tempo em " << nseconds << std::endl;
+        /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
         std::cout << "Numero de geracoes: " << i << std::endl;
         std::cout << "Melhor individuo: " << melhor << std::endl;
-        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();
+        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();*/
+
+
+        return results;
     }
 
 
@@ -168,12 +205,20 @@ namespace Algoritmos{
 
         }
 
+        fim = std::chrono::steady_clock::now();
+        tempo = fim - comeco;
+
+        double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
+
+        std::cout << "Terminou: tempo em " << nseconds << std::endl;
+
+        //std::cout << "Melhor individuo: " << melhor << std::endl;
+
         std::cout << "===============================================================";
         std::cout << "===============================================================" << std::endl;
 
-        std::vector<Resultado> resultsFinais(nGeracoes);
-
         std::vector<Cromossomo>melhores(N_POPULACOES);
+        std::vector<Resultado> resultsFinais(nGeracoes);
 
         std::transform(
                 populacoes.begin(),
@@ -183,32 +228,30 @@ namespace Algoritmos{
                     return p->getElemMaxFitness();
                 }
         );
+
+        //transformar resultsPopulacoes em resultsFinais, tirando a média da geração i para cada sub-população
+        for(unsigned int i = 0;i < nGeracoes;++i)
+            resultsFinais[i] = Util::mediaResultados(i,resultsPopulacoes);
+
 /*
         std::for_each(melhores.begin(),melhores.end(),[](Cromossomo &c) {
             std::cout << "Melhor: " << c << std::endl;
         });*/
-
-        fim = std::chrono::steady_clock::now();
-        tempo = fim - comeco;
-
-        double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
-
-        /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
-
-        std::cout << "Melhor individuo: " << melhor << std::endl;*/
 
 
         return resultsFinais;
     }
 
 
-    Resultado recombinacaoTransformacao(const Funcao &funcaoFitness){
+    std::vector<Resultado> recombinacaoTransformacao(const Funcao &funcaoFitness){
         PopulacaoTransformacao p(100,50,0.05,0.9,30,1.55,funcaoFitness);
 
         int
                 i = 0,
                 nGeracoes = 1000,
                 nParesPaisASelecionar = 15,tamTorneio = 2;
+
+        std::vector<Resultado> results(nGeracoes);
 
         std::chrono::steady_clock::time_point comeco,fim;
         std::chrono::steady_clock::duration tempo;
@@ -229,12 +272,19 @@ namespace Algoritmos{
             p.calcularFitness();
 
             p.recombinacao();
-            if (i % 100 == 0) {
+            /*if (i % 100 == 0) {
                 std::cout << "Geracao: " << i << '\t';
                 std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
                 std::cout << "Media do fitness: " << p.getMediaFitness();
                 std::cout << std::endl;
-            }
+            }*/
+
+
+            results[i] = Resultado(
+                    p.getElemMinFitness().getFitness(),
+                    p.getElemMaxFitness().getFitness(),
+                    p.getMediaFitness()
+            );
         } while (++i < nGeracoes);
 
         const Cromossomo &melhor = p.getElemMinFitness();
@@ -244,10 +294,12 @@ namespace Algoritmos{
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
-        std::cout << "Terminou: tempo em " << nseconds << std::endl;
+        /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
         std::cout << "Numero de geracoes: " << i << std::endl;
         std::cout << "Melhor individuo: " << melhor << std::endl;
-        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();
+        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();*/
+
+        return results;
     }
 
 
