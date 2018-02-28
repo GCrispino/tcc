@@ -47,12 +47,11 @@ int main(){
     //resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
     resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
     resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
-    resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
+    resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
+
+    std::cout << "Calculando resultados..." << std::endl;
 
     //Resultado resultParalelo1 = resultsParalelo[0][nGeracoes - 1], resultParalelo2 = resultsParalelo[1][nGeracoes - 1];
-    /*
-     * PAREI AQUI!!!!!!
-     */
     mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
     mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
     mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
@@ -60,6 +59,7 @@ int main(){
     resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
     resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
     resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
+
 
     std::cout << "Resultado Convencional: " << std::endl;
     std::cout << resFinalConvencional << std::endl << std::endl;
@@ -92,7 +92,7 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::booth);
+        results[i] = ag(Funcoes::rastringin);
 
     return results;
 }
@@ -100,7 +100,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::booth,N_POPULACOES);
+        results[i] = ag(Funcoes::rastringin,N_POPULACOES);
 
     return results;
 }

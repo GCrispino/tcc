@@ -73,7 +73,6 @@ namespace Algoritmos{
 
         p.inicializacao();
         p.calcularFitness();
-        std::cout << "iniciou" << std::endl;
         do {
             std::vector<Cromossomo> pais,filhos;
             pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
@@ -260,7 +259,7 @@ namespace Algoritmos{
 
         p.inicializacao();
         p.calcularFitness();
-        std::cout << "iniciou" << std::endl;
+
         do {
             std::vector<Cromossomo> pais,filhos;
             pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
