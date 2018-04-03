@@ -161,10 +161,8 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
             &filho1 = filhos[i],
             &filho2 = filhos[i + 1];
 
-
         const Cromossomo
-                * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2,
-                * outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
+                * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2;
 
         this->cromossomos[this->iElemMaxFitness] = *escolhido;
 

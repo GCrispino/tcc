@@ -73,6 +73,13 @@ Cromossomo::Cromossomo(float txMutacao,float desvioPadrao,const Funcao &funcaoFi
 Cromossomo::Cromossomo(const Cromossomo &c)
 :txMutacao(c.txMutacao),desvioPadrao(c.desvioPadrao),fitness(c.fitness),funcaoFitness(c.funcaoFitness)
 {
+    double
+            *intervaloFuncaoFitness = c.funcaoFitness.getIntervalo(),
+            intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
+            intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
+
+
+
     if (!c.genotipo.empty())
         this->genotipo = c.genotipo;
 
@@ -81,12 +88,21 @@ Cromossomo::Cromossomo(const Cromossomo &c)
         this->gen = new std::mt19937(seed1);
     this->intDis = std::uniform_int_distribution<int>(0,Cromossomo::N_GENES - 1);
     this->realDis = std::uniform_real_distribution<float>(0,1);
+    this->disIntervaloValoresFuncao = std::uniform_real_distribution<double>(intervaloMin,intervaloMax);
+    this->gaussianDis = std::normal_distribution<double>(0,this->desvioPadrao);
+
 }
 
 Cromossomo& Cromossomo::operator = (const Cromossomo &c){
 
     if (this == &c)
         return *this;
+
+    double
+            *intervaloFuncaoFitness = c.funcaoFitness.getIntervalo(),
+            intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
+            intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
+
 
     this->txMutacao = c.txMutacao;
     this->desvioPadrao = c.desvioPadrao;
@@ -105,6 +121,9 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
         this->gen = new std::mt19937(seed1);
     this->intDis = std::uniform_int_distribution<int>(0,Cromossomo::N_GENES - 1);
     this->realDis = std::uniform_real_distribution<float>(0,1);
+    this->disIntervaloValoresFuncao = std::uniform_real_distribution<double>(intervaloMin,intervaloMax);
+    this->gaussianDis = std::normal_distribution<double>(0,this->desvioPadrao);
+
 
     return *this;
 }

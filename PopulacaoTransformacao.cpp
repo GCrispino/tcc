@@ -4,11 +4,6 @@
 
 #include "PopulacaoTransformacao.h"
 
-/**
- * PROBLEMA!
- * - variável taxaInfeccao não é usada
- */
-
 
 PopulacaoTransformacao::PopulacaoTransformacao(
         unsigned int tamanho, unsigned int tamanhoPopulacaoMortos,
@@ -21,7 +16,6 @@ PopulacaoTransformacao::PopulacaoTransformacao(
 }
 
 void PopulacaoTransformacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
-    const Cromossomo pior = this->getElemMinFitness();
 
     for (int i = 0; i < filhos.size(); i += 2) {
         const Cromossomo
@@ -31,12 +25,16 @@ void PopulacaoTransformacao::selecaoSobreviventes(const std::vector<Cromossomo> 
 
         const Cromossomo
                 *escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2,
-                *outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
+                //*outro = escolhido->getFitness() == filho1.getFitness() ? &filho2 : &filho1;
+                *outro = escolhido == &filho1 ? &filho2 : &filho1,
+                &piorPopulacao = this->cromossomos[this->iElemMaxFitness];
 
-        this->cromossomos[this->iElemMinFitness] = *escolhido;
-        this->mortos.push_back(*outro);
+        this->mortos.push_back(piorPopulacao);
+        this->cromossomos[this->iElemMaxFitness] = *escolhido;
+        //this->mortos.push_back(*outro);
 
-        this->iElemMinFitness = this->achaIndicePiorFitness();
+
+        this->iElemMaxFitness = this->achaIndicePiorFitness();
     }
 }
 
@@ -65,13 +63,27 @@ void PopulacaoTransformacao::recombinacao(){
                 &c = this->cromossomos[iCromossomo],
                 novo = c.crossoverSimples(morto);
 
+
         if (novo.getFitness() < c.getFitness()){
-            //decrementa fitMorto
-            morto.decFitMorto();
-        }
-        else{
             //incrementa fitMorto
             morto.incFitMorto();
+            this->cromossomos[iCromossomo] = novo;
+
+            if (novo.getFitness() < this->elemMinFitness->getFitness()) {
+                this->elemMinFitness = &c;
+                this->iElemMinFitness = i;
+
+                if (novo.getFitness() <= this->funcaoFitness.getMinimoGlobal() + pow(10,-3)) {
+                    this->acabou = true;
+                }
+            }
+
+            if(novo.getFitness() > this->getElemMaxFitness().getFitness())
+                this->iElemMaxFitness = i;
+        }
+        else{
+            //decrementa fitMorto
+            morto.decFitMorto();
         }
     }
 
@@ -93,6 +105,13 @@ void PopulacaoTransformacao::recombinacao(){
         this->mortos.erase(inicioRemocao,this->mortos.end());
 
     }
+
+    //calcular média do fitness de toda a população:
+    double accFitness = 0;
+
+    for (Cromossomo &c: this->cromossomos)
+        accFitness += c.getFitness();
+    this->mediaFitness = accFitness / this->tamanho;accFitness;
 }
 
 

@@ -18,7 +18,7 @@ class Cromossomo{
         std::vector<double> genotipo;
         double fitness;
         Funcao funcaoFitness;
-        static std::mt19937 *gen; //Standard mersenne_twister_engine seeded with rd()
+        static std::mt19937 *gen;
         std::uniform_real_distribution<float> realDis;
         std::uniform_real_distribution<double> disIntervaloValoresFuncao;
         std::uniform_int_distribution<int> intDis;

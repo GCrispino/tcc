@@ -62,7 +62,7 @@ namespace Algoritmos{
         int
                 i = 0,
                 nGeracoes = 1000,
-                nParesPaisASelecionar = 15,tamTorneio = 2;
+                nParesPaisASelecionar = 10,tamTorneio = 2;
 
         std::vector<Resultado> results(nGeracoes);
 
@@ -88,6 +88,15 @@ namespace Algoritmos{
                     p.getElemMaxFitness().getFitness(),
                     p.getMediaFitness()
             );
+
+
+            /*if (i % 10 == 0) {
+                std::cout << "Geracao: " << i << '\t';
+                std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
+                std::cout << "Pior fitness: " << p.getElemMaxFitness().getFitness() << '\t';
+                std::cout << "Media do fitness: " << p.getMediaFitness();
+                std::cout << std::endl;
+            }*/
         } while (++i < nGeracoes);
 
 
@@ -98,11 +107,12 @@ namespace Algoritmos{
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
-        /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
+        /*
+        std::cout << "Terminou: tempo em " << nseconds << std::endl;
         std::cout << "Numero de geracoes: " << i << std::endl;
         std::cout << "Melhor individuo: " << melhor << std::endl;
-        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();*/
-
+        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();
+*/
 
         return results;
     }
@@ -111,9 +121,9 @@ namespace Algoritmos{
     std::vector<Resultado> paralelo(const Funcao &funcaoFitness,const int N_POPULACOES){
 
         int
-                tamanhoPopulacao = 20,
+                tamanhoPopulacao = 10,
                 nGeracoes = 1000,
-                nParesPaisASelecionar = 15,tamTorneio = 2;
+                nParesPaisASelecionar = 10,tamTorneio = 2;
         double
                 txMutacao = .05,
                 txCruzamento = .9,
@@ -248,7 +258,7 @@ namespace Algoritmos{
         int
                 i = 0,
                 nGeracoes = 1000,
-                nParesPaisASelecionar = 15,tamTorneio = 2;
+                nParesPaisASelecionar = 10,tamTorneio = 2;
 
         std::vector<Resultado> results(nGeracoes);
 
@@ -271,9 +281,10 @@ namespace Algoritmos{
             p.calcularFitness();
 
             p.recombinacao();
-            /*if (i % 100 == 0) {
+            /*if (i % 10 == 0) {
                 std::cout << "Geracao: " << i << '\t';
                 std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
+                std::cout << "Pior fitness: " << p.getElemMaxFitness().getFitness() << '\t';
                 std::cout << "Media do fitness: " << p.getMediaFitness();
                 std::cout << std::endl;
             }*/
@@ -293,11 +304,12 @@ namespace Algoritmos{
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
+
         /*std::cout << "Terminou: tempo em " << nseconds << std::endl;
         std::cout << "Numero de geracoes: " << i << std::endl;
         std::cout << "Melhor individuo: " << melhor << std::endl;
-        std::cout << "Media do fitness da populacao: " << p.getMediaFitness();*/
-
+        std::cout << "Media do fitness da populacao: " << p.getMediaFitness() << std::endl;
+*/
         return results;
     }
 
