@@ -1,4 +1,4 @@
-"D:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" C:\Users\Crispino\Documents\tcc
+"D:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_C_COMPILER=D:/TDM-GCC-64/bin/gcc.exe -DCMAKE_CXX_COMPILER=D:/TDM-GCC-64/bin/g++.exe -G "CodeBlocks - MinGW Makefiles" C:\Users\Crispino\Documents\tcc
 -- Configuring done
 -- Generating done
 -- Build files have been written to: C:/Users/Crispino/Documents/tcc/cmake-build-debug

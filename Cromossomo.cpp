@@ -78,8 +78,6 @@ Cromossomo::Cromossomo(const Cromossomo &c)
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
 
-
-
     if (!c.genotipo.empty())
         this->genotipo = c.genotipo;
 
@@ -171,11 +169,9 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo)
     Cromossomo filho1(this->txMutacao,this->desvioPadrao,this->funcaoFitness),
             filho2(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
 
-    double alpha;
-
     //segunda parte
     for (int i = 0; i < Cromossomo::N_GENES; ++i) {
-        alpha = this->realDis(*(this->gen));
+        double alpha = this->realDis(*(this->gen));
 
         filho1.genotipo[i] = alpha * this->genotipo[i] + (1 - alpha) * outroCromossomo.genotipo[i];
         filho2.genotipo[i] = alpha * outroCromossomo.genotipo[i] + (1 - alpha) * this->genotipo[i];
@@ -184,7 +180,8 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo)
     filho1.calcularFitness();
     filho2.calcularFitness();
 
-    std::vector<Cromossomo> filhos;
+    std::vector<Cromossomo>
+            filhos;
 
     if (filho1.fitness < filho2.fitness)
         filhos = {

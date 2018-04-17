@@ -93,9 +93,12 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
         if (realDis(*(this->gen)) > this->txCruzamento)
             continue;
 
+        std::vector<Cromossomo *> parPais(2);
+
         for (int j = 0;j < 2;++j) {
 
-            std::vector<Cromossomo> torneio;
+            //std::vector<Cromossomo> torneio;
+            std::vector<Cromossomo *> torneio;
 
             while (torneio.size() < tamanhoTorneio) {
                 //std::cout << "oi" << std::endl;
@@ -106,20 +109,25 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
 
                 rand = &(this->cromossomos[index]);
 
-                if (std::find_if(torneio.begin(), torneio.end(), [&rand](const Cromossomo &c) { return &c == rand; }) !=
-                    torneio.end())
+                bool
+                    estaNoTorneio = std::find_if(torneio.begin(), torneio.end(), [&rand](const Cromossomo *c) { return c == rand; }) !=
+                                        torneio.end(),
+                    estaNoPar = (j == 1) && (parPais[0] == rand);
+
+                if (estaNoTorneio || estaNoPar)
                     continue;
 
-                torneio.push_back(*rand);
+                //torneio.push_back(*rand);
+                torneio.push_back(rand);
             }
 
-            if (torneio[0].getFitness() < torneio[1].getFitness())
-                pais.push_back(torneio[0]);
+            if (torneio[0]->getFitness() < torneio[1]->getFitness())
+                parPais[j] =torneio[0];
             else
-                pais.push_back(torneio[1]);
-
+                parPais[j] = torneio[1];
         }
-
+        pais.push_back(*parPais[0]);
+        pais.push_back(*parPais[1]);
     }
     this->ocupada = false;
 
@@ -162,7 +170,8 @@ void Populacao::selecaoSobreviventes(const std::vector<Cromossomo> &filhos) {
             &filho2 = filhos[i + 1];
 
         const Cromossomo
-                * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2;
+                * escolhido = filho1.getFitness() < filho2.getFitness() ? &filho1 : &filho2,
+                &pior = this->cromossomos[this->iElemMinFitness];
 
         this->cromossomos[this->iElemMaxFitness] = *escolhido;
 

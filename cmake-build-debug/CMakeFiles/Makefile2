@@ -59,87 +59,13 @@ CMAKE_SOURCE_DIR = C:\Users\Crispino\Documents\tcc
 CMAKE_BINARY_DIR = C:\Users\Crispino\Documents\tcc\cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/NaoConvencional.dir
-
-# All Build rule for target.
-CMakeFiles/NaoConvencional.dir/all:
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/depend
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=7,8,9,10,11,12 "Built target NaoConvencional"
-.PHONY : CMakeFiles/NaoConvencional.dir/all
-
-# Include target in all.
-all: CMakeFiles/NaoConvencional.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/NaoConvencional.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles 6
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/NaoConvencional.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/NaoConvencional.dir/rule
-
-# Convenience name for target.
-NaoConvencional: CMakeFiles/NaoConvencional.dir/rule
-
-.PHONY : NaoConvencional
-
-# clean rule for target.
-CMakeFiles/NaoConvencional.dir/clean:
-	$(MAKE) -f CMakeFiles\NaoConvencional.dir\build.make CMakeFiles/NaoConvencional.dir/clean
-.PHONY : CMakeFiles/NaoConvencional.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/NaoConvencional.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
-# Target rules for target CMakeFiles/Convencional.dir
-
-# All Build rule for target.
-CMakeFiles/Convencional.dir/all:
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/depend
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6 "Built target Convencional"
-.PHONY : CMakeFiles/Convencional.dir/all
-
-# Include target in all.
-all: CMakeFiles/Convencional.dir/all
-
-.PHONY : all
-
-# Build rule for subdir invocation for target.
-CMakeFiles/Convencional.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles 6
-	$(MAKE) -f CMakeFiles\Makefile2 CMakeFiles/Convencional.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles 0
-.PHONY : CMakeFiles/Convencional.dir/rule
-
-# Convenience name for target.
-Convencional: CMakeFiles/Convencional.dir/rule
-
-.PHONY : Convencional
-
-# clean rule for target.
-CMakeFiles/Convencional.dir/clean:
-	$(MAKE) -f CMakeFiles\Convencional.dir\build.make CMakeFiles/Convencional.dir/clean
-.PHONY : CMakeFiles/Convencional.dir/clean
-
-# clean rule for target.
-clean: CMakeFiles/Convencional.dir/clean
-
-.PHONY : clean
-
-#=============================================================================
 # Target rules for target CMakeFiles/Paralelo.dir
 
 # All Build rule for target.
 CMakeFiles/Paralelo.dir/all:
 	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/depend
 	$(MAKE) -f CMakeFiles\Paralelo.dir\build.make CMakeFiles/Paralelo.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=13,14,15,16,17,18,19,20 "Built target Paralelo"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=C:\Users\Crispino\Documents\tcc\cmake-build-debug\CMakeFiles --progress-num=1,2,3,4,5,6,7,8 "Built target Paralelo"
 .PHONY : CMakeFiles/Paralelo.dir/all
 
 # Include target in all.

@@ -1,3 +1,0 @@
-"D:\Program Files\JetBrains\CLion 2017.3.1\bin\cmake\bin\cmake.exe" -E remove -f CMakeFiles\TCC.dir/objects.a
-C:\TDM-GCC-64\bin\ar.exe cr CMakeFiles\TCC.dir/objects.a @CMakeFiles\TCC.dir\objects1.rsp
-C:\TDM-GCC-64\bin\g++.exe -fopenmp -g   -Wl,--whole-archive CMakeFiles\TCC.dir/objects.a -Wl,--no-whole-archive  -o TCC.exe -Wl,--out-implib,libTCC.dll.a -Wl,--major-image-version,0,--minor-image-version,0 @CMakeFiles\TCC.dir\linklibs.rsp

@@ -45,33 +45,30 @@ int main(){
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
     //resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
-    resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
+    //resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
+    std::cout << "Executando AG sequencial convencional..." << std::endl;
     resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
+    std::cout << "Executando AG sequencial não-convencional..." << std::endl;
     resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
 
     std::cout << "Calculando resultados..." << std::endl;
 
-    //Resultado resultParalelo1 = resultsParalelo[0][nGeracoes - 1], resultParalelo2 = resultsParalelo[1][nGeracoes - 1];
-    mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
+    //mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
     mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
     mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
 
-    resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
+    //resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
     resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
     resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
 
 
     std::cout << "Resultado Convencional: " << std::endl;
     std::cout << resFinalConvencional << std::endl << std::endl;
-    std::cout << "Resultado Paralelo: " << std::endl;
-    std::cout << resFinalParalelo << std::endl << std::endl;
+    //std::cout << "Resultado Paralelo: " << std::endl;
+    //std::cout << resFinalParalelo << std::endl << std::endl;
     std::cout << "Resultado Não-Convencional: " << std::endl;
     std::cout << resFinalNaoConvencional << std::endl << std::endl;
 
-
-    //std::cout << resParalelo << std::endl;
-
-    //Algoritmos::recombinacaoTransformacao(Funcoes::rastringin);
 
     return 0;
 }
@@ -92,7 +89,7 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rastringin);
+        results[i] = ag(Funcoes::rosenbrock);
 
     return results;
 }
@@ -100,7 +97,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rastringin,N_POPULACOES);
+        results[i] = ag(Funcoes::rosenbrock,N_POPULACOES);
 
     return results;
 }
