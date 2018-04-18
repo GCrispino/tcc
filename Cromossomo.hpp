@@ -35,7 +35,7 @@ class Cromossomo{
 
         void calcularFitness();
 
-        void mutacao();
+        void mutacao(bool calculaProbabilidadeCadaFilho = false);
 
         //realiza a opera??o de muta??o probabilisticamente em um array de cromossomos
         void mutaFilhos(std::vector<Cromossomo> &filhos);

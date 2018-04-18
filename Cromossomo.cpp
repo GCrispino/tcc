@@ -142,26 +142,19 @@ void Cromossomo::calcularFitness() {
 
 }
 
-void Cromossomo::mutacao() {
-    double rand;
+void Cromossomo::mutacao(bool calculaProbabilidadeCadaFilho) {
     for (double &gene: this->genotipo){
-        rand= this->gaussianDis(*(this->gen));
-
-        gene += rand;
+        if (!calculaProbabilidadeCadaFilho || this->realDis(*this->gen) < this->txMutacao) {
+            double rand = this->gaussianDis(*(this->gen));
+            gene += rand;
+        }
     }
 }
 
+
 void Cromossomo::mutaFilhos(std::vector<Cromossomo> &filhos) {
-
-    for (Cromossomo &filho : filhos) {
-
-        double probMutacao = this->realDis(*this->gen);
-
-        if (probMutacao < filho.txMutacao) {
-            filho.mutacao();
-        }
-
-    }
+    for (Cromossomo &filho : filhos)
+        filho.mutacao(true);
 }
 
 std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo){
