@@ -35,16 +35,16 @@ class Cromossomo{
 
         void calcularFitness();
 
-        void mutacao(bool calculaProbabilidadeCadaFilho = false);
+        void mutacao(unsigned int geracaoAtual, unsigned int nGeracoes,bool calculaProbabilidadeCadaFilho = false);
 
         //realiza a opera??o de muta??o probabilisticamente em um array de cromossomos
-        void mutaFilhos(std::vector<Cromossomo> &filhos);
+        void mutaFilhos(std::vector<Cromossomo> &filhos, unsigned int geracaoAtual, unsigned int nGeracoes);
 
         //gera dois filhos
-        std::vector<Cromossomo> crossover(const Cromossomo &outroCromossomo);
+        std::vector<Cromossomo> crossover(const Cromossomo &outroCromossomo,unsigned int geracaoAtual, unsigned int nGeracoes);
 
         //gera um filho
-        Cromossomo crossoverSimples(const Cromossomo &outroCromossomo);
+        Cromossomo crossoverSimples(const Cromossomo &outroCromossomo, unsigned int geracaoAtual, unsigned int nGeracoes);
 
         double getFitness() const;
 

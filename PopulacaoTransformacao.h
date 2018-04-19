@@ -24,7 +24,7 @@ class PopulacaoTransformacao: public Populacao{
                 const Funcao &funcaoFitness
         );
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
-        void recombinacao();
+        void recombinacao(unsigned int geracaoAtual, unsigned int nGeracoes);
 };
 
 

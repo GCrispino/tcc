@@ -142,22 +142,22 @@ void Cromossomo::calcularFitness() {
 
 }
 
-void Cromossomo::mutacao(bool calculaProbabilidadeCadaFilho) {
+void Cromossomo::mutacao(unsigned int geracaoAtual, unsigned int nGeracoes,bool calculaProbabilidadeCadaFilho) {
     for (double &gene: this->genotipo){
         if (!calculaProbabilidadeCadaFilho || this->realDis(*this->gen) < this->txMutacao) {
             double rand = this->gaussianDis(*(this->gen));
-            gene += rand;
+            gene = gene + (1 - 0.9 * ((geracaoAtual - 1) / (nGeracoes - 1))) * rand;
         }
     }
 }
 
 
-void Cromossomo::mutaFilhos(std::vector<Cromossomo> &filhos) {
+void Cromossomo::mutaFilhos(std::vector<Cromossomo> &filhos,unsigned int geracaoAtual, unsigned int nGeracoes) {
     for (Cromossomo &filho : filhos)
-        filho.mutacao(true);
+        filho.mutacao(geracaoAtual,nGeracoes,true);
 }
 
-std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo){
+std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo, unsigned int geracaoAtual, unsigned int nGeracoes){
 
     Cromossomo filho1(this->txMutacao,this->desvioPadrao,this->funcaoFitness),
             filho2(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
@@ -188,13 +188,13 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo)
         };
 
     //realiza a opera��o de muta��o probabilisticamente nos filhos
-    this->mutaFilhos(filhos);
+    this->mutaFilhos(filhos, geracaoAtual, nGeracoes);
 
 
     return filhos;
 }
 
-Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo){
+Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo, unsigned int geracaoAtual, unsigned int nGeracoes){
 
     Cromossomo filho(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
 
@@ -211,7 +211,7 @@ Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo){
     double probMutacao = this->realDis(*this->gen);
 
     if (probMutacao < filho.txMutacao) {
-        filho.mutacao();
+        filho.mutacao(geracaoAtual, nGeracoes,true);
     }
 
 

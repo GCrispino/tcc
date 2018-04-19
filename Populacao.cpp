@@ -135,7 +135,7 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
 
 }
 
-std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSelecionados) {
+std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSelecionados, unsigned int geracaoAtual, unsigned int nGeracoes) {
     while(this->paralelo && this->momentoMigracao);
 
     std::vector<Cromossomo> filhos(paisSelecionados.size());
@@ -146,7 +146,7 @@ std::vector<Cromossomo> Populacao::gerarFilhos(std::vector<Cromossomo> &paisSele
                 &pai2 = paisSelecionados[i + 1];
 
         std::vector<Cromossomo>
-                filhosGerados = pai1.crossover(pai2);
+                filhosGerados = pai1.crossover(pai2,geracaoAtual,nGeracoes);
 
         filhos[i] = filhosGerados[0];
         filhos[i + 1] = filhosGerados[1];

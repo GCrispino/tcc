@@ -42,7 +42,7 @@ class Populacao {
         void inicializacao();
         void calcularFitness();
         std::vector<Cromossomo> selecaoPais(int nPaisASelecionar,int tamanhoTorneio);
-        std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &);
+        std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &, unsigned int geracaoAtual, unsigned int nGeracoes);
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
         void setAcabou();
         bool verificarParada();

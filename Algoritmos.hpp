@@ -77,7 +77,7 @@ namespace Algoritmos{
             std::vector<Cromossomo> pais,filhos;
             pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
 
-            filhos = p.gerarFilhos(pais);
+            filhos = p.gerarFilhos(pais,i,nGeracoes);
 
             p.selecaoSobreviventes(filhos);
 
@@ -90,13 +90,13 @@ namespace Algoritmos{
             );
 
 
-            /*if (i % 10 == 0) {
+            if (i % 100 == 0) {
                 std::cout << "Geracao: " << i << '\t';
                 std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
                 std::cout << "Pior fitness: " << p.getElemMaxFitness().getFitness() << '\t';
                 std::cout << "Media do fitness: " << p.getMediaFitness();
                 std::cout << std::endl;
-            }*/
+            }
         } while (++i < nGeracoes);
 
 
@@ -169,7 +169,7 @@ namespace Algoritmos{
                     std::vector<Cromossomo> pais,filhos;
                     pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
 
-                    filhos = p.gerarFilhos(pais);
+                    filhos = p.gerarFilhos(pais,i,nGeracoes);
 
                     p.selecaoSobreviventes(filhos);
 
@@ -274,20 +274,20 @@ namespace Algoritmos{
             std::vector<Cromossomo> pais,filhos;
             pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
 
-            filhos = p.gerarFilhos(pais);
+            filhos = p.gerarFilhos(pais,i,nGeracoes);
 
             p.selecaoSobreviventes(filhos);
 
             p.calcularFitness();
 
-            p.recombinacao();
-            /*if (i % 10 == 0) {
+            p.recombinacao(i,nGeracoes);
+            if (i % 100 == 0) {
                 std::cout << "Geracao: " << i << '\t';
                 std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
                 std::cout << "Pior fitness: " << p.getElemMaxFitness().getFitness() << '\t';
                 std::cout << "Media do fitness: " << p.getMediaFitness();
                 std::cout << std::endl;
-            }*/
+            }
 
 
             results[i] = Resultado(

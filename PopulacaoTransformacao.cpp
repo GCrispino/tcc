@@ -38,7 +38,7 @@ void PopulacaoTransformacao::selecaoSobreviventes(const std::vector<Cromossomo> 
     }
 }
 
-void PopulacaoTransformacao::recombinacao(){
+void PopulacaoTransformacao::recombinacao(unsigned int geracaoAtual, unsigned int nGeracoes){
 /*
      * Seleciona um aleatório da população
      * Seleciona um aleatório da população dos mortos
@@ -61,7 +61,7 @@ void PopulacaoTransformacao::recombinacao(){
 
         Cromossomo
                 &c = this->cromossomos[iCromossomo],
-                novo = c.crossoverSimples(morto);
+                novo = c.crossoverSimples(morto,geracaoAtual,nGeracoes);
 
 
         if (novo.getFitness() < c.getFitness()){
