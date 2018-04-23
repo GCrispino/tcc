@@ -38,18 +38,18 @@ namespace Algoritmos{
                     mediaMelhorFitness = 0,
                     mediaMediaFitness = 0;
 
-            unsigned int nPopulacoes = resultsPopulacoes.size();
+            unsigned int nExecucoes = resultsPopulacoes.size();
 
-            for (unsigned int i = 0;i < nPopulacoes;++i){
+            for (unsigned int i = 0;i < nExecucoes;++i){
                 const Resultado &resAtual = resultsPopulacoes[i][iGeracao];
                 mediaPiorFitness += resAtual.piorFitness;
                 mediaMediaFitness += resAtual.mediaFitness;
                 mediaMelhorFitness += resAtual.melhorFitness;
             }
 
-            mediaPiorFitness /= nPopulacoes;
-            mediaMediaFitness /= nPopulacoes;
-            mediaMelhorFitness /= nPopulacoes;
+            mediaPiorFitness /= nExecucoes;
+            mediaMediaFitness /= nExecucoes;
+            mediaMelhorFitness /= nExecucoes;
 
             return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness);
         }
