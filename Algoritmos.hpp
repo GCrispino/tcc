@@ -53,6 +53,66 @@ namespace Algoritmos{
 
             return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness);
         }
+
+        Resultado getResultadosGeracaoParalelo(unsigned int iGeracao,const std::vector<std::vector<Resultado>> &resultsPopulacoes){
+            double
+                    melhorFitnessGeracaoSubPopulacoes   = resultsPopulacoes[0][iGeracao].melhorFitness,
+                    accMediaFitnessGeracaoSubPopulacoes = 0,
+                    piorFitnessGeracaoSubPopulacoes     = resultsPopulacoes[0][iGeracao].piorFitness;
+
+            unsigned int nPopulacoes = resultsPopulacoes.size();
+
+            /**
+             * Acha o resultado que possui o melhor valor, o que possui o pior valor de fitness,
+             *  e calcula a soma das médias, tudo para cada subpopulação
+             */
+            for (unsigned int i = 0;i < nPopulacoes;++i){
+                const Resultado &resAtual = resultsPopulacoes[i][iGeracao];
+                melhorFitnessGeracaoSubPopulacoes =
+                        resAtual.melhorFitness < melhorFitnessGeracaoSubPopulacoes ? resAtual.melhorFitness : melhorFitnessGeracaoSubPopulacoes;
+                piorFitnessGeracaoSubPopulacoes =
+                        resAtual.piorFitness > piorFitnessGeracaoSubPopulacoes ? resAtual.piorFitness : piorFitnessGeracaoSubPopulacoes;
+                accMediaFitnessGeracaoSubPopulacoes += resAtual.piorFitness;
+            }
+
+            double mediaMediaFitnessGeracaoSubPopulacoes = accMediaFitnessGeracaoSubPopulacoes / nPopulacoes;
+
+
+            return Resultado(
+                    melhorFitnessGeracaoSubPopulacoes,
+                    mediaMediaFitnessGeracaoSubPopulacoes,
+                    piorFitnessGeracaoSubPopulacoes
+            );
+
+/*
+            const Resultado
+                    &melhorGeracaoSubPopulacoes =
+                    *(std::min_element(
+                            resultsPopulacoes[iGeracao].begin(),
+                            resultsPopulacoes[iGeracao].end(),
+                            [](Resultado r1,Resultado r2){
+                                return r1.melhorFitness < r2.melhorFitness;
+                            })),
+                    &piorGeracaoSubPopulacoes =
+                    *(std::max_element(
+                            resultsPopulacoes[iGeracao].begin(),
+                            resultsPopulacoes[iGeracao].end(),
+                            [](Resultado r1,Resultado r2){
+                                return r1.piorFitness < r2.piorFitness;
+                            }));
+
+            double
+                    melhorFitnessGeracaoSubPopulacoes = melhorGeracaoSubPopulacoes.melhorFitness,
+                    piorFitnessGeracaoSubPopulacoes   = piorGeracaoSubPopulacoes.piorFitness,
+                    mediaFitnessSubPopulacoes         = Util::mediaResultados(iGeracao,resultsPopulacoes).mediaFitness;
+
+            return Resultado(
+                    melhorFitnessGeracaoSubPopulacoes,
+                    mediaFitnessSubPopulacoes,
+                    piorFitnessGeracaoSubPopulacoes
+            );*/
+        }
+
     }
 
     std::vector<Resultado> convencional(const Funcao &funcaoFitness){
@@ -227,7 +287,6 @@ namespace Algoritmos{
         std::cout << "===============================================================" << std::endl;
 
         std::vector<Cromossomo>melhores(N_POPULACOES);
-        std::vector<Resultado> resultsFinais(nGeracoes);
 
         std::transform(
                 populacoes.begin(),
@@ -238,14 +297,15 @@ namespace Algoritmos{
                 }
         );
 
-        //transformar resultsPopulacoes em resultsFinais, tirando a média da geração i para cada sub-população
-        for(unsigned int i = 0;i < nGeracoes;++i)
-            resultsFinais[i] = Util::mediaResultados(i,resultsPopulacoes);
-
-/*
-        std::for_each(melhores.begin(),melhores.end(),[](Cromossomo &c) {
-            std::cout << "Melhor: " << c << std::endl;
-        });*/
+        std::vector<Resultado> resultsFinais(nGeracoes);
+        /**
+         * transformar resultsPopulacoes em resultsFinais, pegando o melhor dos melhores
+         *  da geração para cada subpopulação, o pior dos piores, e a média das médias,
+         *  também dos resultados dessa geração para cada subpopulação
+         */
+        for(unsigned int i = 0;i < nGeracoes;++i) {
+            resultsFinais[i] = Util::getResultadosGeracaoParalelo(i, resultsPopulacoes);
+        }
 
 
         return resultsFinais;
