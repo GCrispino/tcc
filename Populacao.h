@@ -54,6 +54,7 @@ class Populacao {
         void setElemMinFitness(Cromossomo *);
         double getMediaFitness();
         int getTamanho() const;
+        const Funcao getFuncaoFitness() const;
         Cromossomo getCromossomo(int i) const;
         void setCromossomo(int i,Cromossomo &);
         void setMomentoMigracao(bool);

@@ -236,6 +236,10 @@ int Populacao::getTamanho() const{
     return this->tamanho;
 }
 
+const Funcao Populacao::getFuncaoFitness() const{
+    return this->funcaoFitness;
+}
+
 Cromossomo Populacao::getCromossomo(int i) const{
     return this->cromossomos[i];
 }

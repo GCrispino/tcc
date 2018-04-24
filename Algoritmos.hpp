@@ -36,29 +36,32 @@ namespace Algoritmos{
             double
                     mediaPiorFitness = 0,
                     mediaMelhorFitness = 0,
-                    mediaMediaFitness = 0;
+                    mediaMediaFitness = 0,
+                    nVezesAchouFitnessOtimo = 0;
 
             unsigned int nExecucoes = resultsPopulacoes.size();
 
             for (unsigned int i = 0;i < nExecucoes;++i){
                 const Resultado &resAtual = resultsPopulacoes[i][iGeracao];
-                mediaPiorFitness += resAtual.piorFitness;
-                mediaMediaFitness += resAtual.mediaFitness;
-                mediaMelhorFitness += resAtual.melhorFitness;
+                mediaPiorFitness        += resAtual.piorFitness;
+                mediaMediaFitness       += resAtual.mediaFitness;
+                mediaMelhorFitness      += resAtual.melhorFitness;
+                nVezesAchouFitnessOtimo += resAtual.nVezesAchouFitnessOtimo;
             }
 
             mediaPiorFitness /= nExecucoes;
             mediaMediaFitness /= nExecucoes;
             mediaMelhorFitness /= nExecucoes;
 
-            return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness);
+            return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness,nVezesAchouFitnessOtimo);
         }
 
         Resultado getResultadosGeracaoParalelo(unsigned int iGeracao,const std::vector<std::vector<Resultado>> &resultsPopulacoes){
             double
                     melhorFitnessGeracaoSubPopulacoes   = resultsPopulacoes[0][iGeracao].melhorFitness,
                     accMediaFitnessGeracaoSubPopulacoes = 0,
-                    piorFitnessGeracaoSubPopulacoes     = resultsPopulacoes[0][iGeracao].piorFitness;
+                    piorFitnessGeracaoSubPopulacoes     = resultsPopulacoes[0][iGeracao].piorFitness,
+                    achouFitnessOtimoSubPopulacoes      = resultsPopulacoes[0][iGeracao].nVezesAchouFitnessOtimo;
 
             unsigned int nPopulacoes = resultsPopulacoes.size();
 
@@ -73,6 +76,9 @@ namespace Algoritmos{
                 piorFitnessGeracaoSubPopulacoes =
                         resAtual.piorFitness > piorFitnessGeracaoSubPopulacoes ? resAtual.piorFitness : piorFitnessGeracaoSubPopulacoes;
                 accMediaFitnessGeracaoSubPopulacoes += resAtual.piorFitness;
+
+                if (achouFitnessOtimoSubPopulacoes != 1)
+                    achouFitnessOtimoSubPopulacoes = resAtual.nVezesAchouFitnessOtimo;
             }
 
             double mediaMediaFitnessGeracaoSubPopulacoes = accMediaFitnessGeracaoSubPopulacoes / nPopulacoes;
@@ -81,36 +87,9 @@ namespace Algoritmos{
             return Resultado(
                     melhorFitnessGeracaoSubPopulacoes,
                     mediaMediaFitnessGeracaoSubPopulacoes,
-                    piorFitnessGeracaoSubPopulacoes
+                    piorFitnessGeracaoSubPopulacoes,
+                    achouFitnessOtimoSubPopulacoes
             );
-
-/*
-            const Resultado
-                    &melhorGeracaoSubPopulacoes =
-                    *(std::min_element(
-                            resultsPopulacoes[iGeracao].begin(),
-                            resultsPopulacoes[iGeracao].end(),
-                            [](Resultado r1,Resultado r2){
-                                return r1.melhorFitness < r2.melhorFitness;
-                            })),
-                    &piorGeracaoSubPopulacoes =
-                    *(std::max_element(
-                            resultsPopulacoes[iGeracao].begin(),
-                            resultsPopulacoes[iGeracao].end(),
-                            [](Resultado r1,Resultado r2){
-                                return r1.piorFitness < r2.piorFitness;
-                            }));
-
-            double
-                    melhorFitnessGeracaoSubPopulacoes = melhorGeracaoSubPopulacoes.melhorFitness,
-                    piorFitnessGeracaoSubPopulacoes   = piorGeracaoSubPopulacoes.piorFitness,
-                    mediaFitnessSubPopulacoes         = Util::mediaResultados(iGeracao,resultsPopulacoes).mediaFitness;
-
-            return Resultado(
-                    melhorFitnessGeracaoSubPopulacoes,
-                    mediaFitnessSubPopulacoes,
-                    piorFitnessGeracaoSubPopulacoes
-            );*/
         }
 
     }
@@ -143,10 +122,14 @@ namespace Algoritmos{
 
             p.calcularFitness();
 
+            bool achouFitnessOtimo =
+                    p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
+
             results[i] = Resultado(
                     p.getElemMinFitness().getFitness(),
                     p.getElemMaxFitness().getFitness(),
-                    p.getMediaFitness()
+                    p.getMediaFitness(),
+                    achouFitnessOtimo
             );
 
 
@@ -225,7 +208,7 @@ namespace Algoritmos{
 
                 int j = 0;
                 do {
-
+                    bool jaAchou = false;
                     std::vector<Cromossomo> pais,filhos;
                     pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
 
@@ -242,11 +225,21 @@ namespace Algoritmos{
                         std::cout << "Media do fitness: " << p.getMediaFitness();
                         std::cout << std::endl;
                     }*/
+                    bool achouFitnessOtimo =
+                            p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
+
+                    if (achouFitnessOtimo && !jaAchou){
+                        std::cout << "Achou fitness otimo!" << std::endl;
+                        std::cout << "Populacao: " << i << ". Geracao: " << j << std::endl;
+                        std::cout << "Valor: " << p.getElemMinFitness().getFitness() << std::endl;
+                        jaAchou = true;
+                    }
 
                     resultsPopulacoes[i].push_back(Resultado(
                             p.getElemMinFitness().getFitness(),
                             p.getElemMaxFitness().getFitness(),
-                            p.getMediaFitness()
+                            p.getMediaFitness(),
+                            achouFitnessOtimo
                     ));
                 } while (++j < nGeracoes);
                 p.setAcabou();
@@ -349,11 +342,14 @@ namespace Algoritmos{
                 std::cout << std::endl;
             }
 
+            bool achouFitnessOtimo =
+                    p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
 
             results[i] = Resultado(
                     p.getElemMinFitness().getFitness(),
                     p.getElemMaxFitness().getFitness(),
-                    p.getMediaFitness()
+                    p.getMediaFitness(),
+                    achouFitnessOtimo
             );
         } while (++i < nGeracoes);
 

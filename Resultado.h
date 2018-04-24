@@ -17,20 +17,29 @@
  */
 struct Resultado {
     double melhorFitness;
+    double melhorFitnessTotal;
     double piorFitness;
     double mediaFitness;
+    double nVezesAchouFitnessOtimo;
 
     friend std::ostream &operator << (std::ostream &out, const Resultado &res){
 
         out << "Melhor fitness: " << res.melhorFitness << std::endl;
         out << "Pior fitness: " << res.piorFitness << std::endl;
-        out << "Média do fitness: " << res.mediaFitness;
+        out << "Media do fitness: " << res.mediaFitness;
+        out << "Numero de vezes que achou o fitness otimo dentro do erro: " << res.nVezesAchouFitnessOtimo;
 
         return out;
     }
 
-    Resultado(double melhorFitness = 999, double mediaFitness = 999, double piorFitness = 999)
-    :melhorFitness(melhorFitness),mediaFitness(mediaFitness),piorFitness(piorFitness)
+    Resultado(
+            double melhorFitness = 999,
+            double mediaFitness = 999,
+            double piorFitness = 999,
+            double nVezesAchouFitnessOtimo = 0
+    )
+    :melhorFitness(melhorFitness),mediaFitness(mediaFitness),piorFitness(piorFitness),
+     nVezesAchouFitnessOtimo(nVezesAchouFitnessOtimo)
     {}
 };
 
