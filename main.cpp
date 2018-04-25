@@ -1,6 +1,7 @@
 #include <iostream>
 #include <chrono>
 #include <algorithm>
+#include <numeric>
 #include <omp.h>
 #include "Algoritmos.hpp"
 #include "Funcoes.hpp"
@@ -34,43 +35,87 @@
  */
 
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes, const std::vector<std::vector<Resultado>> &resultsExecucoes);
+Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>> &resultsExecucoes);
+Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao);
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &));
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int));
 
+
 int main(){
-    Resultado resFinalConvencional,resFinalParalelo,resFinalNaoConvencional;
+    Resultado
+            resFinalConvencional, resAbsolutoConvencional,
+            resFinalParalelo, resAbsolutoParalelo,
+            resFinalNaoConvencional, resAbsolutoNaoConvencional;
     std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional;
     std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional;
 
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
-    //resParalelo = Algoritmos::paralelo(Funcoes::rastringin,N_POPULACOES);
     resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
-    /*std::cout << "Executando AG sequencial convencional..." << std::endl;
+    std::cout << "Executando AG sequencial convencional..." << std::endl;
     resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
     std::cout << "Executando AG sequencial não-convencional..." << std::endl;
-    resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);*/
+    resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
 
     std::cout << "Calculando resultados..." << std::endl;
 
     mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
-    //mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
-    //mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
+    mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
+    mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
 
+    resAbsolutoParalelo = getResultadoAbsolutoExecucoes(resultsParalelo);
     resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
-    //resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
-    //resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
+    resAbsolutoConvencional = getResultadoAbsolutoExecucoes(resultsConvencional);
+    resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
+    resAbsolutoNaoConvencional = getResultadoAbsolutoExecucoes(resultsNaoConvencional);
+    resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
 
 
-    //std::cout << "Resultado Convencional: " << std::endl;
-    //std::cout << resFinalConvencional << std::endl << std::endl;
+    std::cout << "Resultado Convencional: " << std::endl;
+    std::cout << resFinalConvencional << std::endl << std::endl;
+    std::cout << "Resultado Absoluto Convencional: " << std::endl;
+    std::cout << resAbsolutoConvencional << std::endl << std::endl;
     std::cout << "Resultado Paralelo: " << std::endl;
     std::cout << resFinalParalelo << std::endl << std::endl;
-    //std::cout << "Resultado Não-Convencional: " << std::endl;
-    //std::cout << resFinalNaoConvencional << std::endl << std::endl;
+    std::cout << "Resultado Absoluto Paralelo: " << std::endl;
+    std::cout << resAbsolutoParalelo << std::endl << std::endl;
+    std::cout << "Resultado Não-Convencional: " << std::endl;
+    std::cout << resFinalNaoConvencional << std::endl << std::endl;
+    std::cout << "Resultado Absoluto Nao-Convencional: " << std::endl;
+    std::cout << resAbsolutoNaoConvencional << std::endl << std::endl;
 
 
     return 0;
+}
+
+//Retorna resultados absolutos a partir de um vector de resultados
+Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao){
+    return std::accumulate(
+            resultsExecucao.begin(),
+            resultsExecucao.end(),
+            Resultado(),
+            [](Resultado acc, Resultado novo){
+                return Resultado(
+                    acc.melhorFitness < novo.melhorFitness ? acc.melhorFitness : novo.melhorFitness,
+                    0,
+                    acc.piorFitness > novo.piorFitness ? acc.piorFitness : novo.piorFitness
+                );
+            }
+    );
+}
+
+Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>> &resultsExecucoes){
+    std::vector<Resultado> resultsAbsolutosExecucoes(resultsExecucoes.size());
+
+    //Encher o vector resultsAbsolutosExecucoes com os novos calculos
+    std::transform(
+            resultsExecucoes.begin(),
+            resultsExecucoes.end(),
+            resultsAbsolutosExecucoes.begin(),
+            getResultadoAbsoluto
+    );
+
+    return getResultadoAbsoluto(resultsAbsolutosExecucoes);
 }
 
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vector<std::vector<Resultado>> &resultsExecucoes){
@@ -89,7 +134,7 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::griewank);
+        results[i] = ag(Funcoes::rastringin);
 
     return results;
 }
@@ -97,7 +142,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::griewank,N_POPULACOES);
+        results[i] = ag(Funcoes::rastringin,N_POPULACOES);
 
     return results;
 }

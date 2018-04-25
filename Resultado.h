@@ -17,7 +17,6 @@
  */
 struct Resultado {
     double melhorFitness;
-    double melhorFitnessTotal;
     double piorFitness;
     double mediaFitness;
     double nVezesAchouFitnessOtimo;
@@ -26,7 +25,7 @@ struct Resultado {
 
         out << "Melhor fitness: " << res.melhorFitness << std::endl;
         out << "Pior fitness: " << res.piorFitness << std::endl;
-        out << "Media do fitness: " << res.mediaFitness;
+        out << "Media do fitness: " << res.mediaFitness << std::endl;
         out << "Numero de vezes que achou o fitness otimo dentro do erro: " << res.nVezesAchouFitnessOtimo;
 
         return out;
