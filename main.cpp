@@ -98,7 +98,9 @@ Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao){
                 return Resultado(
                     acc.melhorFitness < novo.melhorFitness ? acc.melhorFitness : novo.melhorFitness,
                     0,
-                    acc.piorFitness > novo.piorFitness ? acc.piorFitness : novo.piorFitness
+                    acc.piorFitness > novo.piorFitness ? acc.piorFitness : novo.piorFitness,
+                    0,
+                    novo.geracaoAchouFitnessOtimo
                 );
             }
     );
@@ -115,7 +117,26 @@ Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>
             getResultadoAbsoluto
     );
 
-    return getResultadoAbsoluto(resultsAbsolutosExecucoes);
+
+    return std::accumulate(
+            resultsAbsolutosExecucoes.begin(),
+            resultsAbsolutosExecucoes.end(),
+            Resultado(),
+            [](Resultado acc, Resultado novo){
+                double novoGeracaoAchouFitnessOtimo =
+                        novo.geracaoAchouFitnessOtimo == -1
+                            ? acc.geracaoAchouFitnessOtimo
+                            : (acc.geracaoAchouFitnessOtimo + novo.geracaoAchouFitnessOtimo) / 2;
+
+                return Resultado(
+                        acc.melhorFitness < novo.melhorFitness ? acc.melhorFitness : novo.melhorFitness,
+                        0,
+                        acc.piorFitness > novo.piorFitness ? acc.piorFitness : novo.piorFitness,
+                        0,
+                        novoGeracaoAchouFitnessOtimo
+                );
+            }
+    );
 }
 
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vector<std::vector<Resultado>> &resultsExecucoes){
@@ -128,13 +149,14 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
         resultsMediasExecucoes[i] = Algoritmos::Util::mediaResultados(i,resultsExecucoes);
 
 
+
     return resultsMediasExecucoes;
 }
 
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rastringin);
+        results[i] = ag(Funcoes::rosenbrock);
 
     return results;
 }
@@ -142,7 +164,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rastringin,N_POPULACOES);
+        results[i] = ag(Funcoes::rosenbrock,N_POPULACOES);
 
     return results;
 }

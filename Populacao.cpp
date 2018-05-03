@@ -28,6 +28,7 @@ Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,f
     this->elemMinFitness = nullptr;
     this->iElemMaxFitness = -1;
     this->iElemMinFitness = -1;
+    this->geracaoAchouFitnessOtimo = -1;
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
@@ -44,7 +45,7 @@ void Populacao::inicializacao() {
 }
 
 
-void Populacao::calcularFitness() {
+void Populacao::calcularFitness(unsigned int geracaoAtual) {
     while(this->paralelo && this->momentoMigracao);
 
     double accFitness = 0;
@@ -62,6 +63,9 @@ void Populacao::calcularFitness() {
             this->iElemMinFitness = i;
 
             if (fitness <= this->funcaoFitness.getMinimoGlobal() + pow(10,-3)) {
+                if (this->acabou == false) {
+                    this->geracaoAchouFitnessOtimo = geracaoAtual;
+                }
                 this->acabou = true;
             }
         }
@@ -189,6 +193,14 @@ bool Populacao::verificarParada() {
 
 void Populacao::setAcabou() {
     this->acabou = true;
+}
+
+bool Populacao::getAcabou() const{
+    return this->acabou;
+}
+
+int Populacao::getGeracaoAchouFitnessOtimo() const{
+    return this->geracaoAchouFitnessOtimo;
 }
 
 const unsigned int Populacao::getID(){

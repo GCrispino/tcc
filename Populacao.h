@@ -22,6 +22,7 @@ class Populacao {
         int iElemMaxFitness;
         int iElemMinFitness;
         Cromossomo * elemMinFitness;
+        int geracaoAchouFitnessOtimo; //geração onde o fitness dentro do erro foi encontrado
         bool paralelo;
         bool momentoMigracao;//define se migração está acontecendo no momento
         bool acabou;
@@ -40,11 +41,13 @@ class Populacao {
         );
 
         void inicializacao();
-        void calcularFitness();
+        void calcularFitness(unsigned int geracaoAtual);
         std::vector<Cromossomo> selecaoPais(int nPaisASelecionar,int tamanhoTorneio);
         std::vector<Cromossomo> gerarFilhos(std::vector<Cromossomo> &, unsigned int geracaoAtual, unsigned int nGeracoes);
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
         void setAcabou();
+        bool getAcabou() const;
+        int getGeracaoAchouFitnessOtimo() const;
         bool verificarParada();
         bool estaOcupada();
         const unsigned int getID();
