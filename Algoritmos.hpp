@@ -197,12 +197,12 @@ namespace Algoritmos{
 
         #pragma omp parallel
         {
-            #pragma omp single nowait
+            /*#pragma omp single nowait
             {
                 #pragma omp task
                 operadorMigracao.iniciarMigracao(nPopulacoesProcessadas);
             }
-
+*/
             #pragma omp for nowait
             for (unsigned int i = 0;i < N_POPULACOES;++i){
 
@@ -248,8 +248,26 @@ namespace Algoritmos{
                             achouFitnessOtimo,
                             p.getGeracaoAchouFitnessOtimo()
                     ));
+
+
+                    /*if (omp_get_thread_num() == 0)
+                        operadorMigracao.realizarMigracao(nPopulacoesProcessadas);*/
+
+
+                    #pragma omp critical
+                    {
+                        if (p.getID() % N_POPULACOES == 1)
+                            operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                    }
+
+                    /*#pragma omp critical
+                    {
+                        operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                    }*/
                 } while (++j < nGeracoes);
+
                 //p.setAcabou();
+
 
                 #pragma omp atomic
                 nPopulacoesProcessadas += 1;

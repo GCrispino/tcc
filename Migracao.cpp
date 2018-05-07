@@ -104,3 +104,89 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
     #pragma omp critical
     std::cout << "Acabou migração" << std::endl;
 }
+
+void Migracao::realizarMigracao(int &nPopulacoesProcessadas){
+    unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+    std::uniform_int_distribution<int> popDis(0,this->populacoes[0]->getTamanho() - 1);
+
+    Populacao
+            *populacao1 = nullptr,
+            *populacao2 = nullptr;
+
+
+    double rand = this->realDis(this->gen);
+    if (rand < this->probMigracao) {
+        int
+                iPopulacao1,
+                iPopulacao2,
+                iCromossomoAleatorio1 = popDis(this->gen),
+                iCromossomoAleatorio2 = popDis(this->gen);
+
+        bool acabou, ocupada = false, todasPopulacoesProcessadas;
+        do {
+            iPopulacao1 = this->intDis(this->gen);
+
+            acabou = this->populacoes[iPopulacao1]->verificarParada();
+            ocupada = this->populacoes[iPopulacao1]->estaOcupada();
+            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+            if (todasPopulacoesProcessadas)
+                break;
+            bool teste = !todasPopulacoesProcessadas && (!acabou && !ocupada);
+            //}while(todasPopulacoesProcessadas && !(acabou || ocupada));
+        } while (!todasPopulacoesProcessadas && (acabou || ocupada));
+
+
+        populacao1 = this->populacoes[iPopulacao1];
+        populacao1->setMomentoMigracao(true);
+
+        do {
+            iPopulacao2 = this->intDis(this->gen);
+
+            acabou = this->populacoes[iPopulacao2]->verificarParada();
+            ocupada = this->populacoes[iPopulacao2]->estaOcupada();
+            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+            if (acabou)
+                std::cout << "";
+            /*}while(
+                    todasPopulacoesProcessadas
+                    && !(acabou || (iPopulacao1 == iPopulacao2) || ocupada)
+            );*/
+            /*if (todasPopulacoesProcessadas)
+                break;*/
+            bool teste = !todasPopulacoesProcessadas && (!acabou && !ocupada);
+        } while (
+                !todasPopulacoesProcessadas
+                && (acabou || (iPopulacao1 == iPopulacao2) || ocupada)
+                );
+
+        populacao2 = this->populacoes[iPopulacao2];
+        populacao2->setMomentoMigracao(true);
+
+
+        if (nPopulacoesProcessadas >= this->populacoes.size()) {
+            populacao1->setMomentoMigracao(false);
+            populacao2->setMomentoMigracao(false);
+            return;
+        }
+        /*std::cout << iPopulacao1 << ',';
+        std::cout << iPopulacao2 << std::endl;
+
+        std::cout << iCromossomoAleatorio1 << ',';
+        std::cout << iCromossomoAleatorio2 << std::endl;*/
+
+        Cromossomo
+                melhorPopulacao1 = populacao1->getElemMaxFitness(),
+                melhorPopulacao2 = populacao2->getElemMaxFitness();
+
+        populacao1->setCromossomo(iCromossomoAleatorio1, melhorPopulacao2);
+        populacao2->setCromossomo(iCromossomoAleatorio2, melhorPopulacao1);
+
+
+        populacao1->setMomentoMigracao(false);
+        populacao2->setMomentoMigracao(false);
+
+    }
+
+    /*#pragma omp critical
+    std::cout << "Acabou migração" << std::endl;*/
+}

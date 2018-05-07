@@ -23,6 +23,7 @@ class Migracao {
         Migracao(double probMigracao,std::vector<Populacao *> &populacoes);
 
         void iniciarMigracao(int &nPopulacoesProcessadas);
+        void realizarMigracao(int &nPopulacoesProcessadas);
 };
 
 
