@@ -170,7 +170,7 @@ namespace Algoritmos{
     std::vector<Resultado> paralelo(const Funcao &funcaoFitness,const int N_POPULACOES){
 
         int
-                tamanhoPopulacao = 10,
+                tamanhoPopulacao = 80,
                 nGeracoes = 1000,
                 nParesPaisASelecionar = 10,tamTorneio = 2;
         double
@@ -249,8 +249,7 @@ namespace Algoritmos{
                             p.getGeracaoAchouFitnessOtimo()
                     ));
                 } while (++j < nGeracoes);
-                p.setAcabou();
-
+                //p.setAcabou();
 
                 #pragma omp atomic
                 nPopulacoesProcessadas += 1;

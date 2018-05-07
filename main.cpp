@@ -156,7 +156,7 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rosenbrock);
+        results[i] = ag(Funcoes::griewank);
 
     return results;
 }
@@ -164,7 +164,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rosenbrock,N_POPULACOES);
+        results[i] = ag(Funcoes::griewank,N_POPULACOES);
 
     return results;
 }

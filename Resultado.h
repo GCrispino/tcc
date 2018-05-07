@@ -5,6 +5,7 @@
 #ifndef TCC_RESULTADO_H
 #define TCC_RESULTADO_H
 
+#include <iostream>
 /*
  *- Pior fitness
  *  - Melhor fitness
