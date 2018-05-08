@@ -67,9 +67,8 @@ namespace Funcoes{
     double func_eggholder(const std::vector<double> &input){
         const double
                 &x = input[0],&y = input[1],
-                p1 = -(y + 47) * sin(sqrt(abs(y + (x / 2.0) + 47))),
-                p2 = x * sin(sqrt(abs(x - (y + 47))));
-
+                p1 = -(y + 47) * sin(sqrt(fabs(y + (x / 2.0) + 47))),
+                p2 = x * sin(sqrt(fabs(x - (y + 47))));
 
         return p1 - p2;
     }
