@@ -26,7 +26,7 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
             *populacao2 = nullptr;
 
 
-    while(nPopulacoesProcessadas < this->populacoes.size()){
+    while(nPopulacoesProcessadas < this->populacoes.size() - 1){
         double rand = this->realDis(this->gen);
         if (rand < this->probMigracao) {
             int
@@ -41,7 +41,7 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
 
                 acabou = this->populacoes[iPopulacao1]->verificarParada();
                 ocupada = this->populacoes[iPopulacao1]->estaOcupada();
-                todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+                todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size() - 1;
                 if (todasPopulacoesProcessadas)
                     break;
                 bool teste =!todasPopulacoesProcessadas && (!acabou && !ocupada);
@@ -57,7 +57,7 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
 
                 acabou = this->populacoes[iPopulacao2]->verificarParada();
                 ocupada = this->populacoes[iPopulacao2]->estaOcupada();
-                todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+                todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size() - 1;
                 if (acabou)
                   std::cout << "";
             /*}while(
@@ -76,7 +76,7 @@ void Migracao::iniciarMigracao(int &nPopulacoesProcessadas){
             populacao2->setMomentoMigracao(true);
 
 
-            if (nPopulacoesProcessadas >= this->populacoes.size()) {
+            if (nPopulacoesProcessadas >= this->populacoes.size() - 1) {
                 populacao1->setMomentoMigracao(false);
                 populacao2->setMomentoMigracao(false);
                 return;
@@ -128,10 +128,9 @@ void Migracao::realizarMigracao(int &nPopulacoesProcessadas){
 
             acabou = this->populacoes[iPopulacao1]->verificarParada();
             ocupada = this->populacoes[iPopulacao1]->estaOcupada();
-            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size() - 1;
             if (todasPopulacoesProcessadas)
                 break;
-            bool teste = !todasPopulacoesProcessadas && (!acabou && !ocupada);
             //}while(todasPopulacoesProcessadas && !(acabou || ocupada));
         } while (!todasPopulacoesProcessadas && (acabou || ocupada));
 
@@ -144,7 +143,7 @@ void Migracao::realizarMigracao(int &nPopulacoesProcessadas){
 
             acabou = this->populacoes[iPopulacao2]->verificarParada();
             ocupada = this->populacoes[iPopulacao2]->estaOcupada();
-            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size();
+            todasPopulacoesProcessadas = nPopulacoesProcessadas >= this->populacoes.size() - 1;
             if (acabou)
                 std::cout << "";
             /*}while(
@@ -163,7 +162,7 @@ void Migracao::realizarMigracao(int &nPopulacoesProcessadas){
         populacao2->setMomentoMigracao(true);
 
 
-        if (nPopulacoesProcessadas >= this->populacoes.size()) {
+        if (nPopulacoesProcessadas >= this->populacoes.size() - 1) {
             populacao1->setMomentoMigracao(false);
             populacao2->setMomentoMigracao(false);
             return;

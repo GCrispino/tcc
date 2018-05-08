@@ -12,11 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="30eb2ad3-d7be-44a7-8aa6-4ad72bcc0223" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/Algoritmos.hpp" afterPath="$PROJECT_DIR$/Algoritmos.hpp" />
       <change beforePath="$PROJECT_DIR$/Migracao.cpp" afterPath="$PROJECT_DIR$/Migracao.cpp" />
-      <change beforePath="$PROJECT_DIR$/Migracao.h" afterPath="$PROJECT_DIR$/Migracao.h" />
-      <change beforePath="$PROJECT_DIR$/main.cpp" afterPath="$PROJECT_DIR$/main.cpp" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -84,7 +81,7 @@
           <file leaf-file-name="main.cpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/main.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1120">
+                <state relative-caret-position="1351">
                   <caret line="166" column="43" lean-forward="false" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="43" />
                   <folding />
                 </state>
@@ -108,8 +105,8 @@
           <file leaf-file-name="Algoritmos.hpp" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/Algoritmos.hpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="860">
-                  <caret line="260" column="21" lean-forward="false" selection-start-line="260" selection-start-column="21" selection-end-line="260" selection-end-column="21" />
+                <state relative-caret-position="688">
+                  <caret line="260" column="21" lean-forward="true" selection-start-line="260" selection-start-column="21" selection-end-line="260" selection-end-column="21" />
                   <folding>
                     <element signature="e#43#62#0" expanded="true" />
                   </folding>
@@ -130,8 +127,8 @@
           <file leaf-file-name="Migracao.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/Migracao.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="437">
-                  <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="3" />
+                <state relative-caret-position="520">
+                  <caret line="103" column="24" lean-forward="true" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
                   <folding>
                     <element signature="e#0#2#0" expanded="false" />
                   </folding>
@@ -162,8 +159,8 @@
           <file leaf-file-name="PopulacaoTransformacao.cpp" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.cpp">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="581">
-                  <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
+                <state relative-caret-position="194">
+                  <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
                   <folding />
                 </state>
               </provider>
@@ -175,10 +172,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Resultado(</find>
-      <find>getGeracao</find>
-      <find>this-&gt;acab</find>
-      <find>executarAgSequencial</find>
       <find>executarAGSe</find>
       <find>std::cout</find>
       <find>getResultadoA</find>
@@ -193,7 +186,6 @@
       <find>probMid</find>
       <find>parpalel</find>
       <find>20</find>
-      <find>cout</find>
       <find>acabou migra</find>
       <find>acabou</find>
       <find>nPopulacoesProcess</find>
@@ -205,6 +197,11 @@
       <find>setAcab</find>
       <find>setAcabou</find>
       <find>probMigracao</find>
+      <find>cout</find>
+      <find>.size</find>
+      <find>iniciarMigrac</find>
+      <find>size(</find>
+      <find>realizarMi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -234,8 +231,8 @@
         <option value="$PROJECT_DIR$/Populacao.cpp" />
         <option value="$PROJECT_DIR$/Resultado.h" />
         <option value="$PROJECT_DIR$/Migracao.h" />
-        <option value="$PROJECT_DIR$/Migracao.cpp" />
         <option value="$PROJECT_DIR$/main.cpp" />
+        <option value="$PROJECT_DIR$/Migracao.cpp" />
         <option value="$PROJECT_DIR$/Algoritmos.hpp" />
       </list>
     </option>
@@ -359,7 +356,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="211032000" />
+    <option name="totallyTimeSpent" value="213960000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-14" y="-14" width="3868" height="2098" extended-state="6" />
@@ -406,6 +403,11 @@
           <line>57</line>
           <option name="timeStamp" value="340" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Migracao.cpp</url>
+          <line>144</line>
+          <option name="timeStamp" value="351" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -415,7 +417,7 @@
           <properties />
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="346" />
+      <option name="time" value="352" />
     </breakpoint-manager>
     <watches-manager>
       <configuration name="CMakeRunConfiguration">
@@ -623,14 +625,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="581">
-          <caret line="40" column="33" lean-forward="false" selection-start-line="40" selection-start-column="33" selection-end-line="40" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="989">
@@ -694,16 +688,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Migracao.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="3" lean-forward="false" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#2#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Populacao.h">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="43">
@@ -722,16 +706,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1120">
+        <state relative-caret-position="1351">
           <caret line="166" column="43" lean-forward="false" selection-start-line="166" selection-start-column="43" selection-end-line="166" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PopulacaoTransformacao.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="194">
+          <caret line="31" column="30" lean-forward="false" selection-start-line="31" selection-start-column="30" selection-end-line="31" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Migracao.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="520">
+          <caret line="103" column="24" lean-forward="true" selection-start-line="103" selection-start-column="24" selection-end-line="103" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#2#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Algoritmos.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="860">
-          <caret line="260" column="21" lean-forward="false" selection-start-line="260" selection-start-column="21" selection-end-line="260" selection-end-column="21" />
+        <state relative-caret-position="688">
+          <caret line="260" column="21" lean-forward="true" selection-start-line="260" selection-start-column="21" selection-end-line="260" selection-end-column="21" />
           <folding>
             <element signature="e#43#62#0" expanded="true" />
           </folding>

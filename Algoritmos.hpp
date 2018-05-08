@@ -250,7 +250,7 @@ namespace Algoritmos{
                     ));
 
 
-                    /*if (omp_get_thread_num() == 0)
+                /*    if (omp_get_thread_num() == 0)
                         operadorMigracao.realizarMigracao(nPopulacoesProcessadas);*/
 
 
@@ -266,7 +266,7 @@ namespace Algoritmos{
                     }*/
                 } while (++j < nGeracoes);
 
-                //p.setAcabou();
+                p.setAcabou();
 
 
                 #pragma omp atomic
