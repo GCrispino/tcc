@@ -197,12 +197,6 @@ namespace Algoritmos{
 
         #pragma omp parallel
         {
-            /*#pragma omp single nowait
-            {
-                #pragma omp task
-                operadorMigracao.iniciarMigracao(nPopulacoesProcessadas);
-            }
-*/
             #pragma omp for nowait
             for (unsigned int i = 0;i < N_POPULACOES;++i){
 
@@ -234,12 +228,6 @@ namespace Algoritmos{
                     bool achouFitnessOtimo =
                             p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
 
-                    /*if (achouFitnessOtimo && !jaAchou){
-                        std::cout << "Achou fitness otimo!" << std::endl;
-                        std::cout << "Populacao: " << i << ". Geracao: " << j << std::endl;
-                        std::cout << "Valor: " << p.getElemMinFitness().getFitness() << std::endl;
-                        jaAchou = true;
-                    }*/
 
                     resultsPopulacoes[i].push_back(Resultado(
                             p.getElemMinFitness().getFitness(),
@@ -294,17 +282,6 @@ namespace Algoritmos{
 
         std::cout << "===============================================================";
         std::cout << "===============================================================" << std::endl;
-
-        std::vector<Cromossomo>melhores(N_POPULACOES);
-
-        std::transform(
-                populacoes.begin(),
-                populacoes.end(),
-                melhores.begin(),
-                [](Populacao *p){
-                    return p->getElemMaxFitness();
-                }
-        );
 
         std::vector<Resultado> resultsFinais(nGeracoes);
         /**
