@@ -129,7 +129,6 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
 void Cromossomo::inicializar(){
     for (double &gene: this->genotipo) {
         gene = this->disIntervaloValoresFuncao(*(this->gen));
-        double * intervalo = this->funcaoFitness.getIntervalo();
     }
 
 }
@@ -175,13 +174,7 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo,
         double alpha = this->realDis(*(this->gen));
 
         filho1.genotipo[i] = alpha * this->genotipo[i] + (1 - alpha) * outroCromossomo.genotipo[i];
-        if(filho1.genotipo[i] < intervalo[0] || filho1.genotipo[i] > intervalo[1]) {
-            filho1.genotipo[i] = this->genotipo[i];
-        }
         filho2.genotipo[i] = alpha * outroCromossomo.genotipo[i] + (1 - alpha) * this->genotipo[i];
-        if (filho2.genotipo[i] < intervalo[0] || filho2.genotipo[i] > intervalo[1]){
-            filho2.genotipo[i] = outroCromossomo.genotipo[i];
-        }
     }
 
     filho1.calcularFitness();
@@ -219,9 +212,6 @@ Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo, unsig
         alpha = this->realDis(*(this->gen));
 
         filho.genotipo[i] = alpha * this->genotipo[i] + (1 - alpha) * outroCromossomo.genotipo[i];
-        if(filho.genotipo[i] < intervalo[0] || filho.genotipo[i] > intervalo[1]) {
-            filho.genotipo[i] = this->genotipo[i];
-        }
     }
 
     filho.calcularFitness();
