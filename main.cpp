@@ -45,23 +45,28 @@ int main(){
     Resultado
             resFinalConvencional, resAbsolutoConvencional,
             resFinalParalelo, resAbsolutoParalelo,
-            resFinalNaoConvencional, resAbsolutoNaoConvencional;
-    std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional;
-    std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional;
+            resFinalNaoConvencional, resAbsolutoNaoConvencional,
+            resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo;
+    std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional,mediaResultsNaoConvencionalParalelo;
+    std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional,resultsNaoConvencionalParalelo;
 
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
-    resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
     std::cout << "Executando AG sequencial convencional..." << std::endl;
     resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
     std::cout << "Executando AG sequencial não-convencional..." << std::endl;
     resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
+    std::cout << "Executando AG paralelo convencional..." << std::endl;
+    resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
+    std::cout << "Executando AG paralelo nao-convencional..." << std::endl;
+    resultsNaoConvencionalParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::recombinacaoTransformacaoParalelo);
 
     std::cout << "Calculando resultados..." << std::endl;
 
     mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
     mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
     mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
+    mediaResultsNaoConvencionalParalelo = getMediaNExecucoes(nGeracoes,resultsNaoConvencionalParalelo);
 
     resAbsolutoParalelo = getResultadoAbsolutoExecucoes(resultsParalelo);
     resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
@@ -69,20 +74,26 @@ int main(){
     resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
     resAbsolutoNaoConvencional = getResultadoAbsolutoExecucoes(resultsNaoConvencional);
     resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
+    resAbsolutoNaoConvencionalParalelo = getResultadoAbsolutoExecucoes(resultsNaoConvencionalParalelo);
+    resFinalNaoConvencionalParalelo = mediaResultsNaoConvencionalParalelo[mediaResultsNaoConvencionalParalelo.size() - 1];
 
 
     std::cout << "Resultado Convencional: " << std::endl;
     std::cout << resFinalConvencional << std::endl << std::endl;
     std::cout << "Resultado Absoluto Convencional: " << std::endl;
     std::cout << resAbsolutoConvencional << std::endl << std::endl;
-    std::cout << "Resultado Paralelo: " << std::endl;
-    std::cout << resFinalParalelo << std::endl << std::endl;
-    std::cout << "Resultado Absoluto Paralelo: " << std::endl;
-    std::cout << resAbsolutoParalelo << std::endl << std::endl;
     std::cout << "Resultado Não-Convencional: " << std::endl;
     std::cout << resFinalNaoConvencional << std::endl << std::endl;
     std::cout << "Resultado Absoluto Nao-Convencional: " << std::endl;
     std::cout << resAbsolutoNaoConvencional << std::endl << std::endl;
+    std::cout << "Resultado Paralelo: " << std::endl;
+    std::cout << resFinalParalelo << std::endl << std::endl;
+    std::cout << "Resultado Absoluto Paralelo: " << std::endl;
+    std::cout << resAbsolutoParalelo << std::endl << std::endl;
+    std::cout << "Resultado Paralelo nao-convencional: " << std::endl;
+    std::cout << resFinalNaoConvencionalParalelo << std::endl << std::endl;
+    std::cout << "Resultado Absoluto Paralelo nao-convencional: " << std::endl;
+    std::cout << resAbsolutoNaoConvencionalParalelo << std::endl << std::endl;
 
 
     return 0;

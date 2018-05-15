@@ -21,7 +21,7 @@ class PopulacaoTransformacao: public Populacao{
         PopulacaoTransformacao(
                 unsigned int tamanho,unsigned int tamanhoPopulacaoMortos,
                 float txMutacao, float txCruzamento, unsigned int taxaInfeccao,float desvioPadrao,
-                const Funcao &funcaoFitness
+                const Funcao &funcaoFitness,bool paralelo = false
         );
         void selecaoSobreviventes(const std::vector<Cromossomo> &);
         void recombinacao(unsigned int geracaoAtual, unsigned int nGeracoes);

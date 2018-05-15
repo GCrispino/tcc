@@ -27,6 +27,25 @@ void inicializarPopulacoes(
 
 }
 
+void inicializarPopulacoesNaoConvencional(
+        int n,
+        std::vector<Populacao *> &populacoes,
+        int tamanho,
+        int tamanhoPopulacaoMortos,
+        double txMutacao,
+        double txCruzamento,
+        int taxaInfeccao,
+        double desvioPadrao,
+        Funcao funcaoFitness
+){
+    for (unsigned int i = 0;i < n;++i) {
+        populacoes[i] = new PopulacaoTransformacao(tamanho, tamanhoPopulacaoMortos, txMutacao, txCruzamento, taxaInfeccao, desvioPadrao, funcaoFitness, true);
+        populacoes[i]->inicializacao();
+        populacoes[i]->calcularFitness(0);
+    }
+
+}
+
 
 
 namespace Algoritmos{
@@ -361,6 +380,140 @@ namespace Algoritmos{
         std::cout << "Media do fitness da populacao: " << p.getMediaFitness() << std::endl;
 */
         return results;
+    }
+
+    std::vector<Resultado> recombinacaoTransformacaoParalelo(const Funcao &funcaoFitness,const int N_POPULACOES){
+
+        int
+                tamanhoPopulacao = 80,
+                tamanhoPopulacaoMortos = 50,
+                taxaInfeccao = 30,
+                nGeracoes = 1000,
+                nParesPaisASelecionar = 10,tamTorneio = 2;
+        double
+                txMutacao = .05,
+                txCruzamento = .9,
+                desvioPadrao = 1.55,
+                probMigracao = 0.003;
+
+        std::vector<std::vector<Resultado>> resultsPopulacoes(N_POPULACOES);
+
+        std::chrono::steady_clock::time_point comeco,fim;
+        std::chrono::steady_clock::duration tempo;
+
+        std::vector<Populacao *> populacoes(N_POPULACOES);
+
+        inicializarPopulacoesNaoConvencional(N_POPULACOES,populacoes,tamanhoPopulacao,tamanhoPopulacaoMortos,txMutacao,txCruzamento,taxaInfeccao,desvioPadrao,funcaoFitness);
+        Migracao operadorMigracao(probMigracao,populacoes);
+
+        comeco = std::chrono::steady_clock::now();
+
+        int nPopulacoesProcessadas = 0;
+        Cromossomo melhor,pior;
+
+
+        #pragma omp parallel
+        {
+            #pragma omp for nowait
+            for (unsigned int i = 0;i < N_POPULACOES;++i){
+
+                PopulacaoTransformacao &p = static_cast<PopulacaoTransformacao &>(*(populacoes[i]));
+
+                #pragma omp critical
+                std::cout << "Iniciou populacao " << p.getID() << std::endl;
+
+
+                int j = 0;
+                do {
+                    bool jaAchou = false;
+                    std::vector<Cromossomo> pais,filhos;
+                    pais = p.selecaoPais(nParesPaisASelecionar,tamTorneio);
+
+                    filhos = p.gerarFilhos(pais,j,nGeracoes);
+
+                    p.selecaoSobreviventes(filhos);
+
+                    p.calcularFitness(j);
+
+                    p.recombinacao(i,nGeracoes);
+
+                    /*if (j % 100 == 0) {
+                        std::cout << "Populacao: " << i << std::endl;
+                        std::cout << "Geracao: " << j << '\t';
+                        std::cout << "Melhor fitness: " << p.getElemMinFitness().getFitness() << '\t';
+                        std::cout << "Media do fitness: " << p.getMediaFitness();
+                        std::cout << std::endl;
+                    }*/
+                    bool achouFitnessOtimo =
+                            p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
+
+
+                    resultsPopulacoes[i].push_back(Resultado(
+                            p.getElemMinFitness().getFitness(),
+                            p.getElemMaxFitness().getFitness(),
+                            p.getMediaFitness(),
+                            achouFitnessOtimo,
+                            p.getGeracaoAchouFitnessOtimo()
+                    ));
+
+
+                    /*    if (omp_get_thread_num() == 0)
+                            operadorMigracao.realizarMigracao(nPopulacoesProcessadas);*/
+
+
+                    #pragma omp critical
+                    {
+                        if (p.getID() % N_POPULACOES == 1)
+                            operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                    }
+
+                    /*#pragma omp critical
+                    {
+                        operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                    }*/
+                } while (++j < nGeracoes);
+
+                p.setAcabou();
+
+
+#pragma omp atomic
+                nPopulacoesProcessadas += 1;
+
+#pragma omp critical
+                {
+                    std::cout << "Terminou populacao " << p.getID() << std::endl;
+                    //std::cout << "Melhor elemento: " << p.getElemMinFitness() << std::endl;
+                    std::cout << "";
+                }
+
+            }
+
+        }
+
+        fim = std::chrono::steady_clock::now();
+        tempo = fim - comeco;
+
+        double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
+
+        std::cout << "Terminou: tempo em " << nseconds << std::endl;
+
+        //std::cout << "Melhor individuo: " << melhor << std::endl;
+
+        std::cout << "===============================================================";
+        std::cout << "===============================================================" << std::endl;
+
+        std::vector<Resultado> resultsFinais(nGeracoes);
+        /**
+         * transformar resultsPopulacoes em resultsFinais, pegando o melhor dos melhores
+         *  da geração para cada subpopulação, o pior dos piores, e a média das médias,
+         *  também dos resultados dessa geração para cada subpopulação
+         */
+        for(unsigned int i = 0;i < nGeracoes;++i) {
+            resultsFinais[i] = Util::getResultadosGeracaoParalelo(i, resultsPopulacoes);
+        }
+
+
+        return resultsFinais;
     }
 
 
