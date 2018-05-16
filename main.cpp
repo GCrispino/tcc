@@ -8,6 +8,7 @@
 
 
 #define N_POPULACOES 10
+#define N_THREADS 4
 
 
 /**
@@ -42,6 +43,9 @@ std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std:
 
 
 int main(){
+
+    //omp_set_num_threads(N_POPULACOES);
+
     Resultado
             resFinalConvencional, resAbsolutoConvencional,
             resFinalParalelo, resAbsolutoParalelo,
@@ -167,7 +171,7 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::eggholder);
+        results[i] = ag(Funcoes::rosenbrock);
 
     return results;
 }
@@ -175,7 +179,7 @@ std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,st
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::eggholder,N_POPULACOES);
+        results[i] = ag(Funcoes::rosenbrock, N_POPULACOES);
 
     return results;
 }

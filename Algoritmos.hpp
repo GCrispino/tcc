@@ -422,7 +422,6 @@ namespace Algoritmos{
                 #pragma omp critical
                 std::cout << "Iniciou populacao " << p.getID() << std::endl;
 
-
                 int j = 0;
                 do {
                     bool jaAchou = false;

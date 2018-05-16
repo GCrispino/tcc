@@ -148,8 +148,8 @@ void Cromossomo::mutacao(unsigned int geracaoAtual, unsigned int nGeracoes,bool 
     for (double &gene: this->genotipo){
         if (!calculaProbabilidadeCadaFilho || this->realDis(*this->gen) < this->txMutacao) {
             double rand = this->gaussianDis(*(this->gen));
-            //double novoGene = gene + (1 - 0.9 * ((geracaoAtual - 1) / (nGeracoes - 1))) * rand;
-            double novoGene = gene + rand;
+            double novoGene = gene + (1 - 0.9 * ((geracaoAtual) / (nGeracoes - 1))) * rand;
+            //double novoGene = gene + rand;
 
             double diff;
             if(novoGene < intervalo[0]) {

@@ -8,8 +8,8 @@
 PopulacaoTransformacao::PopulacaoTransformacao(
         unsigned int tamanho, unsigned int tamanhoPopulacaoMortos,
         float txMutacao, float txCruzamento, unsigned int taxaInfeccao,
-        float desvioPadrao, const Funcao &funcaoFitness)
-:Populacao(tamanho,txMutacao,txCruzamento,desvioPadrao,funcaoFitness)
+        float desvioPadrao, const Funcao &funcaoFitness, bool paralelo)
+:Populacao(tamanho,txMutacao,txCruzamento,desvioPadrao,funcaoFitness,paralelo)
 {
     this->tamanhoPopulacaoMortos = tamanhoPopulacaoMortos;
     this->taxaInfeccao = taxaInfeccao;
