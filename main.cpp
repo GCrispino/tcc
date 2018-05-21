@@ -1,25 +1,41 @@
 #include <iostream>
+#include <fstream>
+#include <ctime>
 #include <chrono>
 #include <algorithm>
 #include <numeric>
 #include <omp.h>
+#include <cstring>
 #include "Algoritmos.hpp"
 #include "Funcoes.hpp"
 
 
 #define N_POPULACOES 10
-#define N_THREADS 4
-
+#define N_THREADS 5
 
 /**
+ * TODO:
+ * função que cria um arquivo de texto para um determinado tipo de AG onde os resultados das funções vão ser armazenados
+
+ * função que executa um determinado tipo de AG pra todas as funções
+
+ *--------------------------------------------------------------------
+ * Fluxo:
+ *	- Executar cada tipo de AG n vezes para cada função
+ *	- Função que executa deve receber o caminho do arquivo a ser criado
+ *		- Função interna que vai executar o ag n vezes pra função específica vai escrever os resultados no arquivo passado como parâmetro
+ */
+
+/**
+ * TODO:
  *
- * O QUE AVALIAR NO DESEMPENHO DO ALGORITMO
+ * Criar arquivos no início do main, para cada tipo de AG
  *
- *
- *  - Pior fitness - feito
- *  - Melhor fitness - feito
- *  - Média fitness - Média da geração e/ou média da população no algoritmo inteiro?
- *  - Média de vezes que encontrou um fitness menor que um determinado erro
+ * no fim do main, quando resultados já forem obtidos, para cada função, passar os arquivos
+ *      e os nomes das funções para a função escreveResultados()
+ */
+
+/**
  *
  * O QUE FAZER NO MAIN:
  * - Cada função retorna um std::vector<Resultado>
@@ -40,11 +56,12 @@ Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>
 Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao);
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &));
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int));
-
+std::string criarPastaArquivos();
+void escreveResultados(std::ofstream &nomeArquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto);
 
 int main(){
 
-    //omp_set_num_threads(N_POPULACOES);
+    omp_set_num_threads(N_THREADS);
 
     Resultado
             resFinalConvencional, resAbsolutoConvencional,
@@ -53,6 +70,13 @@ int main(){
             resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo;
     std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional,mediaResultsNaoConvencionalParalelo;
     std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional,resultsNaoConvencionalParalelo;
+
+    std::string nomePastaArquivos = criarPastaArquivos();
+    std::ofstream
+            arqConvencional(nomePastaArquivos + "/convencional.txt"),
+            arqParalelo(nomePastaArquivos + "/paralelo.txt"),
+            arqNaoConvencional(nomePastaArquivos + "/nao-convencional.txt"),
+            arqNaoConvencionalParalelo(nomePastaArquivos + "/nao-convencional-paralelo.txt");
 
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
@@ -81,8 +105,7 @@ int main(){
     resAbsolutoNaoConvencionalParalelo = getResultadoAbsolutoExecucoes(resultsNaoConvencionalParalelo);
     resFinalNaoConvencionalParalelo = mediaResultsNaoConvencionalParalelo[mediaResultsNaoConvencionalParalelo.size() - 1];
 
-
-    std::cout << "Resultado Convencional: " << std::endl;
+    /*std::cout << "Resultado Convencional: " << std::endl;
     std::cout << resFinalConvencional << std::endl << std::endl;
     std::cout << "Resultado Absoluto Convencional: " << std::endl;
     std::cout << resAbsolutoConvencional << std::endl << std::endl;
@@ -97,8 +120,14 @@ int main(){
     std::cout << "Resultado Paralelo nao-convencional: " << std::endl;
     std::cout << resFinalNaoConvencionalParalelo << std::endl << std::endl;
     std::cout << "Resultado Absoluto Paralelo nao-convencional: " << std::endl;
-    std::cout << resAbsolutoNaoConvencionalParalelo << std::endl << std::endl;
+    std::cout << resAbsolutoNaoConvencionalParalelo << std::endl << std::endl;*/
 
+    std::cout << "Escrevendo resultados na pasta " << nomePastaArquivos << "..." << std::endl;
+    escreveResultados(arqConvencional,"Rosenbrock",resFinalConvencional,resAbsolutoConvencional);
+    escreveResultados(arqParalelo,"Rosenbrock",resFinalParalelo,resAbsolutoParalelo);
+    escreveResultados(arqNaoConvencional,"Rosenbrock",resFinalNaoConvencional,resAbsolutoNaoConvencional);
+    escreveResultados(arqNaoConvencionalParalelo,"Rosenbrock",resFinalNaoConvencionalParalelo,resAbsolutoNaoConvencionalParalelo);
+    std::cout << "Resultados escritos! " << std::endl;
 
     return 0;
 }
@@ -182,4 +211,26 @@ std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std:
         results[i] = ag(Funcoes::rosenbrock, N_POPULACOES);
 
     return results;
+}
+
+std::string criarPastaArquivos(){
+    time_t now = time(0);
+    std::string nomePasta = std::to_string(now);
+    const char *c_nomePasta = nomePasta.c_str();
+    char comando[255];
+    strcpy(comando,"mkdir ");
+    strcat(comando,c_nomePasta);
+
+
+    system(comando);
+
+    return nomePasta;
+}
+
+void escreveResultados(std::ofstream &arquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto){
+    arquivo << "Resultado final para a funcao " << nomeFuncao << std::endl;
+    arquivo << resFinal << std::endl << std::endl;
+
+    arquivo << "Resultado absoluto para a funcao " << nomeFuncao << std::endl;
+    arquivo << resAbsoluto << std::endl;
 }

@@ -39,7 +39,7 @@ void PopulacaoTransformacao::selecaoSobreviventes(const std::vector<Cromossomo> 
 }
 
 void PopulacaoTransformacao::recombinacao(unsigned int geracaoAtual, unsigned int nGeracoes){
-/*
+    /*
      * Seleciona um aleatório da população
      * Seleciona um aleatório da população dos mortos
      * faz o cruzamento simples
