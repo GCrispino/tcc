@@ -46,7 +46,14 @@ void inicializarPopulacoesNaoConvencional(
 
 }
 
+void destruirPopulacoes(
+        std::vector<Populacao *> &populacoes
+){
+    for (Populacao *p: populacoes) {
+        delete p;
+    }
 
+}
 
 namespace Algoritmos{
 
@@ -293,6 +300,7 @@ namespace Algoritmos{
         fim = std::chrono::steady_clock::now();
         tempo = fim - comeco;
 
+        destruirPopulacoes(populacoes);
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 
         std::cout << "Terminou: tempo em " << nseconds << std::endl;
@@ -491,6 +499,7 @@ namespace Algoritmos{
 
         fim = std::chrono::steady_clock::now();
         tempo = fim - comeco;
+        destruirPopulacoes(populacoes);
 
         double nseconds = double(tempo.count()) * std::chrono::steady_clock::period::num / std::chrono::steady_clock::period::den;
 

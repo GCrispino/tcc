@@ -108,14 +108,26 @@ namespace Funcoes{
     }
 
     Funcao
-            schaffer2(0.0,-1000.0,1000.0    ,func_schaffer2),
-            dropwave(-1.0,-5.12,5.12,func_dropwave),
-            booth(0.0,-10,10,func_booth),
-            ackley(0.0,-32,32,func_ackley),
-            griewank(0.0,-600,600,func_griewank),
-            rastringin(0.0,-5.12,5.12,func_rastringin),
-            rosenbrock(0.0,-5,10,func_rosenbrock),
-            eggholder(-959.6407,-512,512,func_eggholder);
+            schaffer2("schaffer2",0.0,-1000.0,1000.0    ,func_schaffer2),
+            dropwave("dropwave",-1.0,-5.12,5.12,func_dropwave),
+            booth("booth",0.0,-10,10,func_booth),
+            ackley("ackley",0.0,-32,32,func_ackley),
+            griewank("griewank",0.0,-600,600,func_griewank),
+            rastringin("rastringin",0.0,-5.12,5.12,func_rastringin),
+            rosenbrock("rosenbrock",0.0,-5,10,func_rosenbrock),
+            eggholder("eggholder",-959.6407,-512,512,func_eggholder);
+
+    Funcao funcoes[] = {
+            schaffer2,
+            dropwave,
+            booth,
+            ackley,
+            griewank,
+            rastringin,
+            rosenbrock,
+            eggholder
+    };
+
 };
 
 #endif

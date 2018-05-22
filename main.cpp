@@ -11,29 +11,19 @@
 
 
 #define N_POPULACOES 10
-#define N_THREADS 5
+#define N_THREADS 7
+
 
 /**
- * TODO:
- * função que cria um arquivo de texto para um determinado tipo de AG onde os resultados das funções vão ser armazenados
-
- * função que executa um determinado tipo de AG pra todas as funções
-
- *--------------------------------------------------------------------
- * Fluxo:
- *	- Executar cada tipo de AG n vezes para cada função
- *	- Função que executa deve receber o caminho do arquivo a ser criado
- *		- Função interna que vai executar o ag n vezes pra função específica vai escrever os resultados no arquivo passado como parâmetro
+ * PROBLEMA:
+ *  - Ponteiros de geradores de números aleatórios precisam ser liberados usando delete
+ *      - mas eles são estáticos
+ *      - soluções:
+ *          - passá-los como parâmetro no construtor
+ *          - não definí-los como estáticos
+ *              - talvez isso possa ter maus efeitos estatísticos
  */
 
-/**
- * TODO:
- *
- * Criar arquivos no início do main, para cada tipo de AG
- *
- * no fim do main, quando resultados já forem obtidos, para cada função, passar os arquivos
- *      e os nomes das funções para a função escreveResultados()
- */
 
 /**
  *
@@ -54,8 +44,8 @@
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes, const std::vector<std::vector<Resultado>> &resultsExecucoes);
 Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>> &resultsExecucoes);
 Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao);
-std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &));
-std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int));
+std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &),const Funcao &funcao);
+std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int),const Funcao &funcao);
 std::string criarPastaArquivos();
 void escreveResultados(std::ofstream &nomeArquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto);
 
@@ -63,13 +53,6 @@ int main(){
 
     omp_set_num_threads(N_THREADS);
 
-    Resultado
-            resFinalConvencional, resAbsolutoConvencional,
-            resFinalParalelo, resAbsolutoParalelo,
-            resFinalNaoConvencional, resAbsolutoNaoConvencional,
-            resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo;
-    std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional,mediaResultsNaoConvencionalParalelo;
-    std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional,resultsNaoConvencionalParalelo;
 
     std::string nomePastaArquivos = criarPastaArquivos();
     std::ofstream
@@ -80,54 +63,69 @@ int main(){
 
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
-    std::cout << "Executando AG sequencial convencional..." << std::endl;
-    resultsConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::convencional);
-    std::cout << "Executando AG sequencial não-convencional..." << std::endl;
-    resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes,Algoritmos::recombinacaoTransformacao);
-    std::cout << "Executando AG paralelo convencional..." << std::endl;
-    resultsParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::paralelo);
-    std::cout << "Executando AG paralelo nao-convencional..." << std::endl;
-    resultsNaoConvencionalParalelo = executarAGParaleloNVezes(nExecucoes,Algoritmos::recombinacaoTransformacaoParalelo);
+    for (Funcao &funcao: Funcoes::funcoes) {
+        Resultado
+                resFinalConvencional, resAbsolutoConvencional,
+                resFinalParalelo, resAbsolutoParalelo,
+                resFinalNaoConvencional, resAbsolutoNaoConvencional,
+                resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo;
+        std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional,mediaResultsNaoConvencionalParalelo;
+        std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional,resultsNaoConvencionalParalelo;
 
-    std::cout << "Calculando resultados..." << std::endl;
+        std::cout << "Executando AG sequencial convencional..." << std::endl;
+        resultsConvencional = executarAGSequencialNVezes(nExecucoes, Algoritmos::convencional, funcao);
+        std::cout << "Executando AG sequencial não-convencional..." << std::endl;
+        resultsNaoConvencional = executarAGSequencialNVezes(nExecucoes, Algoritmos::recombinacaoTransformacao, funcao);
+        std::cout << "Executando AG paralelo convencional..." << std::endl;
+        resultsParalelo = executarAGParaleloNVezes(nExecucoes, Algoritmos::paralelo, funcao);
+        std::cout << "Executando AG paralelo nao-convencional..." << std::endl;
+        resultsNaoConvencionalParalelo = executarAGParaleloNVezes(nExecucoes,
+                                                                  Algoritmos::recombinacaoTransformacaoParalelo,
+                                                                  funcao);
 
-    mediaResultsParalelo = getMediaNExecucoes(nGeracoes,resultsParalelo);
-    mediaResultsConvencional = getMediaNExecucoes(nGeracoes,resultsConvencional);
-    mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes,resultsNaoConvencional);
-    mediaResultsNaoConvencionalParalelo = getMediaNExecucoes(nGeracoes,resultsNaoConvencionalParalelo);
+        std::cout << "Calculando resultados..." << std::endl;
 
-    resAbsolutoParalelo = getResultadoAbsolutoExecucoes(resultsParalelo);
-    resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
-    resAbsolutoConvencional = getResultadoAbsolutoExecucoes(resultsConvencional);
-    resFinalConvencional= mediaResultsConvencional[mediaResultsConvencional.size() - 1];
-    resAbsolutoNaoConvencional = getResultadoAbsolutoExecucoes(resultsNaoConvencional);
-    resFinalNaoConvencional= mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
-    resAbsolutoNaoConvencionalParalelo = getResultadoAbsolutoExecucoes(resultsNaoConvencionalParalelo);
-    resFinalNaoConvencionalParalelo = mediaResultsNaoConvencionalParalelo[mediaResultsNaoConvencionalParalelo.size() - 1];
+        mediaResultsParalelo = getMediaNExecucoes(nGeracoes, resultsParalelo);
+        mediaResultsConvencional = getMediaNExecucoes(nGeracoes, resultsConvencional);
+        mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes, resultsNaoConvencional);
+        mediaResultsNaoConvencionalParalelo = getMediaNExecucoes(nGeracoes, resultsNaoConvencionalParalelo);
 
-    /*std::cout << "Resultado Convencional: " << std::endl;
-    std::cout << resFinalConvencional << std::endl << std::endl;
-    std::cout << "Resultado Absoluto Convencional: " << std::endl;
-    std::cout << resAbsolutoConvencional << std::endl << std::endl;
-    std::cout << "Resultado Não-Convencional: " << std::endl;
-    std::cout << resFinalNaoConvencional << std::endl << std::endl;
-    std::cout << "Resultado Absoluto Nao-Convencional: " << std::endl;
-    std::cout << resAbsolutoNaoConvencional << std::endl << std::endl;
-    std::cout << "Resultado Paralelo: " << std::endl;
-    std::cout << resFinalParalelo << std::endl << std::endl;
-    std::cout << "Resultado Absoluto Paralelo: " << std::endl;
-    std::cout << resAbsolutoParalelo << std::endl << std::endl;
-    std::cout << "Resultado Paralelo nao-convencional: " << std::endl;
-    std::cout << resFinalNaoConvencionalParalelo << std::endl << std::endl;
-    std::cout << "Resultado Absoluto Paralelo nao-convencional: " << std::endl;
-    std::cout << resAbsolutoNaoConvencionalParalelo << std::endl << std::endl;*/
+        resAbsolutoParalelo = getResultadoAbsolutoExecucoes(resultsParalelo);
+        resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
+        resAbsolutoConvencional = getResultadoAbsolutoExecucoes(resultsConvencional);
+        resFinalConvencional = mediaResultsConvencional[mediaResultsConvencional.size() - 1];
+        resAbsolutoNaoConvencional = getResultadoAbsolutoExecucoes(resultsNaoConvencional);
+        resFinalNaoConvencional = mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
+        resAbsolutoNaoConvencionalParalelo = getResultadoAbsolutoExecucoes(resultsNaoConvencionalParalelo);
+        resFinalNaoConvencionalParalelo = mediaResultsNaoConvencionalParalelo[
+                mediaResultsNaoConvencionalParalelo.size() - 1];
 
-    std::cout << "Escrevendo resultados na pasta " << nomePastaArquivos << "..." << std::endl;
-    escreveResultados(arqConvencional,"Rosenbrock",resFinalConvencional,resAbsolutoConvencional);
-    escreveResultados(arqParalelo,"Rosenbrock",resFinalParalelo,resAbsolutoParalelo);
-    escreveResultados(arqNaoConvencional,"Rosenbrock",resFinalNaoConvencional,resAbsolutoNaoConvencional);
-    escreveResultados(arqNaoConvencionalParalelo,"Rosenbrock",resFinalNaoConvencionalParalelo,resAbsolutoNaoConvencionalParalelo);
-    std::cout << "Resultados escritos! " << std::endl;
+        /*std::cout << "Resultado Convencional: " << std::endl;
+        std::cout << resFinalConvencional << std::endl << std::endl;
+        std::cout << "Resultado Absoluto Convencional: " << std::endl;
+        std::cout << resAbsolutoConvencional << std::endl << std::endl;
+        std::cout << "Resultado Não-Convencional: " << std::endl;
+        std::cout << resFinalNaoConvencional << std::endl << std::endl;
+        std::cout << "Resultado Absoluto Nao-Convencional: " << std::endl;
+        std::cout << resAbsolutoNaoConvencional << std::endl << std::endl;
+        std::cout << "Resultado Paralelo: " << std::endl;
+        std::cout << resFinalParalelo << std::endl << std::endl;
+        std::cout << "Resultado Absoluto Paralelo: " << std::endl;
+        std::cout << resAbsolutoParalelo << std::endl << std::endl;
+        std::cout << "Resultado Paralelo nao-convencional: " << std::endl;
+        std::cout << resFinalNaoConvencionalParalelo << std::endl << std::endl;
+        std::cout << "Resultado Absoluto Paralelo nao-convencional: " << std::endl;
+        std::cout << resAbsolutoNaoConvencionalParalelo << std::endl << std::endl;*/
+
+        std::cout << "Escrevendo resultados na pasta " << nomePastaArquivos;
+        std::cout << " para a funcao " << funcao.getNome() << "..." << std::endl;
+        escreveResultados(arqConvencional, funcao.getNome(), resFinalConvencional, resAbsolutoConvencional);
+        escreveResultados(arqParalelo, funcao.getNome(), resFinalParalelo, resAbsolutoParalelo);
+        escreveResultados(arqNaoConvencional, funcao.getNome(), resFinalNaoConvencional, resAbsolutoNaoConvencional);
+        escreveResultados(arqNaoConvencionalParalelo, funcao.getNome(), resFinalNaoConvencionalParalelo,
+                          resAbsolutoNaoConvencionalParalelo);
+        std::cout << "Resultados escritos! " << std::endl;
+    }
 
     return 0;
 }
@@ -197,18 +195,18 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
     return resultsMediasExecucoes;
 }
 
-std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &)){
+std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &),const Funcao &funcao){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rosenbrock);
+        results[i] = ag(funcao);
 
     return results;
 }
 
-std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int)){
+std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &,const int),const Funcao &funcao){
     std::vector<std::vector<Resultado>> results(n);
     for (int i = 0;i < n;++i)
-        results[i] = ag(Funcoes::rosenbrock, N_POPULACOES);
+        results[i] = ag(funcao, N_POPULACOES);
 
     return results;
 }
@@ -232,5 +230,5 @@ void escreveResultados(std::ofstream &arquivo, const std::string &nomeFuncao,con
     arquivo << resFinal << std::endl << std::endl;
 
     arquivo << "Resultado absoluto para a funcao " << nomeFuncao << std::endl;
-    arquivo << resAbsoluto << std::endl;
+    arquivo << resAbsoluto << std::endl << std::endl;
 }

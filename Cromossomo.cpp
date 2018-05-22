@@ -30,6 +30,7 @@ Cromossomo::Cromossomo(float txMutacao,float desvioPadrao)
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
 
+    delete [] intervaloFuncaoFitness;
     //=======================================================
     //intervaloMin = -32;
     //intervaloMax = 32;
@@ -56,6 +57,7 @@ Cromossomo::Cromossomo(float txMutacao,float desvioPadrao,const Funcao &funcaoFi
             *intervaloFuncaoFitness = funcaoFitness.getIntervalo(),
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : -100,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 100;
+    delete [] intervaloFuncaoFitness;
     this->fitness = -1;
 
     unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
@@ -78,12 +80,12 @@ Cromossomo::Cromossomo(const Cromossomo &c)
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
 
+    delete [] intervaloFuncaoFitness;
+
     if (!c.genotipo.empty())
         this->genotipo = c.genotipo;
 
-    unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
-    if (this->gen == nullptr)
-        this->gen = new std::mt19937(seed1);
+    this->gen = c.gen;
     this->intDis = std::uniform_int_distribution<int>(0,Cromossomo::N_GENES - 1);
     this->realDis = std::uniform_real_distribution<float>(0,1);
     this->disIntervaloValoresFuncao = std::uniform_real_distribution<double>(intervaloMin,intervaloMax);
@@ -101,6 +103,7 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : 0,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 0;
 
+    delete [] intervaloFuncaoFitness;
 
     this->txMutacao = c.txMutacao;
     this->desvioPadrao = c.desvioPadrao;
@@ -114,16 +117,20 @@ Cromossomo& Cromossomo::operator = (const Cromossomo &c){
         this->genotipo = std::vector<double>(Cromossomo::N_GENES);
 
 
-    unsigned seed1 = std::chrono::system_clock::now().time_since_epoch().count();
-    if (this->gen == nullptr)
-        this->gen = new std::mt19937(seed1);
+    this->gen = c.gen;
     this->intDis = std::uniform_int_distribution<int>(0,Cromossomo::N_GENES - 1);
     this->realDis = std::uniform_real_distribution<float>(0,1);
     this->disIntervaloValoresFuncao = std::uniform_real_distribution<double>(intervaloMin,intervaloMax);
     this->gaussianDis = std::normal_distribution<double>(0,this->desvioPadrao);
 
 
+
     return *this;
+}
+
+Cromossomo::~Cromossomo(){
+    /*if (this->gen != nullptr)
+        delete this->gen;*/
 }
 
 void Cromossomo::inicializar(){
@@ -163,6 +170,8 @@ void Cromossomo::mutacao(unsigned int geracaoAtual, unsigned int nGeracoes,bool 
             gene = novoGene;
         }
     }
+
+    delete [] intervalo;
 }
 
 
@@ -176,7 +185,6 @@ std::vector<Cromossomo> Cromossomo::crossover(const Cromossomo &outroCromossomo,
     Cromossomo filho1(this->txMutacao,this->desvioPadrao,this->funcaoFitness),
             filho2(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
 
-    double *intervalo = this->funcaoFitness.getIntervalo();
     //segunda parte
     for (int i = 0; i < Cromossomo::N_GENES; ++i) {
         double alpha = this->realDis(*(this->gen));
@@ -214,7 +222,6 @@ Cromossomo Cromossomo::crossoverSimples(const Cromossomo &outroCromossomo, unsig
     Cromossomo filho(this->txMutacao,this->desvioPadrao,this->funcaoFitness);
 
     double alpha;
-    double *intervalo = this->funcaoFitness.getIntervalo();
 
     for (int i = 0; i < Cromossomo::N_GENES; ++i) {
         alpha = this->realDis(*(this->gen));
@@ -246,6 +253,8 @@ void Cromossomo::setFuncao(const Funcao &funcao){
             *intervaloFuncaoFitness = funcaoFitness.getIntervalo(),
             intervaloMin = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[0] : -100,
             intervaloMax = intervaloFuncaoFitness != nullptr ? intervaloFuncaoFitness[1] : 100;
+
+    delete [] intervaloFuncaoFitness;
 
     this->disIntervaloValoresFuncao = std::uniform_real_distribution<double>(intervaloMin,intervaloMax);
 }

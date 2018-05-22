@@ -29,6 +29,7 @@ class Cromossomo{
         Cromossomo(float txMutacao,float desvioPadrao,const Funcao &funcaoFitness);
         Cromossomo(const Cromossomo &);
         Cromossomo& operator = (const Cromossomo &);
+        ~Cromossomo();
 
 
     void inicializar();
