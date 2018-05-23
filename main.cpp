@@ -135,7 +135,7 @@ Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao){
     return std::accumulate(
             resultsExecucao.begin(),
             resultsExecucao.end(),
-            Resultado(),
+            resultsExecucao[0],
             [](Resultado acc, Resultado novo){
                 return Resultado(
                     acc.melhorFitness < novo.melhorFitness ? acc.melhorFitness : novo.melhorFitness,
@@ -163,7 +163,7 @@ Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>
     return std::accumulate(
             resultsAbsolutosExecucoes.begin(),
             resultsAbsolutosExecucoes.end(),
-            Resultado(),
+            resultsAbsolutosExecucoes[0],
             [](Resultado acc, Resultado novo){
                 double novoGeracaoAchouFitnessOtimo =
                         novo.geracaoAchouFitnessOtimo == -1
