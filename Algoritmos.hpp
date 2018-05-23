@@ -160,21 +160,7 @@ namespace Algoritmos{
             double
                     mediaFitness =p.getMediaFitness(),
                     piorFitness = p.getCromossomo(p.achaIndicePiorFitness()).getFitness();
-                    //piorFitness = p.getElemMaxFitness().getFitness();
-            /*if (piorFitness < mediaFitness){
-                std::cout << "ACABOU!=====================================" << std::endl;
-                std::cout << "Pior: " << piorFitness << std::endl;
-                std::cout << "Media: " << mediaFitness << std::endl;
 
-                /*std::cout << "elementos: " << std::endl;
-                for (int i = 0;i < p.getTamanho();++i){
-                    Cromossomo c = p.getCromossomo(i);
-
-                    std::cout << c.getFitness() << std::endl;
-                }
-                std::cout << std::endl << std::endl;
-                exit(0);
-            }*/
             results[i] = Resultado(
                     p.getElemMinFitness().getFitness(),
                     mediaFitness,
@@ -275,26 +261,16 @@ namespace Algoritmos{
 
 
                     double
-                            mediaFitness =p.getMediaFitness(),
-                            piorFitness = p.getElemMaxFitness().getFitness();
-                            //piorFitness = p.getElemMaxFitness().getFitness();
-                    /*if (piorFitness < mediaFitness){
-                        std::cout << "ACABOU!=====================================" << std::endl;
-                        std::cout << "Pior: " << piorFitness << std::endl;
-                        std::cout << "Media: " << mediaFitness << std::endl;
-                    }*/
+                            mediaFitness = p.getMediaFitness(),
+                            piorFitness = p.getCromossomo(p.achaIndicePiorFitness()).getFitness();
 
                     resultsPopulacoes[i].push_back(Resultado(
                             p.getElemMinFitness().getFitness(),
                             mediaFitness,
-                            p.getElemMaxFitness().getFitness(),
+                            piorFitness,
                             achouFitnessOtimo,
                             p.getGeracaoAchouFitnessOtimo()
                     ));
-
-
-                /*    if (omp_get_thread_num() == 0)
-                        operadorMigracao.realizarMigracao(nPopulacoesProcessadas);*/
 
 
                     #pragma omp critical
@@ -302,11 +278,7 @@ namespace Algoritmos{
                         if (p.getID() % N_POPULACOES == 1)
                             operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
                     }
-
-                    /*#pragma omp critical
-                    {
-                        operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
-                    }*/
+                    
                 } while (++j < nGeracoes);
 
                 p.setAcabou();
@@ -398,25 +370,9 @@ namespace Algoritmos{
             double
                     mediaFitness = p.getMediaFitness(),
                     piorFitness = p.getCromossomo(p.achaIndicePiorFitness()).getFitness();
-                    //piorFitness = p.getElemMaxFitness().getFitness();
-           /* if (piorFitness < mediaFitness){
-                std::cout << "ACABOU!=====================================" << std::endl;
-                std::cout << "Pior: " << piorFitness << std::endl;
-                std::cout << "Media: " << mediaFitness << std::endl;
-
-                /*std::cout << "elementos: " << std::endl;
-                for (int i = 0;i < p.getTamanho();++i){
-                    Cromossomo c = p.getCromossomo(i);
-
-                    std::cout << c.getFitness() << std::endl;
-                }
-                std::cout << std::endl << std::endl;
-                exit(0);
-            }*/
 
             results[i] = Resultado(
                     p.getElemMinFitness().getFitness(),
-                    //p.getElemMaxFitness().getFitness(),
                     mediaFitness,
                     piorFitness,
                     achouFitnessOtimo,
@@ -504,17 +460,14 @@ namespace Algoritmos{
                     bool achouFitnessOtimo =
                             p.getElemMinFitness().getFitness() < p.getFuncaoFitness().getMinimoGlobal() + pow(10,-3);
 
-                    double mediaFitness = p.getMediaFitness(),piorFitness = p.getElemMaxFitness().getFitness();
-                    /*if (piorFitness < mediaFitness){
-                        std::cout << "ACABOU!=====================================" << std::endl;
-                        std::cout << "Pior: " << piorFitness << std::endl;
-                        std::cout << "Media: " << mediaFitness << std::endl;
-                    }*/
+                    double
+                            mediaFitness = p.getMediaFitness(),
+                            piorFitness = p.getCromossomo(p.achaIndicePiorFitness()).getFitness();
 
                     resultsPopulacoes[i].push_back(Resultado(
                             p.getElemMinFitness().getFitness(),
                             mediaFitness,
-                            p.getElemMaxFitness().getFitness(),
+                            piorFitness,
                             achouFitnessOtimo,
                             p.getGeracaoAchouFitnessOtimo()
                     ));
