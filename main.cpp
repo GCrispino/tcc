@@ -11,7 +11,7 @@
 
 
 #define N_POPULACOES 10
-#define N_THREADS 7
+#define N_THREADS 4
 
 
 /**

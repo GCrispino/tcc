@@ -79,13 +79,15 @@ void PopulacaoTransformacao::recombinacao(unsigned int geracaoAtual, unsigned in
             }
 
             if(novo.getFitness() > this->getElemMaxFitness().getFitness())
-                this->iElemMaxFitness = i;
+                this->iElemMaxFitness = iCromossomo;
         }
         else{
             //decrementa fitMorto
             morto.decFitMorto();
         }
     }
+
+    this->iElemMaxFitness = this->achaIndicePiorFitness();
 
 
     unsigned int tamAtualPopulacaoMortos = this->mortos.size();
@@ -111,7 +113,6 @@ void PopulacaoTransformacao::recombinacao(unsigned int geracaoAtual, unsigned in
 
     for (Cromossomo &c: this->cromossomos)
         accFitness += c.getFitness();
-    this->mediaFitness = accFitness / this->tamanho;accFitness;
 }
 
 

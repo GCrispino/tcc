@@ -75,8 +75,6 @@ void Populacao::calcularFitness(unsigned int geracaoAtual) {
         else if(fitness > this->getElemMaxFitness().getFitness())
             this->iElemMaxFitness = i;
     }
-
-    this->mediaFitness = accFitness / this->tamanho;
 }
 
 
@@ -240,7 +238,13 @@ void Populacao::setElemMinFitness(Cromossomo *c) {
 }
 
 double Populacao::getMediaFitness(){
-    return this->mediaFitness;
+    double media = 0;
+
+    for (Cromossomo &c: this->cromossomos)
+        media += c.getFitness();
+    media /= this->cromossomos.size();
+
+    return media;
 }
 
 

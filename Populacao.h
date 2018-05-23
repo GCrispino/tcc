@@ -16,7 +16,6 @@ class Populacao {
         float txMutacao;
         float txCruzamento;
         float desvioPadrao;
-        double mediaFitness;
         Funcao funcaoFitness;
         std::vector<Cromossomo> cromossomos;
         int iElemMaxFitness;
