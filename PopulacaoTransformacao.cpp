@@ -54,8 +54,8 @@ void PopulacaoTransformacao::recombinacao(unsigned int geracaoAtual, unsigned in
                 distMortos (0,this->mortos.size() - 1);
 
         unsigned int
-                iCromossomo = distPopulacao(*(this->gen)),
-                iMorto = distMortos(*(this->gen));
+                iCromossomo = distPopulacao(this->gen),
+                iMorto = distMortos(this->gen);
 
         CromossomoMorto &morto = this->mortos[iMorto];
 

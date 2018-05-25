@@ -9,8 +9,6 @@
 
 
 
-
-std::mt19937* Populacao::gen = nullptr;
 unsigned int Populacao::count = 0;
 
 Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,float desvioPadrao,const Funcao &funcaoFitness,bool paralelo) {
@@ -32,8 +30,7 @@ Populacao::Populacao(unsigned int tamanho, float txMutacao, float txCruzamento,f
 
     unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
 
-    if (this->gen == nullptr)
-        this->gen = new std::mt19937(seed);
+    this->gen = std::mt19937(seed);
 }
 
 void Populacao::inicializacao() {
@@ -92,7 +89,7 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
 
     for (int i = 0;i < nParesPaisASelecionar;++i){
 
-        if (realDis(*(this->gen)) > this->txCruzamento)
+        if (realDis(this->gen) > this->txCruzamento)
             continue;
 
         std::vector<Cromossomo *> parPais(2);
@@ -107,7 +104,7 @@ std::vector<Cromossomo> Populacao::selecaoPais(int nParesPaisASelecionar,int tam
                 Cromossomo *rand = nullptr;
                 int index;
 
-                index = dist(*this->gen);
+                index = dist(this->gen);
 
                 rand = &(this->cromossomos[index]);
 

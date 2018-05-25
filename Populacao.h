@@ -27,7 +27,7 @@ class Populacao {
         bool acabou;
         bool ocupada;
 
-        static std::mt19937 *gen;
+        std::mt19937 gen;
         static unsigned int count;
 
         const int N_THREADS = 3;
