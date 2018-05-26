@@ -275,10 +275,11 @@ namespace Algoritmos{
 
                     #pragma omp critical
                     {
-                        if (p.getID() % N_POPULACOES == 1)
+                        if (p.getID() % N_POPULACOES == 9) {
                             operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                        }
                     }
-                    
+
                 } while (++j < nGeracoes);
 
                 p.setAcabou();
@@ -479,8 +480,9 @@ namespace Algoritmos{
 
                     #pragma omp critical
                     {
-                        if (p.getID() % N_POPULACOES == 1)
+                        if (p.getID() % N_POPULACOES == 9) {
                             operadorMigracao.realizarMigracao(nPopulacoesProcessadas);
+                        }
                     }
 
                     /*#pragma omp critical
