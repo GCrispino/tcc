@@ -83,6 +83,32 @@ namespace Algoritmos{
             return Resultado(mediaMelhorFitness,mediaMediaFitness,mediaPiorFitness,nVezesAchouFitnessOtimo);
         }
 
+        Resultado desvioResultados(
+                unsigned int iGeracao,
+                const std::vector<std::vector<Resultado>> &resultsPopulacoes,
+                const Resultado &resultMedia
+        ){
+            double
+                    desvioPiorFitness = 0,
+                    desvioMelhorFitness = 0,
+                    desvioMediaFitness = 0;
+
+            unsigned int nExecucoes = resultsPopulacoes.size();
+
+            for (unsigned int i = 0;i < nExecucoes;++i){
+                const Resultado &resAtual = resultsPopulacoes[i][iGeracao];
+                desvioPiorFitness        += pow(resAtual.piorFitness - resultMedia.piorFitness,2);
+                desvioMediaFitness       += pow(resAtual.mediaFitness - resultMedia.mediaFitness,2);
+                desvioMelhorFitness      += pow(resAtual.melhorFitness - resultMedia.melhorFitness,2);
+            }
+
+            desvioPiorFitness   = sqrt(desvioPiorFitness / nExecucoes);
+            desvioMediaFitness  = sqrt(desvioMediaFitness / nExecucoes);
+            desvioMelhorFitness = sqrt(desvioMelhorFitness / nExecucoes);
+
+            return Resultado(desvioMelhorFitness,desvioMediaFitness,desvioPiorFitness);
+        }
+
         Resultado getResultadosGeracaoParalelo(unsigned int iGeracao,const std::vector<std::vector<Resultado>> &resultsPopulacoes){
             double
                     melhorFitnessGeracaoSubPopulacoes          = resultsPopulacoes[0][iGeracao].melhorFitness,

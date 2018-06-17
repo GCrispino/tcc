@@ -42,12 +42,18 @@
  */
 
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes, const std::vector<std::vector<Resultado>> &resultsExecucoes);
+std::vector<Resultado> getDesvioNExecucoes(
+        unsigned int nGeracoes,
+        const std::vector<std::vector<Resultado>> &resultsExecucoes,
+        const std::vector<Resultado> &resultsMedia
+);
 Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>> &resultsExecucoes);
 Resultado getResultadoAbsoluto(const std::vector<Resultado> &resultsExecucao);
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &),const Funcao &funcao);
 std::vector<std::vector<Resultado>> executarAGParaleloNVezes(unsigned int n,std::vector<Resultado> (*)(const Funcao &,const int),const Funcao &funcao);
 std::string criarPastaArquivos();
-void escreveResultados(std::ofstream &nomeArquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto);
+void escreveResultadosResumo(std::ofstream &arquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto);
+void escreveResultadosConvergencia(std::ofstream &arquivo, const std::string &nomeFuncao, const std::vector<Resultado> &resultados, const std::vector<Resultado> &desvioResultados);
 
 int main(){
 
@@ -57,9 +63,13 @@ int main(){
     std::string nomePastaArquivos = criarPastaArquivos();
     std::ofstream
             arqConvencional(nomePastaArquivos + "/convencional.txt"),
+            arqConvergenciaConvencional(nomePastaArquivos + "/convergencia-convencional.csv"),
             arqParalelo(nomePastaArquivos + "/paralelo.txt"),
+            arqConvergenciaParalelo(nomePastaArquivos + "/convergencia-paralelo.csv"),
             arqNaoConvencional(nomePastaArquivos + "/nao-convencional.txt"),
-            arqNaoConvencionalParalelo(nomePastaArquivos + "/nao-convencional-paralelo.txt");
+            arqConvergenciaNaoConvencional(nomePastaArquivos + "/convergencia-nao-convencional.csv"),
+            arqNaoConvencionalParalelo(nomePastaArquivos + "/nao-convencional-paralelo.txt"),
+            arqConvergenciaNaoConvencionalParalelo(nomePastaArquivos + "/convergencia-nao-convencional-paralelo.csv");
 
     unsigned int nExecucoes = 30,nGeracoes = 1000;
 
@@ -69,7 +79,11 @@ int main(){
                 resFinalParalelo, resAbsolutoParalelo,
                 resFinalNaoConvencional, resAbsolutoNaoConvencional,
                 resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo;
-        std::vector<Resultado> mediaResultsConvencional,mediaResultsParalelo,mediaResultsNaoConvencional,mediaResultsNaoConvencionalParalelo;
+        std::vector<Resultado>
+                mediaResultsConvencional,desvioResultsConvencional,
+                mediaResultsParalelo,desvioResultsParalelo,
+                mediaResultsNaoConvencional,desvioResultsNaoConvencional,
+                mediaResultsNaoConvencionalParalelo,desvioResultsNaoConvencionalParalelo;
         std::vector<std::vector<Resultado>> resultsConvencional,resultsParalelo,resultsNaoConvencional,resultsNaoConvencionalParalelo;
 
         std::cout << "Executando AG sequencial convencional..." << std::endl;
@@ -85,10 +99,14 @@ int main(){
 
         std::cout << "Calculando resultados..." << std::endl;
 
-        mediaResultsParalelo = getMediaNExecucoes(nGeracoes, resultsParalelo);
-        mediaResultsConvencional = getMediaNExecucoes(nGeracoes, resultsConvencional);
-        mediaResultsNaoConvencional = getMediaNExecucoes(nGeracoes, resultsNaoConvencional);
-        mediaResultsNaoConvencionalParalelo = getMediaNExecucoes(nGeracoes, resultsNaoConvencionalParalelo);
+        mediaResultsParalelo                 = getMediaNExecucoes(nGeracoes, resultsParalelo);
+        desvioResultsParalelo                = getDesvioNExecucoes(nGeracoes,resultsParalelo,mediaResultsParalelo);
+        mediaResultsConvencional             = getMediaNExecucoes(nGeracoes, resultsConvencional);
+        desvioResultsConvencional            = getDesvioNExecucoes(nGeracoes,resultsConvencional,mediaResultsConvencional);
+        mediaResultsNaoConvencional          = getMediaNExecucoes(nGeracoes, resultsNaoConvencional);
+        desvioResultsNaoConvencional         = getDesvioNExecucoes(nGeracoes,resultsNaoConvencional,mediaResultsNaoConvencional);
+        mediaResultsNaoConvencionalParalelo  = getMediaNExecucoes(nGeracoes, resultsNaoConvencionalParalelo);
+        desvioResultsNaoConvencionalParalelo = getDesvioNExecucoes(nGeracoes,resultsNaoConvencionalParalelo,mediaResultsNaoConvencionalParalelo);
 
         resAbsolutoParalelo = getResultadoAbsolutoExecucoes(resultsParalelo);
         resFinalParalelo = mediaResultsParalelo[mediaResultsParalelo.size() - 1];
@@ -98,7 +116,8 @@ int main(){
         resFinalNaoConvencional = mediaResultsNaoConvencional[mediaResultsNaoConvencional.size() - 1];
         resAbsolutoNaoConvencionalParalelo = getResultadoAbsolutoExecucoes(resultsNaoConvencionalParalelo);
         resFinalNaoConvencionalParalelo = mediaResultsNaoConvencionalParalelo[
-                mediaResultsNaoConvencionalParalelo.size() - 1];
+                mediaResultsNaoConvencionalParalelo.size() - 1
+        ];
 
         /*std::cout << "Resultado Convencional: " << std::endl;
         std::cout << resFinalConvencional << std::endl << std::endl;
@@ -119,11 +138,14 @@ int main(){
 
         std::cout << "Escrevendo resultados na pasta " << nomePastaArquivos;
         std::cout << " para a funcao " << funcao.getNome() << "..." << std::endl;
-        escreveResultados(arqConvencional, funcao.getNome(), resFinalConvencional, resAbsolutoConvencional);
-        escreveResultados(arqParalelo, funcao.getNome(), resFinalParalelo, resAbsolutoParalelo);
-        escreveResultados(arqNaoConvencional, funcao.getNome(), resFinalNaoConvencional, resAbsolutoNaoConvencional);
-        escreveResultados(arqNaoConvencionalParalelo, funcao.getNome(), resFinalNaoConvencionalParalelo,
-                          resAbsolutoNaoConvencionalParalelo);
+        escreveResultadosResumo(arqConvencional, funcao.getNome(), resFinalConvencional, resAbsolutoConvencional);
+        escreveResultadosConvergencia(arqConvergenciaConvencional, funcao.getNome(), mediaResultsConvencional,desvioResultsConvencional);
+        escreveResultadosResumo(arqParalelo, funcao.getNome(), resFinalParalelo, resAbsolutoParalelo);
+        escreveResultadosConvergencia(arqConvergenciaParalelo, funcao.getNome(), mediaResultsParalelo, desvioResultsParalelo);
+        escreveResultadosResumo(arqNaoConvencional, funcao.getNome(), resFinalNaoConvencional, resAbsolutoNaoConvencional);
+        escreveResultadosConvergencia(arqConvergenciaNaoConvencional, funcao.getNome(), mediaResultsNaoConvencional, desvioResultsNaoConvencional);
+        escreveResultadosResumo(arqNaoConvencionalParalelo, funcao.getNome(), resFinalNaoConvencionalParalelo, resAbsolutoNaoConvencionalParalelo),
+        escreveResultadosConvergencia(arqConvergenciaNaoConvencionalParalelo, funcao.getNome(), mediaResultsNaoConvencionalParalelo, desvioResultsNaoConvencionalParalelo);
         std::cout << "Resultados escritos! " << std::endl;
     }
 
@@ -183,8 +205,6 @@ Resultado getResultadoAbsolutoExecucoes(const std::vector<std::vector<Resultado>
 
 std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vector<std::vector<Resultado>> &resultsExecucoes){
 
-    unsigned int nExecucoes = resultsExecucoes.size();
-
     std::vector<Resultado> resultsMediasExecucoes(nGeracoes);
 
     for (unsigned int i = 0;i < nGeracoes;++i)
@@ -193,6 +213,22 @@ std::vector<Resultado> getMediaNExecucoes(unsigned int nGeracoes,const std::vect
 
 
     return resultsMediasExecucoes;
+}
+
+std::vector<Resultado> getDesvioNExecucoes(
+        unsigned int nGeracoes,
+        const std::vector<std::vector<Resultado>> &resultsExecucoes,
+        const std::vector<Resultado> &resultsMedia
+){
+
+    std::vector<Resultado> resultsDesviosExecucoes(nGeracoes);
+
+    for (unsigned int i = 0;i < nGeracoes;++i)
+        resultsDesviosExecucoes[i] = Algoritmos::Util::desvioResultados(i,resultsExecucoes,resultsMedia[i]);
+
+
+
+    return resultsDesviosExecucoes;
 }
 
 std::vector<std::vector<Resultado>> executarAGSequencialNVezes(unsigned int n,std::vector<Resultado> (*ag)(const Funcao &),const Funcao &funcao){
@@ -219,16 +255,43 @@ std::string criarPastaArquivos(){
     strcpy(comando,"mkdir ");
     strcat(comando,c_nomePasta);
 
-
     system(comando);
 
     return nomePasta;
 }
 
-void escreveResultados(std::ofstream &arquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto){
+void escreveResultadosResumo(std::ofstream &arquivo, const std::string &nomeFuncao,const Resultado &resFinal,const Resultado &resAbsoluto){
     arquivo << "Resultado final para a funcao " << nomeFuncao << std::endl;
     arquivo << resFinal << std::endl << std::endl;
 
     arquivo << "Resultado absoluto para a funcao " << nomeFuncao << std::endl;
     arquivo << resAbsoluto << std::endl << std::endl;
+}
+
+void escreveResultadosConvergencia(
+        std::ofstream &arquivo,
+        const std::string &nomeFuncao,
+        const std::vector<Resultado> &resultados,
+        const std::vector<Resultado> &desvioResultados
+){
+    arquivo << std::endl << "Dados de convergencia para a funcao " << nomeFuncao << std::endl;
+    arquivo << "Melhor, Media, Pior,-,";
+    arquivo << " Desvio melhor, Desvio Media, Desvio Pior,-, ";
+    arquivo << " Melhor + Desvio melhor, Melhor - Desvio melhor,";
+    arquivo << " Media + Desvio media, Media - Desvio media,";
+    arquivo << " Pior + Desvio pior, Pior - Desvio pior,";
+
+    arquivo << std::endl;
+
+    for (unsigned int i = 0;i < resultados.size();++i){
+        const Resultado &r = resultados[i],&desvio = desvioResultados[i];
+        arquivo << r.melhorFitness << ',' << r.mediaFitness << ',' << r.piorFitness << ",-,";
+        arquivo << desvio.melhorFitness << ',' << desvio.mediaFitness << ',' << desvio.piorFitness << ",-,";
+        arquivo << r.melhorFitness + desvio.melhorFitness << ',' << r.melhorFitness - desvio.melhorFitness << ',';
+        arquivo << r.mediaFitness  + desvio.mediaFitness  << ',' << r.mediaFitness  - desvio.mediaFitness << ',';
+        arquivo << r.piorFitness   + desvio.piorFitness   << ',' << r.piorFitness   - desvio.piorFitness << ',';
+        arquivo << std::endl;
+    }
+
+    arquivo << std::endl;
 }
